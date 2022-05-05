@@ -16,8 +16,8 @@ using namespace sf;
 using namespace std;
 using namespace cv;
 
-const int W = 450;
-const int H = 300;
+const int W = 900;
+const int H = 600;
 double zoom = 1.0;
 
 //dichiaro le variabili per il calcolo dell'equazione
@@ -34,6 +34,11 @@ static double xPoint;
 static double yPoint;
 static int numeroScelta;
 static int numero_iterazioni_scelte;
+//variabili per colorare i grafici dei frattali
+static int n;
+static int r;
+static int g;
+static int b;
 //static vector <coppieCoordinate> listaPosizioniXY;
 
 double w = (max_re - min_re) * 20.0/W;
@@ -274,7 +279,19 @@ double nuovaCooridnataY(int y) {
       B) riempie il vettore con le coordinate
       C) restituisce in output il vettore
   */
-
+static const vector<Color> colors{
+                {0,0,0},
+                {213,67,31},
+                {251,255,121},
+                {62,223,89},
+                {43,30,218},
+                {0,255,247}
+};
+Color linear_interpolation(const Color& v, const Color& u, double a)
+{
+    auto const b = 1 - a;
+    return Color(b * v.r + a * u.r, b * v.g + a * u.g, b * v.b + a * u.b);
+}
 
 int main() {
     
@@ -410,124 +427,179 @@ int main() {
         }
     
         window.clear();
-
-            switch (numeroScelta) {
-            case 1:
-#pragma omp parallel for   
-                //cicli for per frattale
-                for (int y = 0; y < H; y++) {
-                    for (int x = 0; x < W; x++) {
-                        //calcolo gli intervalli del set 
-                        double cr = min_re + (max_re - min_re) * x / W;
-                        double ci = min_im + (max_im - min_im) * y / H;
-                        int n = ricorsioniMandelbrot(cr, ci, max_iter);
-                        //set dei valori rgb per colorare l'immagine
-                        int r = ((int)(n * sinf(n)) % 256);
-                        int g = ((n * 3) % 256);
-                        int b = (n % 256);
-                        plotFrattale.setPixel(x, y, Color(r, g, b));
-                        //listaPosizioniXY = calcoloMandelbrot(cr,ci, numero_iterazioni_scelte);
-                       
-                    }
-
-                }
-                
-
-                break;
-            case 2:
-#pragma omp parallel for   
-                //cicli for per frattale
-                for (int y = 0; y < H; y++) {
-                    for (int x = 0; x < W; x++) {
-                        //calcolo gli intervalli del set 
-                        double cr = min_re + (max_re - min_re) * x / W;
-                        double ci = min_im + (max_im - min_im) * y / H;
-                        int n = ricorsioniBurning_ship(cr, ci, max_iter);
-                        int r = ((int)(n * sinf(n)) % 256);
-                        int g = ((n * 3) % 256);
-                        int b = (n % 256);
-                        plotFrattale.setPixel(x, y, Color(r, g, b));
-
-                    }
-
-                }
-                break;
-            case 3:
-#pragma omp parallel for   
-                //cicli for per frattale
-                for (int y = 0; y < H; y++) {
-                    for (int x = 0; x < W; x++) {
-                        //calcolo gli intervalli del set 
-                        double cr = min_re + (max_re - min_re) * x / W;
-                        double ci = min_im + (max_im - min_im) * y / H;
-                        int n = ricorsioniJuliaSet1(cr, ci, max_iter);
-                        int r = ((int)(n * sinf(n)) % 256);
-                        int g = ((n * 3) % 256);
-                        int b = (n % 256);
-                        plotFrattale.setPixel(x, y, Color(r, g, b));
-                    }
-
-                }
-                break;
-            case 4:
-#pragma omp parallel for   
-                //cicli for per frattale
-                for (int y = 0; y < H; y++) {
-                    for (int x = 0; x < W; x++) {
-                        //calcolo gli intervalli del set 
-                        double cr = min_re + (max_re - min_re) * x / W;
-                        double ci = min_im + (max_im - min_im) * y / H;
-                        int n = ricorsioniJuliaSet2(cr, ci, max_iter);
-                        int r = ((int)(n * sinf(n)) % 256);
-                        int g = ((n * 3) % 256);
-                        int b = (n % 256);
-                        plotFrattale.setPixel(x, y, Color(r, g, b));
-
-                    }
-
-                }
-
-                break;
-            case 5:
-#pragma omp parallel for   
-                //cicli for per frattale julia
-                for (int y = 0; y < H; y++) {
-                    for (int x = 0; x < W; x++) {
-                        //calcolo gli intervalli del set 
-                        double cr = min_re + (max_re - min_re) * x / W;
-                        double ci = min_im + (max_im - min_im) * y / H;
-                        int n = henon(cr, ci, max_iter);
-                        int r = ((int)(n * sinf(n)) % 256);
-                        int g = ((n * 3) % 256);
-                        int b = (n % 256);
-                        plotFrattale.setPixel(x, y, Color(r, g, b));
-
-                    }
-
-                }
-
-                break;
-            case 6:
-#pragma omp parallel for   
-                //cicli for per frattale julia
-                for (int y = 0; y < H; y++) {
-                    for (int x = 0; x < W; x++) {
-                        //calcolo gli intervalli del set 
-                        double cr = min_re + (max_re - min_re) * x / W;
-                        double ci = min_im + (max_im - min_im) * y / H;
-                        int n = ikeda(cr, ci, max_iter);
-                        int r = ((int)(n * sinf(n)) % 256);
-                        int g = ((n * 3) % 256);
-                        int b = (n % 256);
-                        plotFrattale.setPixel(x, y, Color(r, g, b));
-
-                    }
-
+        switch (numeroScelta) {
+        case 1:
+#pragma omp parallel for
+            //cicli for per frattale
+            for (int y = 0; y < H; y++) {
+                for (int x = 0; x < W; x++) {
+                    //calcolo gli intervalli del set 
+                    double cr = min_re + (max_re - min_re) * x / W;
+                    double ci = min_im + (max_im - min_im) * y / H;
+                    int n = ricorsioniMandelbrot(cr, ci, max_iter);
+                    /*
+                    int r = ((int)(n * sinf(n)) % 256);
+                    int g = ((n * 3) % 256);
+                    int b = (n % 256);
+                    plotFrattale.setPixel(x, y, Color(r, g, b));
+                    */
+                    static const auto max_color = colors.size() - 1;
+                    if (n == max_iter)
+                        n = 0;
+                    double mu = 1.0 * n / max_iter;
+                    //scale mu to be in the range of colors
+                    mu *= max_color;
+                    auto i_mu = static_cast<size_t>(mu);
+                    auto color1 = colors[i_mu];
+                    auto color2 = colors[min(i_mu + 1, max_color)];
+                    Color c = linear_interpolation(color1, color2, mu - i_mu);
+                    plotFrattale.setPixel(x, y, Color(c));
+                    
                 }
 
             }
-            
-            
+
+            break;
+
+        case 2:
+#pragma omp parallel for   
+            //cicli for per frattale
+            for (int y = 0; y < H; y++) {
+                for (int x = 0; x < W; x++) {
+                    //calcolo gli intervalli del set 
+                    double cr = min_re + (max_re - min_re) * x / W;
+                    double ci = min_im + (max_im - min_im) * y / H;
+                    int n = ricorsioniBurning_ship(cr, ci, max_iter);
+                    /* 
+                    int r = ((int)(n * sinf(n)) % 256);
+                    int g = ((n * 3) % 256);
+                    int b = (n % 256);
+                    */
+                   
+                    static const auto max_color = colors.size() - 1;
+                    if (n == max_iter)
+                        n = 0;
+                    double mu = 1.0 * n / max_iter;
+                    //scale mu to be in the range of colors
+                    mu *= max_color;
+                    auto i_mu = static_cast<size_t>(mu);
+                    auto color1 = colors[i_mu];
+                    auto color2 = colors[min(i_mu + 1, max_color)];
+                    Color c = linear_interpolation(color1, color2, mu - i_mu);
+                    plotFrattale.setPixel(x, y, Color(c));
+                    //plotFrattale.setPixel(x, y, Color(r, g, b));
+
+                }
+            }
+            break;
+        case 3:
+#pragma omp parallel for   
+            //cicli for per frattale
+            for (int y = 0; y < H; y++) {
+                for (int x = 0; x < W; x++) {
+                    //calcolo gli intervalli del set 
+                    double cr = min_re + (max_re - min_re) * x / W;
+                    double ci = min_im + (max_im - min_im) * y / H;
+                    int n = ricorsioniJuliaSet1(cr, ci, max_iter);
+                    
+                    /*
+                   int r = ((int)(n * sinf(n)) % 256);
+                   int g = ((n * 3) % 256);
+                   int b = (n % 256);
+                   */
+
+                    static const auto max_color = colors.size() - 1;
+                    if (n == max_iter)
+                        n = 0;
+                    double mu = 1.0 * n / max_iter;
+                    //scale mu to be in the range of colors
+                    mu *= max_color;
+                    auto i_mu = static_cast<size_t>(mu);
+                    auto color1 = colors[i_mu];
+                    auto color2 = colors[min(i_mu + 1, max_color)];
+                    Color c = linear_interpolation(color1, color2, mu - i_mu);
+                    plotFrattale.setPixel(x, y, Color(c));
+                }
+            }
+            break;
+        case 4:
+#pragma omp parallel for   
+            //cicli for per frattale
+            for (int y = 0; y < H; y++) {
+                for (int x = 0; x < W; x++) {
+                    //calcolo gli intervalli del set 
+                    double cr = min_re + (max_re - min_re) * x / W;
+                    double ci = min_im + (max_im - min_im) * y / H;
+                    int n = ricorsioniJuliaSet2(cr, ci, max_iter);
+                    /*
+                    int r = ((int)(n * sinf(n)) % 256);
+                    int g = ((n * 3) % 256);
+                    int b = (n % 256);
+                    */
+
+                    static const auto max_color = colors.size() - 1;
+                    if (n == max_iter)
+                        n = 0;
+                    double mu = 1.0 * n / max_iter;
+                    //scale mu to be in the range of colors
+                    mu *= max_color;
+                    auto i_mu = static_cast<size_t>(mu);
+                    auto color1 = colors[i_mu];
+                    auto color2 = colors[min(i_mu + 1, max_color)];
+                    Color c = linear_interpolation(color1, color2, mu - i_mu);
+                    plotFrattale.setPixel(x, y, Color(c));
+
+                }
+            }
+
+            break;
+        case 5:
+#pragma omp parallel for   
+            //cicli for per frattale julia
+            for (int y = 0; y < H; y++) {
+                for (int x = 0; x < W; x++) {
+                    //calcolo gli intervalli del set 
+                    double cr = min_re + (max_re - min_re) * x / W;
+                    double ci = min_im + (max_im - min_im) * y / H;
+                    int n = henon(cr, ci, max_iter);
+                    /*
+                   int r = ((int)(n * sinf(n)) % 256);
+                   int g = ((n * 3) % 256);
+                   int b = (n % 256);
+                   */
+
+                    static const auto max_color = colors.size() - 1;
+                    if (n == max_iter)
+                        n = 0;
+                    double mu = 1.0 * n / max_iter;
+                    //scale mu to be in the range of colors
+                    mu *= max_color;
+                    auto i_mu = static_cast<size_t>(mu);
+                    auto color1 = colors[i_mu];
+                    auto color2 = colors[min(i_mu + 1, max_color)];
+                    Color c = linear_interpolation(color1, color2, mu - i_mu);
+                    plotFrattale.setPixel(x, y, Color(c));
+                }
+            }
+
+            break;
+        case 6:
+#pragma omp parallel for   
+            //cicli for per frattale julia
+            for (int y = 0; y < H; y++) {
+                for (int x = 0; x < W; x++) {
+                    //calcolo gli intervalli del set 
+                    double cr = min_re + (max_re - min_re) * x / W;
+                    double ci = min_im + (max_im - min_im) * y / H;
+                    int n = ikeda(cr, ci, max_iter);
+                    int r = ((int)(n * sinf(n)) % 256);
+                    int g = ((n * 3) % 256);
+                    int b = (n % 256);
+                    plotFrattale.setPixel(x, y, Color(r, g, b));
+                }
+            }
+        }
+                
                 texture.loadFromImage(plotFrattale);
                 sprite.setTexture(texture);
                 window.draw(sprite);
@@ -555,9 +627,7 @@ int main() {
                     break;
                       
                 }
-                */
-                
+                */        
             }
-    //}
     return 0;
 }
