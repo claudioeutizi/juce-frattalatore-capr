@@ -17,10 +17,17 @@
         <FILE id="DOUdCw" name="AdsrComponent.cpp" compile="1" resource="0"
               file="Source/UI/AdsrComponent.cpp"/>
         <FILE id="D7c4Cd" name="AdsrComponent.h" compile="0" resource="0" file="Source/UI/AdsrComponent.h"/>
+        <FILE id="uRjb2N" name="CustomComponent.cpp" compile="1" resource="0"
+              file="Source/UI/CustomComponent.cpp"/>
+        <FILE id="YG6j3s" name="CustomComponent.h" compile="0" resource="0"
+              file="Source/UI/CustomComponent.h"/>
         <FILE id="j50tot" name="FilterComponent.cpp" compile="1" resource="0"
               file="Source/UI/FilterComponent.cpp"/>
         <FILE id="omPIkG" name="FilterComponent.h" compile="0" resource="0"
               file="Source/UI/FilterComponent.h"/>
+        <FILE id="AO1Ph6" name="LfoComponent.cpp" compile="1" resource="0"
+              file="Source/UI/LfoComponent.cpp"/>
+        <FILE id="I2zXPy" name="LfoComponent.h" compile="0" resource="0" file="Source/UI/LfoComponent.h"/>
         <FILE id="uvhLdK" name="OscComponent.cpp" compile="1" resource="0"
               file="Source/UI/OscComponent.cpp"/>
         <FILE id="pViirn" name="OscComponent.h" compile="0" resource="0" file="Source/UI/OscComponent.h"/>

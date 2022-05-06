@@ -24,7 +24,7 @@ FrattalatoreAudioProcessor::FrattalatoreAudioProcessor()
     apvts(*this, nullptr, "Parameters", createParams())
 #endif
 {
-    //monophonic synthesiser: adding sound and voice
+    //polyphonic synthesiser
     synth.addSound(new SynthSound());
     for (int v = 0; v < numVoices; v++) 
     {
@@ -115,13 +115,6 @@ void FrattalatoreAudioProcessor::prepareToPlay (double sampleRate, int samplesPe
     spec.maximumBlockSize = samplesPerBlock;
     spec.sampleRate = sampleRate;
     spec.numChannels = getTotalNumOutputChannels();
-
-    for (int ch = 0; ch < numChannelsToProcess; ++ch)
-    {
-        filter[ch].prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
-        lfo[ch].prepare(spec);
-        lfo[ch].initialise([](float x) {return std::sin(x); });
-    }
 }
 
 void FrattalatoreAudioProcessor::releaseResources()
@@ -169,15 +162,15 @@ void FrattalatoreAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
 
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 
-    for (int ch = 0; ch < numChannelsToProcess; ++ch)
-    {
-        auto* output = buffer.getWritePointer(ch);
-        for (int s = 0; s < buffer.getNumSamples(); ++s)
-        {
-            lfoOutput[ch] = lfo[ch].processSample(buffer.getSample(ch, s)) * lfoDepth;
-            output[s] = filter[ch].processNextSample(ch, buffer.getSample(ch, s));
-        }
-    }
+    //for (int ch = 0; ch < numChannelsToProcess; ++ch)
+    //{
+    //    auto* output = buffer.getWritePointer(ch);
+    //    for (int s = 0; s < buffer.getNumSamples(); ++s)
+    //    {
+    //        lfoOutput[ch] = lfo[ch].processSample(buffer.getSample(ch, s));
+    //        output[s] = filter[ch].processNextSample(ch, buffer.getSample(ch, s));
+    //    }
+    //}
 }
 
 //==============================================================================
@@ -217,9 +210,11 @@ juce::AudioProcessorValueTreeState::ParameterLayout FrattalatoreAudioProcessor::
 
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
 
-    //OSC select
-    params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC1WAVETYPE", "Osc 1 Wave Type", juce::StringArray{ "Sine", "Saw", "Square"}, 0));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC1GAIN", "Oscillator 1 Gain", juce::NormalisableRange<float> { -40.0f, 0.2f, 0.1f }, 0.1f, "dB"));
+    //OSC select and options
+    params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC1WAVETYPE", "Osc 1 Wave Type", juce::StringArray
+        { "Sine", "Saw", "Square"}, 0));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC1GAIN", "Oscillator 1 Gain", juce::NormalisableRange<float> 
+    { -40.0f, 0.2f, 0.1f }, 0.1f, "dB"));
     params.push_back(std::make_unique<juce::AudioParameterInt>("OSC1PITCH", "Oscillator 1 Pitch", -48, 48, 0));
 
     //FM
@@ -227,25 +222,6 @@ juce::AudioProcessorValueTreeState::ParameterLayout FrattalatoreAudioProcessor::
     {0.0f, 1000.0f, 0.01f, 0.3f}, 5.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC1FMDEPTH", "OSC 1 FM Depth", juce::NormalisableRange<float>
     {0.0f, 1000.0f, 0.01f, 0.3f}, 500.0f)); //more control on the lower range, like logarithmically
-    //ADSR
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("ATTACK", "Attack", juce::NormalisableRange<float> 
-    {0.1f, 1.0f, 0.1f }, 0.1f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("DECAY", "Decay", juce::NormalisableRange<float> 
-    {0.1f, 1.0f, 0.1f, }, 0.1f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("SUSTAIN", "Sustain", juce::NormalisableRange<float> 
-    {0.1f, 1.0f, 0.1f, }, 1.0f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("RELEASE", "Release", juce::NormalisableRange<float> 
-    {0.1f, 3.0f, 0.1f, }, 0.4f));
-
-    //Filter ADSR
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("MODATTACK", "Mod Attack", juce::NormalisableRange<float>
-    {0.1f, 1.0f, 0.1f, }, 0.1f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("MODDECAY", "Mod Decay", juce::NormalisableRange<float>
-    {0.1f, 1.0f, 0.1f,  }, 0.1f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("MODSUSTAIN", "Mod Sustain", juce::NormalisableRange<float>
-    {0.1f, 1.0f, 0.1f,  }, 1.0f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("MODRELEASE", "Mod Release", juce::NormalisableRange<float>
-    {0.1f, 3.0f, 0.1f,  }, 0.4f));
 
     //Filter
     params.push_back(std::make_unique<juce::AudioParameterChoice>("FILTERTYPE", "Filter Type", 
@@ -254,11 +230,22 @@ juce::AudioProcessorValueTreeState::ParameterLayout FrattalatoreAudioProcessor::
     {20.0f, 20000.0f, 0.1f, 0.6f}, 200.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("FILTERRES", "Filter Resonance", juce::NormalisableRange<float>
     {1.0f, 10.0f, 0.1f}, 1.0f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("LFO1FREQ", "LFO1 Frequency", juce::NormalisableRange<float> 
-    { 0.0f, 20.0f, 0.1f }, 20.0f, "Hz"));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("LFO1DEPTH", "LFO1 Depth", juce::NormalisableRange<float> 
-    { 0.0f, 1.0f, 0.1f}, 1.0f, ""));
 
+    //LFO
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("LFO1FREQ", "LFO1 Frequency", juce::NormalisableRange<float> 
+    { 0.0f, 20.0f, 0.1f }, 5.0f, "Hz"));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("LFO1DEPTH", "LFO1 Depth", juce::NormalisableRange<float> 
+    { 0.0f, 500.0f, 0.1f}, 1000.0f, ""));
+
+    //ADSR
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("ATTACK", "Attack", juce::NormalisableRange<float>
+    {0.1f, 1.0f, 0.1f }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("DECAY", "Decay", juce::NormalisableRange<float>
+    {0.1f, 1.0f, 0.1f, }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("SUSTAIN", "Sustain", juce::NormalisableRange<float>
+    {0.1f, 1.0f, 0.1f, }, 1.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("RELEASE", "Release", juce::NormalisableRange<float>
+    {0.1f, 3.0f, 0.1f, }, 0.4f));
     return { params.begin(), params.end() };
 }
 
@@ -275,12 +262,6 @@ void FrattalatoreAudioProcessor::setVoiceParams()
         //check the correct casting for each voice
         if (auto voice = dynamic_cast<SynthVoice*> (synth.getVoice(i)))
         {
-            //ADSR
-//auto returns a pointer => I have to obtain what type it refers
-            auto& attack = *apvts.getRawParameterValue("ATTACK");
-            auto& decay = *apvts.getRawParameterValue("DECAY");
-            auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
-            auto& release = *apvts.getRawParameterValue("RELEASE");
 
             // OSC 
             auto& oscWaveChoice = *apvts.getRawParameterValue("OSC1WAVETYPE");
@@ -291,19 +272,20 @@ void FrattalatoreAudioProcessor::setVoiceParams()
             auto& fmDepth = *apvts.getRawParameterValue("OSC1FMDEPTH");
             auto& fmFreq = *apvts.getRawParameterValue("OSC1FMFREQ");
 
-            //Mod Filter
-            //auto& modAttack = *apvts.getRawParameterValue("MODATTACK");
-            //auto& modDecay = *apvts.getRawParameterValue("MODDECAY");
-            //auto& modSustain = *apvts.getRawParameterValue("MODSUSTAIN");
-            //auto& modRelease = *apvts.getRawParameterValue("MODRELEASE");
+            //ADSR
+            auto& attack = *apvts.getRawParameterValue("ATTACK");
+            auto& decay = *apvts.getRawParameterValue("DECAY");
+            auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
+            auto& release = *apvts.getRawParameterValue("RELEASE");
+
             auto& osc = voice->getOscillator();
             //auto& adsr = voice->getAdsr();
             for (int j = 0; j < getTotalNumOutputChannels(); i++)
             {
                 osc[j].setParams(oscWaveChoice, oscGain, oscPitch, fmFreq, fmDepth);
             }
-            voice->updateAdsr(attack.load(), decay.load(), sustain.load(), release.load()); //the pointer is for a AtomicFloat -> convert it into float iot save 
-//            voice->updateModAdsr(modAttack.load(), modDecay.load(), modSustain.load(), modRelease.load());
+            auto& adsr = voice->getAdsr();
+            adsr.updateADSR(attack.load(), decay.load(), sustain.load(), release.load()); //the pointer is for a AtomicFloat -> convert it into float iot save 
         }
     }
 }
@@ -316,19 +298,18 @@ void FrattalatoreAudioProcessor::setFilterParams()
 
     auto& lfoFreq = *apvts.getRawParameterValue("LFO1FREQ");
     auto& lfoDepth = *apvts.getRawParameterValue("LFO1DEPTH");
-
+    
     for (int ch = 0; ch < numChannelsToProcess; ++ch)
     {
-        filterCutOff = (500 * lfoOutput[ch]) + filterCutOff;
-        auto cutOff = std::clamp<float>(filterCutOff, 20.0f, 20000.0f);
-        //filter[ch].updateParameters(filterType, filterCutOff, filterResonance);
-        lfo[ch].setFrequency(lfoFreq);
+        for (int i = 0; i < synth.getNumVoices(); ++i) 
+        {
+            if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
+            {
+                lfo[ch].setFrequency(lfoFreq);
+                //filterCutOff = (lfoDepth * lfoOutput[ch]) + filterCutOff;
+                auto cutOff = std::clamp<float>(filterCutOff, 20.0f, 20000.0f);
+                voice->updateFilterParams(filterType, filterCutOff, filterResonance, lfoFreq, lfoDepth);
+            }
+        }
     }
-    //for (int v = 0; v < synth.getNumVoices(); ++v)
-    //{
-    //    if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(v)))
-    //    {
-    //        voice->updateFilter(filterType.load(), filterCutOff.load(), filterResonance.load());
-    //    }
-    //}
 }

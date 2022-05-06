@@ -57,19 +57,20 @@ public:
     //==============================================================================
 
     juce::AudioProcessorValueTreeState apvts;
-    juce::dsp::Oscillator<float> getLfo() { return lfo; };
 
 private:
     static constexpr int numChannelsToProcess{ 2 };
     juce::Synthesiser synth;
-    std::array<FilterData, numChannelsToProcess> filter;
+
     juce::AudioProcessorValueTreeState::ParameterLayout createParams();
     void setParams();
     void setVoiceParams();
     void setFilterParams();
+
+    static constexpr int numVoices{ 5 };
     std::array<juce::dsp::Oscillator<float>,numChannelsToProcess> lfo;
     std::array<float, numChannelsToProcess> lfoOutput{ 0.0f,0.0f };
-    static constexpr int numVoices{ 5 };
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FrattalatoreAudioProcessor)
 };

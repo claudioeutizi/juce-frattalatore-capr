@@ -10,9 +10,11 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
-#include "UI/AdsrComponent.h"
 #include "UI/OscComponent.h"
 #include "UI/FilterComponent.h"
+#include "UI/AdsrComponent.h"
+#include "UI/LfoComponent.h"
+
 
 //==============================================================================
 /**
@@ -26,13 +28,12 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
-
 private:
     FrattalatoreAudioProcessor& audioProcessor;
-    AdsrComponent adsr;
     OscComponent osc;
     FilterComponent filter;
-    AdsrComponent modAdsr;
+    AdsrComponent adsr;
+    LfoComponent lfo;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FrattalatoreAudioProcessorEditor)
 };

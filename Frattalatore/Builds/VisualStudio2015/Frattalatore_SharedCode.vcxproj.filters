@@ -493,7 +493,13 @@
     <ClCompile Include="..\..\Source\UI\AdsrComponent.cpp">
       <Filter>Frattalatore\Source\UI</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\UI\CustomComponent.cpp">
+      <Filter>Frattalatore\Source\UI</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\UI\FilterComponent.cpp">
+      <Filter>Frattalatore\Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\UI\LfoComponent.cpp">
       <Filter>Frattalatore\Source\UI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\UI\OscComponent.cpp">
@@ -2775,7 +2781,13 @@
     <ClInclude Include="..\..\Source\UI\AdsrComponent.h">
       <Filter>Frattalatore\Source\UI</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\UI\CustomComponent.h">
+      <Filter>Frattalatore\Source\UI</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\UI\FilterComponent.h">
+      <Filter>Frattalatore\Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\UI\LfoComponent.h">
       <Filter>Frattalatore\Source\UI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\UI\OscComponent.h">

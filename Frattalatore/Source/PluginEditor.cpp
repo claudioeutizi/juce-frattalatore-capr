@@ -10,20 +10,17 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (FrattalatoreAudioProcessor& p)
-    : AudioProcessorEditor (&p),
+FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (FrattalatoreAudioProcessor& p):
+    AudioProcessorEditor (&p),
     audioProcessor (p),
-    osc(audioProcessor.apvts,"OSC1WAVETYPE", "OSC1FMFREQ", "OSC1FMDEPTH"),
-    adsr("Amp Envelope", audioProcessor.apvts, "ATTACK", "DECAY", "SUSTAIN", "RELEASE"),
-    filter(audioProcessor.apvts, "FILTERTYPE", "FILTERCUTOFF", "FILTERRES"),
-    modAdsr("Mod Envelope", audioProcessor.apvts, "MODATTACK", "MODDECAY", "MODSUSTAIN", "MODRELEASE")
+    osc(audioProcessor.apvts, "OSC1", "OSC1GAIN", "OSC1PITCH", "OSC1FMFREQ", "OSC1FMDEPTH"),
+    filter(audioProcessor.apvts, "FILTERTYPE", "FILTERCUTOFF", "FILTERRESONANCE"),
+    adsr(audioProcessor.apvts, "ATTACK", "DECAY", "SUSTAIN", "RELEASE"),
+    lfo(audioProcessor.apvts, "LFO1FREQ", "LFO1DEPTH")
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (620, 500);
-
-    //adsr sliders
-    addAndMakeVisible(adsr);
 
     //Oscillator parameters
     addAndMakeVisible(osc);
@@ -31,9 +28,27 @@ FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (Frattalatore
     //Filter
     addAndMakeVisible(filter);
 
-    //Mod filter
-    addAndMakeVisible(modAdsr);
+    //LFO
+    addAndMakeVisible(lfo);
 
+    //adsr sliders
+    addAndMakeVisible(adsr);
+
+
+    osc.setName("Oscillator");
+    filter.setName("Filter");
+    lfo.setName("Filter LFO");
+    adsr.setName("ADSR");
+
+    auto oscColour = juce::Colour::fromRGB(247, 190, 67);
+    auto filterColour = juce::Colour::fromRGB(246, 87, 64);
+
+    osc.setBoundsColour(oscColour);
+
+    filter.setBoundsColour(filterColour);
+    lfo.setBoundsColour(filterColour);
+
+    setSize(1080, 525);
 }
 
 FrattalatoreAudioProcessorEditor::~FrattalatoreAudioProcessorEditor()
@@ -51,18 +66,11 @@ void FrattalatoreAudioProcessorEditor::resized()
 {
     //positioning all the graphical components in the right place
 
-    //dimension variables
-    const auto paddingX = 5;
-    const auto paddingY = 35;
-    const auto paddingYFilter = 270;
-    const auto width = 300;
-    const auto height = 200;
-
-    //placing the components
-
-    osc.setBounds(paddingX, paddingY, width, height);
-    adsr.setBounds(osc.getRight(),paddingY, width, height);
-    filter.setBounds(paddingX, paddingYFilter, width, height);
-    modAdsr.setBounds(filter.getRight(), paddingYFilter, width, height);
+    const auto oscWidth = 420;
+    const auto oscHeight = 180;
+    osc.setBounds(0, 0, oscWidth, oscHeight);
+    filter.setBounds(osc.getRight(), 0, 180, 200);
+    lfo.setBounds(filter.getRight(), filter.getBottom(), 180, 160);
+    adsr.setBounds(filter.getRight(), 0, 230, 360);
 }
 
