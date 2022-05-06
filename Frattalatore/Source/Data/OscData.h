@@ -26,8 +26,6 @@ public:
     virtual void OscData::resetOsc();
     virtual void setParams(const int oscChoice, const float oscGain, const int oscPitch, const float fmFreq, const float fmDepth);
 
-
-
 private:
     juce::dsp::Oscillator<float> fmOsc{ [](float x) {return sin(x); } }; //frequency modulator
     juce::dsp::Gain<float> gain;

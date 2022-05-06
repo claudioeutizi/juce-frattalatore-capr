@@ -211,7 +211,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout FrattalatoreAudioProcessor::
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
 
     //OSC select and options
-    params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC1WAVETYPE", "Osc 1 Wave Type", juce::StringArray
+    params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC", "Oscillator", juce::StringArray
         { "Sine", "Saw", "Square"}, 0));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC1GAIN", "Oscillator 1 Gain", juce::NormalisableRange<float> 
     { -40.0f, 0.2f, 0.1f }, 0.1f, "dB"));
@@ -264,7 +264,7 @@ void FrattalatoreAudioProcessor::setVoiceParams()
         {
 
             // OSC 
-            auto& oscWaveChoice = *apvts.getRawParameterValue("OSC1WAVETYPE");
+            auto& oscWaveChoice = *apvts.getRawParameterValue("OSC");
             auto& oscGain = *apvts.getRawParameterValue("OSC1GAIN");
             auto& oscPitch = *apvts.getRawParameterValue("OSC1PITCH");
 

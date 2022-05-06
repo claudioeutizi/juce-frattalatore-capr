@@ -19,16 +19,17 @@ class OscComponent  : public GuiComponent
 {
 public:
     OscComponent(juce::AudioProcessorValueTreeState& apvts, 
-        juce::String waveSelectorId,
-        juce::String gainId,
-        juce::String pitchId,
-        juce::String fmFreqId,
-        juce::String fmDepthId);
+    juce::String waveSelectorId,
+    juce::String gainId,
+    juce::String pitchId,
+    juce::String fmFreqId,
+    juce::String fmDepthId);
     ~OscComponent() override;
     void resized() override;
 
 private:
-    SynthComboBox oscTypeSelector;
+    juce::ComboBox oscTypeSelector;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> oscSelAttachment;
     SliderWithLabel gain;
     SliderWithLabel pitch;
     SliderWithLabel fmFreq;

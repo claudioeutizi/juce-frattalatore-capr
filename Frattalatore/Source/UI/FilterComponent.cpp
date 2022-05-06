@@ -16,13 +16,16 @@ FilterComponent::FilterComponent(juce::AudioProcessorValueTreeState& apvts,
     juce::String filterTypeSelectorId, juce::String filterCutOffId, 
     juce::String filterResId):
         cutOff("CutOff", filterCutOffId, apvts, dialWidth, dialHeight),
-        resonance("Resonance", filterResId, apvts, dialWidth, dialHeight),
-        typeSelector("Type", filterTypeSelectorId,apvts, { "LPF", "BPF", "HPF" }, 0)
-        
+        resonance("Resonance", filterResId, apvts, dialWidth, dialHeight)        
 {
+    juce::StringArray filterTypeChoices{ "Low Pass", "Band Pass", "High Pass" };
+    typeSelector.addItemList(filterTypeChoices, 1);
+    typeSelector.setSelectedItemIndex(0);
+    addAndMakeVisible(typeSelector);
+
     addAndMakeVisible(cutOff);
     addAndMakeVisible(resonance);
-    addAndMakeVisible(typeSelector);
+
 }
 
 FilterComponent::~FilterComponent()

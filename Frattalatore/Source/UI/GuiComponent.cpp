@@ -75,18 +75,4 @@ void GuiComponent::paint(juce::Graphics& g)
 void GuiComponent::resized()
 {
 }
-//===============IMPLEMENTATION OF SynthComboBox===================================
 
-SynthComboBox::SynthComboBox(juce::String labelName, 
-    juce::String paramId, juce::AudioProcessorValueTreeState& apvts, 
-    juce::StringArray choices, const int defaultChoice)
-{
-    guiComboBox.addItemList(choices, 1);
-    guiComboBox.setSelectedItemIndex(defaultChoice);
-    addAndMakeVisible(guiComboBox);
-    guiComboBoxAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, paramId, guiComboBox);
-}
-
-void SynthComboBox::resized()
-{
-}

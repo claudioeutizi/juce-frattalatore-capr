@@ -19,16 +19,18 @@ OscComponent::OscComponent(juce::AudioProcessorValueTreeState& apvts,
     gain("Gain", gainId, apvts, dialWidth, dialHeight),
     pitch("Pitch", pitchId, apvts, dialWidth, dialHeight),
     fmFreq("FM Freq", fmFreqId, apvts, dialWidth, dialHeight),
-    fmDepth("FM Depth", fmDepthId, apvts, dialWidth, dialHeight),
-    oscTypeSelector("Wave Type", waveSelectorId, apvts, { "Sine", "Saw", "Square" }, 0)
+    fmDepth("FM Depth", fmDepthId, apvts, dialWidth, dialHeight)
 {
-
+    juce::StringArray oscChoices { "Sine", "Saw", "Square" };
+    oscTypeSelector.addItemList(oscChoices, 1);
+    oscTypeSelector.setSelectedItemIndex(0);
     addAndMakeVisible(oscTypeSelector);
+
+    oscSelAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, waveSelectorId, oscTypeSelector);
     addAndMakeVisible(gain);
     addAndMakeVisible(pitch);
     addAndMakeVisible(fmFreq);
     addAndMakeVisible(fmDepth);
-
 }
 
 OscComponent::~OscComponent()

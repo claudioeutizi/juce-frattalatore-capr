@@ -29,7 +29,8 @@ private:
 
     SliderWithLabel cutOff;
     SliderWithLabel resonance;
-    SynthComboBox typeSelector;
+    juce::ComboBox typeSelector;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> filterTypeAttachment;
 
     static constexpr int dialWidth = 70;
     static constexpr int dialHeight = 70;

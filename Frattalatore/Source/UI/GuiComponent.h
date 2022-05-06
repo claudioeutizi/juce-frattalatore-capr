@@ -63,18 +63,3 @@ private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(GuiComponent)
 };
 
-class SynthComboBox : public juce::Component
-{
-public:
-    using ComboBoxAttachment = juce::AudioProcessorValueTreeState::ComboBoxAttachment;
-
-    SynthComboBox(juce::String labelName, juce::String paramId,
-        juce::AudioProcessorValueTreeState& apvts,
-        juce::StringArray choices, const int defaultChoice);
-
-    void resized() override;
-
-private:
-    juce::ComboBox guiComboBox;
-    std::unique_ptr<ComboBoxAttachment> guiComboBoxAttachment;
-};
