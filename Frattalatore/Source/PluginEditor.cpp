@@ -13,14 +13,13 @@
 FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (FrattalatoreAudioProcessor& p):
     AudioProcessorEditor (&p),
     audioProcessor (p),
-    osc(audioProcessor.apvts, "OSC1", "OSC1GAIN", "OSC1PITCH", "OSC1FMFREQ", "OSC1FMDEPTH"),
+    osc(audioProcessor.apvts, "OSCTYPE", "OSC1GAIN", "OSC1PITCH", "OSC1FMFREQ", "OSC1FMDEPTH"),
     filter(audioProcessor.apvts, "FILTERTYPE", "FILTERCUTOFF", "FILTERRESONANCE"),
     adsr(audioProcessor.apvts, "ATTACK", "DECAY", "SUSTAIN", "RELEASE"),
     lfo(audioProcessor.apvts, "LFO1FREQ", "LFO1DEPTH")
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize (620, 500);
 
     //Oscillator parameters
     addAndMakeVisible(osc);
@@ -33,7 +32,6 @@ FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (Frattalatore
 
     //adsr sliders
     addAndMakeVisible(adsr);
-
 
     osc.setName("Oscillator");
     filter.setName("Filter");
@@ -48,7 +46,7 @@ FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (Frattalatore
     filter.setBoundsColour(filterColour);
     lfo.setBoundsColour(filterColour);
 
-    setSize(1080, 525);
+    setSize(1000, 1000);
 }
 
 FrattalatoreAudioProcessorEditor::~FrattalatoreAudioProcessorEditor()

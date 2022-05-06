@@ -115,10 +115,14 @@ void SynthVoice::reset()
     adsr.reset();
 }
 
-void SynthVoice::updateFilterParams(const int filterType, const float cutOff, const float resonance, const float lfoFreq, const float lfoDepth)
+void SynthVoice::updateFilterParams(const int filterType, const float filterCutOff, const float resonance, const float lfoFreq, const float lfoDepth)
 {
+    auto cutOff = filterCutOff;
     for (int ch = 0; ch < numChannelsToProcess; ch++)
     {
+        lfo[ch].setFrequency (lfoFreq);
+        cutOff = (lfoDepth * lfoOutput[ch]) + cutOff;
+        cutOff = std::clamp<float> (cutOff, 20.0f, 20000.0f);
         filter[ch].updateParameters(filterType, cutOff, resonance);
     }
 }

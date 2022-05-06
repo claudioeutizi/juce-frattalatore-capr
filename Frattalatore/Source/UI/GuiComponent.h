@@ -16,7 +16,7 @@
 /*
 */
 
-static constexpr float fontHeight{ 15.0f };
+static constexpr float fontSize{ 15.0f };
 
 /* class that abstracts the creation of sliders with labels */
 
@@ -26,8 +26,9 @@ public:
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
     using SliderStyle = juce::Slider::SliderStyle;
 
-    SliderWithLabel(juce::String labelName, juce::String paramId, 
-        juce::AudioProcessorValueTreeState& apvts, 
+    SliderWithLabel(juce::String labelName,
+        juce::String paramId, 
+        juce::AudioProcessorValueTreeState& apvts,
         const int width, const int height, 
         SliderStyle style = SliderStyle::RotaryHorizontalVerticalDrag);
 
@@ -54,8 +55,8 @@ public:
     void paint(juce::Graphics&) override;
     void resized() override;
 
-    void setComponentName(juce::String guiComponentName) { this->guiComponentName = guiComponentName; }
-    void setBoundsColour(juce::Colour guiComponentBoundsColour) { guiComponentBoundsColour = guiComponentBoundsColour; }
+    void setComponentName(juce::String name) { guiComponentName = name; }
+    void setBoundsColour(juce::Colour colour) { boundsColour = colour; }
 
 private:
     juce::String guiComponentName{ "" };

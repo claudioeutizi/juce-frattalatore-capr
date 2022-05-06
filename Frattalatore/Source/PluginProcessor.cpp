@@ -211,7 +211,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout FrattalatoreAudioProcessor::
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
 
     //OSC select and options
-    params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC", "Oscillator", juce::StringArray
+    params.push_back(std::make_unique<juce::AudioParameterChoice>("OSCTYPE", "Oscillator", juce::StringArray
         { "Sine", "Saw", "Square"}, 0));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC1GAIN", "Oscillator 1 Gain", juce::NormalisableRange<float> 
     { -40.0f, 0.2f, 0.1f }, 0.1f, "dB"));
@@ -264,7 +264,7 @@ void FrattalatoreAudioProcessor::setVoiceParams()
         {
 
             // OSC 
-            auto& oscWaveChoice = *apvts.getRawParameterValue("OSC");
+            auto& oscWaveChoice = *apvts.getRawParameterValue("OSCTYPE");
             auto& oscGain = *apvts.getRawParameterValue("OSC1GAIN");
             auto& oscPitch = *apvts.getRawParameterValue("OSC1PITCH");
 
@@ -282,7 +282,7 @@ void FrattalatoreAudioProcessor::setVoiceParams()
             //auto& adsr = voice->getAdsr();
             for (int j = 0; j < getTotalNumOutputChannels(); i++)
             {
-                osc[j].setParams(oscWaveChoice, oscGain, oscPitch, fmFreq, fmDepth);
+                osc[j].setParams(oscWaveChoice, oscGain.load(), oscPitch, fmFreq.load(), fmDepth.load());
             }
             auto& adsr = voice->getAdsr();
             adsr.updateADSR(attack.load(), decay.load(), sustain.load(), release.load()); //the pointer is for a AtomicFloat -> convert it into float iot save 
@@ -299,17 +299,11 @@ void FrattalatoreAudioProcessor::setFilterParams()
     auto& lfoFreq = *apvts.getRawParameterValue("LFO1FREQ");
     auto& lfoDepth = *apvts.getRawParameterValue("LFO1DEPTH");
     
-    for (int ch = 0; ch < numChannelsToProcess; ++ch)
-    {
         for (int i = 0; i < synth.getNumVoices(); ++i) 
         {
             if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
             {
-                lfo[ch].setFrequency(lfoFreq);
-                //filterCutOff = (lfoDepth * lfoOutput[ch]) + filterCutOff;
-                auto cutOff = std::clamp<float>(filterCutOff, 20.0f, 20000.0f);
-                voice->updateFilterParams(filterType, filterCutOff, filterResonance, lfoFreq, lfoDepth);
+                voice->updateFilterParams(filterType, filterCutOff.load(), filterResonance.load(), lfoFreq.load(), lfoDepth.load());
             }
         }
-    }
 }

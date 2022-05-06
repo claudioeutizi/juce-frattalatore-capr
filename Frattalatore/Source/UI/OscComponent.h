@@ -30,6 +30,7 @@ public:
 private:
     juce::ComboBox oscTypeSelector;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> oscSelAttachment;
+
     SliderWithLabel gain;
     SliderWithLabel pitch;
     SliderWithLabel fmFreq;

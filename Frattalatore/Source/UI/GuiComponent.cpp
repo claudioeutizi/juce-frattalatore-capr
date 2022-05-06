@@ -26,7 +26,7 @@ SliderWithLabel::SliderWithLabel(juce::String labelName, juce::String paramId, j
     guiSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, textBoxWidth, textBoxHeight);
     addAndMakeVisible(guiSlider);
 
-    guiLabel.setFont(fontHeight);
+    guiLabel.setFont(fontSize);
     guiLabel.setText(labelName, juce::dontSendNotification);
     guiLabel.setJustificationType(juce::Justification::centred);
     addAndMakeVisible(guiLabel);
@@ -65,7 +65,7 @@ void GuiComponent::paint(juce::Graphics& g)
     g.drawRoundedRectangle(bounds.toFloat().reduced(10.0f), 5.0f, 2.0f);
 
     g.setColour(juce::Colours::yellow);
-    g.setFont(fontHeight);
+    g.setFont(fontSize);
     g.setFont(g.getCurrentFont().boldened());
 
     jassert(guiComponentName.isNotEmpty());
