@@ -26,11 +26,10 @@ public:
     void resized() override;
 
 private:
-
-    SliderWithLabel cutOff;
-    SliderWithLabel resonance;
     juce::ComboBox typeSelector;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> filterTypeAttachment;
+    SliderWithLabel cutOff;
+    SliderWithLabel resonance;
 
     static constexpr int dialWidth = 70;
     static constexpr int dialHeight = 70;

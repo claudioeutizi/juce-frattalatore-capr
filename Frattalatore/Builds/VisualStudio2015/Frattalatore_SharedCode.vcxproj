@@ -74,7 +74,7 @@
       <WarningLevel>Level4</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -114,7 +114,7 @@
       <WarningLevel>Level4</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -141,8 +141,8 @@
     <ClCompile Include="..\..\Source\Data\FilterData.cpp"/>
     <ClCompile Include="..\..\Source\Data\OscData.cpp"/>
     <ClCompile Include="..\..\Source\UI\AdsrComponent.cpp"/>
-    <ClCompile Include="..\..\Source\UI\CustomComponent.cpp"/>
     <ClCompile Include="..\..\Source\UI\FilterComponent.cpp"/>
+    <ClCompile Include="..\..\Source\UI\GuiComponent.cpp"/>
     <ClCompile Include="..\..\Source\UI\LfoComponent.cpp"/>
     <ClCompile Include="..\..\Source\UI\OscComponent.cpp"/>
     <ClCompile Include="..\..\Source\SynthVoice.cpp"/>
@@ -2252,8 +2252,8 @@
     <ClInclude Include="..\..\Source\Data\FilterData.h"/>
     <ClInclude Include="..\..\Source\Data\OscData.h"/>
     <ClInclude Include="..\..\Source\UI\AdsrComponent.h"/>
-    <ClInclude Include="..\..\Source\UI\CustomComponent.h"/>
     <ClInclude Include="..\..\Source\UI\FilterComponent.h"/>
+    <ClInclude Include="..\..\Source\UI\GuiComponent.h"/>
     <ClInclude Include="..\..\Source\UI\LfoComponent.h"/>
     <ClInclude Include="..\..\Source\UI\OscComponent.h"/>
     <ClInclude Include="..\..\Source\SynthSound.h"/>

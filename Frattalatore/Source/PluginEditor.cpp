@@ -33,16 +33,15 @@ FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (Frattalatore
     //adsr sliders
     addAndMakeVisible(adsr);
 
-    osc.setName("Oscillator");
-    filter.setName("Filter");
-    lfo.setName("Filter LFO");
-    adsr.setName("ADSR");
+    osc.setComponentName("Oscillator");
+    filter.setComponentName("Filter");
+    lfo.setComponentName("Filter LFO");
+    adsr.setComponentName("ADSR");
 
     auto oscColour = juce::Colour::fromRGB(247, 190, 67);
     auto filterColour = juce::Colour::fromRGB(246, 87, 64);
 
     osc.setBoundsColour(oscColour);
-
     filter.setBoundsColour(filterColour);
     lfo.setBoundsColour(filterColour);
 

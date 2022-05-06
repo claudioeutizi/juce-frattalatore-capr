@@ -18,10 +18,11 @@ FilterComponent::FilterComponent(juce::AudioProcessorValueTreeState& apvts,
         cutOff("CutOff", filterCutOffId, apvts, dialWidth, dialHeight),
         resonance("Resonance", filterResId, apvts, dialWidth, dialHeight)        
 {
-    juce::StringArray filterTypeChoices{ "Low Pass", "Band Pass", "High Pass" };
+    juce::StringArray filterTypeChoices{ "LPF", "BPF", "HPF" };
     typeSelector.addItemList(filterTypeChoices, 1);
     typeSelector.setSelectedItemIndex(0);
     addAndMakeVisible(typeSelector);
+    filterTypeAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, filterTypeSelectorId, typeSelector);
 
     addAndMakeVisible(cutOff);
     addAndMakeVisible(resonance);

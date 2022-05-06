@@ -18,7 +18,6 @@ public:
     FilterData();
     void FilterData::prepareToPlay (double sampleRate, int samplePerBlock, int numChannels);
     void FilterData::updateParameters(const int filterType, const float cutOff, const float resonance);
-    void FilterData::setLfoParameters(const float freq, const float depth);
     void FilterData::processNextBlock(juce::AudioBuffer<float>& buffer);
     float FilterData::processNextSample(int channel, float input);
     void FilterData::resetFilter();

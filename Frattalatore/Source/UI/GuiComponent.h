@@ -26,11 +26,7 @@ public:
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
     using SliderStyle = juce::Slider::SliderStyle;
 
-    SliderWithLabel(juce::String labelName,
-        juce::String paramId, 
-        juce::AudioProcessorValueTreeState& apvts,
-        const int width, const int height, 
-        SliderStyle style = SliderStyle::RotaryHorizontalVerticalDrag);
+    SliderWithLabel(juce::String labelName, juce::String paramId, juce::AudioProcessorValueTreeState& apvts, const int width, const int height, SliderStyle style = SliderStyle::RotaryHorizontalVerticalDrag);
 
     void resized() override;
 

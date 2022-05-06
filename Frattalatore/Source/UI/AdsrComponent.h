@@ -26,6 +26,7 @@ public:
     using SliderStyle = juce::Slider::SliderStyle;
 
 private:
+
     static constexpr int sliderWidth = 50;
     static constexpr int sliderHeight = 260;
 

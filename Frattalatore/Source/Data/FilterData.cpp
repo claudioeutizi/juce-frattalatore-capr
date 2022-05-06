@@ -22,12 +22,6 @@ void FilterData::updateParameters(const int filterType, const float cutOff, cons
     setResonance(resonance);
 }
 
-void FilterData::setLfoParameters(const float freq, const float depth)
-{
-    //lfoGain = (juce::Decibels::gainToDecibels(depth));
-    //lfo.setFrequency(freq);
-}
-
 
 void FilterData::prepareToPlay(double sampleRate, int samplePerBlock, int numChannels)
 {
@@ -37,7 +31,6 @@ void FilterData::prepareToPlay(double sampleRate, int samplePerBlock, int numCha
     spec.sampleRate = sampleRate;
     spec.numChannels = numChannels;
     prepare(spec);
-    //lfo.prepareToPlay(sampleRate, samplePerBlock, numChannels);
     lfo.prepare(spec);
     isPrepared = true;
 
@@ -65,6 +58,7 @@ void FilterData::selectFilterType(const int filterType)
 void FilterData::resetFilter()
 {
     reset();
+    lfo.reset();
 }
 
 void FilterData::processNextBlock(juce::AudioBuffer<float>& buffer)

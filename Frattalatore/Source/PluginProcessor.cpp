@@ -228,7 +228,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout FrattalatoreAudioProcessor::
         juce::StringArray{ "LPF", "BPF", "HPF" }, 0));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("FILTERCUTOFF", "Filter CutOff", juce::NormalisableRange<float>
     {20.0f, 20000.0f, 0.1f, 0.6f}, 200.0f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("FILTERRES", "Filter Resonance", juce::NormalisableRange<float>
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("FILTERRESONANCE", "Filter Resonance", juce::NormalisableRange<float>
     {1.0f, 10.0f, 0.1f}, 1.0f));
 
     //LFO
@@ -280,7 +280,7 @@ void FrattalatoreAudioProcessor::setVoiceParams()
 
             auto& osc = voice->getOscillator();
             //auto& adsr = voice->getAdsr();
-            for (int j = 0; j < getTotalNumOutputChannels(); i++)
+            for (int j = 0; j < getTotalNumOutputChannels(); j++)
             {
                 osc[j].setParams(oscWaveChoice, oscGain.load(), oscPitch, fmFreq.load(), fmDepth.load());
             }

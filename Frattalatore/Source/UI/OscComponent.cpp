@@ -15,11 +15,11 @@ OscComponent::OscComponent(juce::AudioProcessorValueTreeState& apvts,
     juce::String gainId,
     juce::String pitchId,
     juce::String fmFreqId,
-    juce::String fmDepthId) :
-    gain("Gain", gainId, apvts, dialWidth, dialHeight),
-    pitch("Pitch", pitchId, apvts, dialWidth, dialHeight),
-    fmFreq("FM Freq", fmFreqId, apvts, dialWidth, dialHeight),
-    fmDepth("FM Depth", fmDepthId, apvts, dialWidth, dialHeight)
+    juce::String fmDepthId):
+        gain("Gain", gainId, apvts, dialWidth, dialHeight),
+        pitch("Pitch", pitchId, apvts, dialWidth, dialHeight),
+        fmFreq("FM Freq", fmFreqId, apvts, dialWidth, dialHeight),
+        fmDepth("FM Depth", fmDepthId, apvts, dialWidth, dialHeight)
 {
     juce::StringArray oscChoices { "Sine", "Saw", "Square" };
     oscTypeSelector.addItemList(oscChoices, 1);
