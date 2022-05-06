@@ -8,6 +8,7 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include <algorithm>
 
 //==============================================================================
 FrattalatoreAudioProcessor::FrattalatoreAudioProcessor()
@@ -25,7 +26,10 @@ FrattalatoreAudioProcessor::FrattalatoreAudioProcessor()
 {
     //monophonic synthesiser: adding sound and voice
     synth.addSound(new SynthSound());
-    synth.addVoice(new SynthVoice());
+    for (int v = 0; v < numVoices; v++) 
+    {
+        synth.addVoice(new SynthVoice());
+    }
 }
 
 FrattalatoreAudioProcessor::/*destructor*/~FrattalatoreAudioProcessor()
@@ -107,6 +111,17 @@ void FrattalatoreAudioProcessor::prepareToPlay (double sampleRate, int samplesPe
             voice->prepareToplay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
         }
     }
+    juce::dsp::ProcessSpec spec;
+    spec.maximumBlockSize = samplesPerBlock;
+    spec.sampleRate = sampleRate;
+    spec.numChannels = getTotalNumOutputChannels();
+
+    for (int ch = 0; ch < numChannelsToProcess; ++ch)
+    {
+        filter[ch].prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
+        lfo[ch].prepare(spec);
+        lfo[ch].initialise([](float x) {return std::sin(x); });
+    }
 }
 
 void FrattalatoreAudioProcessor::releaseResources()
@@ -150,45 +165,19 @@ void FrattalatoreAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    for (int i = 0; i < synth.getNumVoices(); ++i)
-    {
-        //check the correct casting for each voice
-        if (auto voice = dynamic_cast<SynthVoice*> (synth.getVoice(i)))
-        {
-            // OSC type 
-            auto& oscWaveChoice = *apvts.getRawParameterValue("OSC1WAVETYPE");
+    setParams();
 
-            //FM
-            auto& fmDepth = *apvts.getRawParameterValue("OSC1FMDEPTH");
-            auto& fmFreq = *apvts.getRawParameterValue("OSC1FMFREQ");
-
-            //ADSR
-            //auto returns a pointer => I have to obtain what type it refers
-            auto& attack = *apvts.getRawParameterValue("ATTACK");
-            auto& decay = *apvts.getRawParameterValue("DECAY");
-            auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
-            auto& release = *apvts.getRawParameterValue("RELEASE");
-
-            //Filter
-            auto& filterType = *apvts.getRawParameterValue("FILTERTYPE");
-            auto& filterCutOff = *apvts.getRawParameterValue("FILTERCUTOFF");
-            auto& filterResonance = *apvts.getRawParameterValue("FILTERRES");
-
-            //Mod Filter
-            auto& modAttack = *apvts.getRawParameterValue("MODATTACK");
-            auto& modDecay = *apvts.getRawParameterValue("MODDECAY");
-            auto& modSustain = *apvts.getRawParameterValue("MODSUSTAIN");
-            auto& modRelease = *apvts.getRawParameterValue("MODRELEASE");
-
-            voice->getOscillator().setOscWaveType(oscWaveChoice);
-            voice->getOscillator().updateFm(fmDepth.load(), fmFreq.load());
-            voice->updateAdsr(attack.load(), decay.load(), sustain.load(), release.load()); //the pointer is for a AtomicFloat -> convert it into float iot save 
-            voice->updateFilter(filterType.load(), filterCutOff.load(), filterResonance.load());
-            voice->updateModAdsr(modAttack.load(), modDecay.load(), modSustain.load(), modRelease.load());
-        }
-    }
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 
+    for (int ch = 0; ch < numChannelsToProcess; ++ch)
+    {
+        auto* output = buffer.getWritePointer(ch);
+        for (int s = 0; s < buffer.getNumSamples(); ++s)
+        {
+            lfoOutput[ch] = lfo[ch].processSample(buffer.getSample(ch, s)) * lfoDepth;
+            output[s] = filter[ch].processNextSample(ch, buffer.getSample(ch, s));
+        }
+    }
 }
 
 //==============================================================================
@@ -227,14 +216,12 @@ juce::AudioProcessorValueTreeState::ParameterLayout FrattalatoreAudioProcessor::
 {
 
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
-    //Combobox: switch oscillator
-    //Attack - float
-    //Decay - float
-    //Sustain - float
-    //Release - float
 
     //OSC select
     params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC1WAVETYPE", "Osc 1 Wave Type", juce::StringArray{ "Sine", "Saw", "Square"}, 0));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC1GAIN", "Oscillator 1 Gain", juce::NormalisableRange<float> { -40.0f, 0.2f, 0.1f }, 0.1f, "dB"));
+    params.push_back(std::make_unique<juce::AudioParameterInt>("OSC1PITCH", "Oscillator 1 Pitch", -48, 48, 0));
+
     //FM
     params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC1FMFREQ", "OSC 1 FM Frequency", juce::NormalisableRange<float>
     {0.0f, 1000.0f, 0.01f, 0.3f}, 5.0f));
@@ -267,6 +254,81 @@ juce::AudioProcessorValueTreeState::ParameterLayout FrattalatoreAudioProcessor::
     {20.0f, 20000.0f, 0.1f, 0.6f}, 200.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("FILTERRES", "Filter Resonance", juce::NormalisableRange<float>
     {1.0f, 10.0f, 0.1f}, 1.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("LFO1FREQ", "LFO1 Frequency", juce::NormalisableRange<float> 
+    { 0.0f, 20.0f, 0.1f }, 20.0f, "Hz"));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("LFO1DEPTH", "LFO1 Depth", juce::NormalisableRange<float> 
+    { 0.0f, 1.0f, 0.1f}, 1.0f, ""));
 
     return { params.begin(), params.end() };
+}
+
+void FrattalatoreAudioProcessor::setParams()
+{
+    setVoiceParams();
+    setFilterParams();
+}
+
+void FrattalatoreAudioProcessor::setVoiceParams()
+{
+    for (int i = 0; i < synth.getNumVoices(); ++i)
+    {
+        //check the correct casting for each voice
+        if (auto voice = dynamic_cast<SynthVoice*> (synth.getVoice(i)))
+        {
+            //ADSR
+//auto returns a pointer => I have to obtain what type it refers
+            auto& attack = *apvts.getRawParameterValue("ATTACK");
+            auto& decay = *apvts.getRawParameterValue("DECAY");
+            auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
+            auto& release = *apvts.getRawParameterValue("RELEASE");
+
+            // OSC 
+            auto& oscWaveChoice = *apvts.getRawParameterValue("OSC1WAVETYPE");
+            auto& oscGain = *apvts.getRawParameterValue("OSC1GAIN");
+            auto& oscPitch = *apvts.getRawParameterValue("OSC1PITCH");
+
+            //FM
+            auto& fmDepth = *apvts.getRawParameterValue("OSC1FMDEPTH");
+            auto& fmFreq = *apvts.getRawParameterValue("OSC1FMFREQ");
+
+            //Mod Filter
+            //auto& modAttack = *apvts.getRawParameterValue("MODATTACK");
+            //auto& modDecay = *apvts.getRawParameterValue("MODDECAY");
+            //auto& modSustain = *apvts.getRawParameterValue("MODSUSTAIN");
+            //auto& modRelease = *apvts.getRawParameterValue("MODRELEASE");
+            auto& osc = voice->getOscillator();
+            //auto& adsr = voice->getAdsr();
+            for (int j = 0; j < getTotalNumOutputChannels(); i++)
+            {
+                osc[j].setParams(oscWaveChoice, oscGain, oscPitch, fmFreq, fmDepth);
+            }
+            voice->updateAdsr(attack.load(), decay.load(), sustain.load(), release.load()); //the pointer is for a AtomicFloat -> convert it into float iot save 
+//            voice->updateModAdsr(modAttack.load(), modDecay.load(), modSustain.load(), modRelease.load());
+        }
+    }
+}
+
+void FrattalatoreAudioProcessor::setFilterParams()
+{
+    auto& filterType = *apvts.getRawParameterValue("FILTERTYPE");
+    auto& filterCutOff = *apvts.getRawParameterValue("FILTERCUTOFF");
+    auto& filterResonance = *apvts.getRawParameterValue("FILTERRESONANCE");
+
+    auto& lfoFreq = *apvts.getRawParameterValue("LFO1FREQ");
+    auto& lfoDepth = *apvts.getRawParameterValue("LFO1DEPTH");
+
+    for (int ch = 0; ch < numChannelsToProcess; ++ch)
+    {
+        filterCutOff = (500 * lfoOutput[ch]) + filterCutOff;
+        auto cutOff = std::clamp<float>(filterCutOff, 20.0f, 20000.0f);
+        //filter[ch].updateParameters(filterType, filterCutOff, filterResonance);
+        lfo[ch].setFrequency(lfoFreq);
+    }
+    //for (int v = 0; v < synth.getNumVoices(); ++v)
+    //{
+    //    if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(v)))
+    //    {
+    //        voice->updateFilter(filterType.load(), filterCutOff.load(), filterResonance.load());
+    //    }
+    //}
 }

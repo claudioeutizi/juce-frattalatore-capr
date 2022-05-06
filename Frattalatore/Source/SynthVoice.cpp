@@ -18,7 +18,10 @@ bool SynthVoice::canPlaySound(juce::SynthesiserSound* sound)
 
 void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound* sound, int currentPitchWheelPosition)
 {
-    osc.setWaveFrequency(midiNoteNumber);
+    for (int i = 0; i < 2; i++)
+    {
+        osc[i].setWaveFrequency(midiNoteNumber);
+    }
     adsr.noteOn();
     modAdsr.noteOn();
 }
@@ -46,21 +49,21 @@ void SynthVoice::prepareToplay(double sampleRate, int samplesPerBlock, int outpu
     spec.sampleRate = sampleRate;
     spec.numChannels = outputChannels;
 
-    //OSC
-    osc.prepareToPlay(spec);
-    //ADSR
-    adsr.setSampleRate(sampleRate);
-    //FILTER
-    filter.prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
-    //MOD FILTER
-    modAdsr.setSampleRate(sampleRate);
-    //GAIN
-    gain.prepare(spec);
+    for (int ch = 0; ch < numChannelsToProcess; ch++)
+    {
+        //OSC
+        osc[ch].prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
+        //FILTER
+        filter[ch].prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
+        //MOD FILTER
+    }
+        //modAdsr.setSampleRate(sampleRate);
+        //GAIN
+        gain.prepare(spec);
+        gain.setGainLinear(0.07f);
 
+        isPrepared = true;
 
-    gain.setGainLinear(0.3f);
-
-    isPrepared = true;
 }
 void SynthVoice::updateAdsr(const float attack, const float decay,
     const float sustain, const float release)
@@ -78,17 +81,35 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int sta
     modAdsr.applyEnvelopeToBuffer(synthBuffer, 0, numSamples); //despite it does not work on the output envelope, I need this function to activate it
     synthBuffer.clear();
 
+    for (int ch = 0; ch < synthBuffer.getNumChannels(); ++ch)
+    {
+        auto* buffer = synthBuffer.getWritePointer(ch, 0);
+
+        for (int s = 0; s < synthBuffer.getNumSamples(); ++s)
+        {
+            buffer[s] = osc[ch].processNextSample(buffer[s])/* + osc[ch].processNextSample(buffer[s])*/;
+        }
+    }
     //Audio block
     juce::dsp::AudioBlock<float> audioBlock{ synthBuffer };
 
     //Oscillator
-    osc.getNextAudioBlock(audioBlock);
+    gain.process(juce::dsp::ProcessContextReplacing<float> (audioBlock));
 
     //adsr applied
     adsr.applyEnvelopeToBuffer(synthBuffer, 0, synthBuffer.getNumSamples());
-
     //filtering
-    filter.process(synthBuffer);
+
+    for (int ch = 0; ch < synthBuffer.getNumChannels(); ++ch)
+    {
+        auto* buffer = synthBuffer.getWritePointer(ch, 0);
+
+        for (int s = 0; s < synthBuffer.getNumSamples(); ++s)
+        {
+            //lfoOutput[ch] = lfo[ch].processSample (synthBuffer.getSample (ch, s));
+            buffer[s] = filter[ch].processNextSample(ch, synthBuffer.getSample(ch, s));
+        }
+    }
 
     //gain
     gain.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
@@ -103,8 +124,13 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int sta
 
 void SynthVoice::updateFilter(const int filterType, const float cutOff, const float resonance)
 {
+    //TODO
     float modulator = modAdsr.getNextSample();
-    filter.updateParameters(filterType, cutOff, resonance, modulator);
+    for (int ch = 0; ch < numChannelsToProcess; ch++)
+    {
+        filter[ch].updateParameters(filterType, cutOff, resonance);
+    }
+    
 }
 
 void SynthVoice::updateModAdsr(const float attack, const float decay, const float sustain, const float release)
