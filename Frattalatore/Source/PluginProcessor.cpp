@@ -7,13 +7,13 @@
 */
 
 #include "PluginProcessor.h"
-#include "PluginEditor.h"
+//#include "PluginEditor.h"
 #include <algorithm>
 
 //==============================================================================
 FrattalatoreAudioProcessor::FrattalatoreAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
-    : AudioProcessor(BusesProperties()
+    : foleys::MagicProcessor (BusesProperties()
 #if ! JucePlugin_IsMidiEffect
 #if ! JucePlugin_IsSynth
         .withInput("Input", juce::AudioChannelSet::stereo(), true)
@@ -162,31 +162,31 @@ void FrattalatoreAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
 
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 }
-
-//==============================================================================
-bool FrattalatoreAudioProcessor::hasEditor() const
-{
-    return true; // (change this to false if you choose to not supply an editor)
-}
-
-juce::AudioProcessorEditor* FrattalatoreAudioProcessor::createEditor()
-{
-    return new FrattalatoreAudioProcessorEditor (*this);
-}
-
-//==============================================================================
-void FrattalatoreAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
-{
-    // You should use this method to store your parameters in the memory block.
-    // You could do that either as raw data, or use the XML or ValueTree classes
-    // as intermediaries to make it easy to save and load complex data.
-}
-
-void FrattalatoreAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
-{
-    // You should use this method to restore your parameters from this memory block,
-    // whose contents will have been created by the getStateInformation() call.
-}
+//
+////==============================================================================
+//bool FrattalatoreAudioProcessor::hasEditor() const
+//{
+//    return true; // (change this to false if you choose to not supply an editor)
+//}
+//
+//juce::AudioProcessorEditor* FrattalatoreAudioProcessor::createEditor()
+//{
+//    return new FrattalatoreAudioProcessorEditor (*this);
+//}
+//
+////==============================================================================
+//void FrattalatoreAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
+//{
+//    // You should use this method to store your parameters in the memory block.
+//    // You could do that either as raw data, or use the XML or ValueTree classes
+//    // as intermediaries to make it easy to save and load complex data.
+//}
+//
+//void FrattalatoreAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
+//{
+//    // You should use this method to restore your parameters from this memory block,
+//    // whose contents will have been created by the getStateInformation() call.
+//}
 
 //==============================================================================
 // This creates new instances of the plugin..
