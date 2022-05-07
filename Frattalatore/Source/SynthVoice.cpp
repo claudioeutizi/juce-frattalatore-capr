@@ -42,6 +42,8 @@ void SynthVoice::controllerMoved(int controllerNumber, int newControllerValue)
 
 void SynthVoice::prepareToplay(double sampleRate, int samplesPerBlock, int outputChannels)
 {
+    reset();
+
     adsr.setSampleRate(sampleRate);
 
     juce::dsp::ProcessSpec spec;
@@ -87,10 +89,9 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int sta
         }
     }
 
-    for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
-    {
-        outputBuffer.addFrom(channel, startSample, synthBuffer, channel, 0, numSamples);
-    }
+    juce::dsp::AudioBlock<float> audioBlock{ synthBuffer };
+    gain.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
+    adsr.applyEnvelopeToBuffer(synthBuffer, 0, synthBuffer.getNumSamples());
 
     for (int ch = 0; ch < synthBuffer.getNumChannels(); ++ch)
     {
@@ -98,7 +99,6 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int sta
 
         for (int s = 0; s < synthBuffer.getNumSamples(); ++s)
         {
-            //lfoOutput[ch] = lfo[ch].processSample (synthBuffer.getSample (ch, s));
             buffer[s] = filter[ch].processNextSample(ch, synthBuffer.getSample(ch, s));
         }
     }

@@ -67,7 +67,7 @@ void FrattalatoreAudioProcessorEditor::resized()
     const auto oscHeight = 180;
     osc.setBounds(0, 0, oscWidth, oscHeight);
     filter.setBounds(osc.getRight(), 0, 180, 200);
-    lfo.setBounds(filter.getRight(), filter.getBottom(), 180, 160);
+    lfo.setBounds(osc.getRight(), filter.getBottom(), 180, 160);
     adsr.setBounds(filter.getRight(), 0, 230, 360);
 }
 
