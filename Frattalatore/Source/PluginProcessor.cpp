@@ -170,15 +170,15 @@ void FrattalatoreAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
 
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 
-    //for (int ch = 0; ch < numChannelsToProcess; ++ch)
-    //{
-    //    auto* output = buffer.getWritePointer(ch);
-    //    for (int s = 0; s < buffer.getNumSamples(); ++s)
-    //    {
-    //        lfoOutput[ch] = lfo[ch].processSample(buffer.getSample(ch, s));
-    //        output[s] = filter[ch].processNextSample(ch, buffer.getSample(ch, s));
-    //    }
-    //}
+    for (int ch = 0; ch < numChannelsToProcess; ++ch)
+    {
+        auto* output = buffer.getWritePointer(ch);
+        for (int s = 0; s < buffer.getNumSamples(); ++s)
+        {
+        lfoOutput[ch] = lfo[ch].processSample(buffer.getSample(ch, s));
+        output[s] = filter[ch].processNextSample(ch, buffer.getSample(ch, s));
+        }
+    }
 }
 
 //==============================================================================
