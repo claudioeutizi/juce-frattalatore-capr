@@ -24,6 +24,5 @@ public:
 private:
     juce::dsp::Oscillator<float> lfo{ [](float x) { return std::sin(x); } };
     void FilterData::selectFilterType(const int filterType);
-    //float lfoGain{ 0.0f };
     bool isPrepared{ false };
 };

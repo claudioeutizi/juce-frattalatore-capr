@@ -55,11 +55,6 @@ void SynthVoice::prepareToplay(double sampleRate, int samplesPerBlock, int outpu
     {
         //OSC
         osc[ch].prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
-        //FILTER
-        filter[ch].prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
-        //LFO
-        lfo[ch].prepare(spec);
-        lfo[ch].initialise([](float x) {return std::sin(x); });
     }
         //GAIN
         gain.prepare(spec);
@@ -93,15 +88,6 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int sta
     gain.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
     adsr.applyEnvelopeToBuffer(synthBuffer, 0, synthBuffer.getNumSamples());
 
-    for (int ch = 0; ch < synthBuffer.getNumChannels(); ++ch)
-    {
-        auto* buffer = synthBuffer.getWritePointer(ch, 0);
-
-        for (int s = 0; s < synthBuffer.getNumSamples(); ++s)
-        {
-            buffer[s] = filter[ch].processNextSample(ch, synthBuffer.getSample(ch, s));
-        }
-    }
     for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
     {
         outputBuffer.addFrom(channel, startSample, synthBuffer, channel, 0, numSamples);
@@ -115,15 +101,14 @@ void SynthVoice::reset()
     adsr.reset();
 }
 
-void SynthVoice::updateFilterParams(const int filterType, const float filterCutOff, const float resonance, const float lfoFreq, const float lfoDepth)
-{
-    auto cutOff = filterCutOff;
-    for (int ch = 0; ch < numChannelsToProcess; ch++)
-    {
-        lfo[ch].setFrequency (lfoFreq);
-        cutOff = (lfoDepth * lfoOutput[ch]) + cutOff;
-        cutOff = std::clamp<float> (cutOff, 20.0f, 20000.0f);
-        filter[ch].updateParameters(filterType, cutOff, resonance);
-    }
-}
+//void SynthVoice::updateFilterParams(const int filterType, const float filterCutOff, const float resonance, const float lfoFreq, const float lfoDepth)
+//{
+//    for (int ch = 0; ch < numChannelsToProcess; ch++)
+//    {
+//        lfo[ch].setFrequency (lfoFreq);
+//        auto cutOff = (lfoDepth * lfoOutput[ch]) + filterCutOff;
+//        cutOff = std::clamp<float> (cutOff, 20.0f, 20000.0f);
+//        filter[ch].updateParameters(filterType, cutOff, resonance);
+//    }
+//}
 

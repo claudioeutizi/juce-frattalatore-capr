@@ -115,6 +115,14 @@ void FrattalatoreAudioProcessor::prepareToPlay (double sampleRate, int samplesPe
     spec.maximumBlockSize = samplesPerBlock;
     spec.sampleRate = sampleRate;
     spec.numChannels = getTotalNumOutputChannels();
+    for (int ch = 0; ch < numChannelsToProcess; ++ch)
+    {
+        //FILTER
+        filter[ch].prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
+        //LFO
+        lfo[ch].prepare(spec);
+        lfo[ch].initialise([](float x) {return std::sin(x); });
+    }
 }
 
 void FrattalatoreAudioProcessor::releaseResources()
@@ -279,7 +287,6 @@ void FrattalatoreAudioProcessor::setVoiceParams()
             auto& release = *apvts.getRawParameterValue("RELEASE");
 
             auto& osc = voice->getOscillator();
-            //auto& adsr = voice->getAdsr();
             for (int j = 0; j < getTotalNumOutputChannels(); j++)
             {
                 osc[j].setParams(oscWaveChoice, oscGain.load(), oscPitch, fmFreq.load(), fmDepth.load());
@@ -298,12 +305,12 @@ void FrattalatoreAudioProcessor::setFilterParams()
 
     auto& lfoFreq = *apvts.getRawParameterValue("LFO1FREQ");
     auto& lfoDepth = *apvts.getRawParameterValue("LFO1DEPTH");
-    
-        for (int i = 0; i < synth.getNumVoices(); ++i) 
-        {
-            if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
-            {
-                voice->updateFilterParams(filterType, filterCutOff.load(), filterResonance.load(), lfoFreq.load(), lfoDepth.load());
-            }
-        }
+    for (int ch = 0; ch < getTotalNumOutputChannels(); ++ch)
+    {
+        lfo[ch].setFrequency(lfoFreq);
+        filterCutOff = (lfoDepth * lfoOutput[ch]) + filterCutOff;
+        auto cutOff = std::clamp<float>(filterCutOff, 20.0f, 20000.f);
+
+        filter[ch].updateParameters(filterType, cutOff, filterResonance);
+    }
 }

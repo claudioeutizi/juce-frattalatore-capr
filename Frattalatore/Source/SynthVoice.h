@@ -32,11 +32,10 @@ public:
 
     std::array<OscData, 2>& getOscillator() { return this->osc; };
     AdsrData& getAdsr() { return this->adsr; };
-    void updateFilterParams(const int filterType, const float filterCutOff, const float filterResonance, const float lfoFreq, const float lfoDepth);
+    //void updateFilterParams(const int filterType, const float filterCutOff, const float filterResonance, const float lfoFreq, const float lfoDepth);
 private:
     static constexpr int numChannelsToProcess{ 2 };
     std::array<OscData, numChannelsToProcess> osc;
-    std::array<FilterData, numChannelsToProcess> filter;
     std::array<juce::dsp::Oscillator<float>, numChannelsToProcess> lfo;
     juce::AudioBuffer<float> synthBuffer;
     AdsrData adsr;
