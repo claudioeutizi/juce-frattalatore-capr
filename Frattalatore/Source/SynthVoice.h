@@ -31,13 +31,20 @@ public:
     virtual void reset();
 
     void updateFilterParams(const int filterType, const float filterCutOff, const float resonance, const float lfoFreq, const float lfoDepth);
-
-    std::array<OscData, 2>& getOscillator() { return this->osc; };
+    std::array<std::array<OscData, 2>,5>& getOscillators() { return this->oscillators; };
+    std::array<OscData, 2>& getOscillator(const int idxOscillator) { return oscillators[idxOscillator]; };
     AdsrData& getAdsr() { return this->adsr; };
     //void updateFilterParams(const int filterType, const float filterCutOff, const float filterResonance, const float lfoFreq, const float lfoDepth);
 private:
     static constexpr int numChannelsToProcess{ 2 };
-    std::array<OscData, numChannelsToProcess> osc;
+
+    std::array<std::array<OscData, numChannelsToProcess>,5> oscillators;
+    //std::array<OscData, numChannelsToProcess> osc1;
+    //std::array<OscData, numChannelsToProcess> osc2;
+    //std::array<OscData, numChannelsToProcess> osc3;
+    //std::array<OscData, numChannelsToProcess> osc4;
+    //std::array<OscData, numChannelsToProcess> osc5;
+
     std::array<juce::dsp::Oscillator<float>, numChannelsToProcess> lfo;
     std::array<FilterData, numChannelsToProcess> filter;
     juce::AudioBuffer<float> synthBuffer;

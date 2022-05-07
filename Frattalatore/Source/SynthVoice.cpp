@@ -18,9 +18,13 @@ bool SynthVoice::canPlaySound(juce::SynthesiserSound* sound)
 
 void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound* sound, int currentPitchWheelPosition)
 {
-    for (int i = 0; i < 2; i++)
+    for (int osc = 0; osc < oscillators.size(); ++osc)
     {
-        osc[i].setWaveFrequency(midiNoteNumber);
+        auto &oscillator = oscillators[osc];
+        for (int i = 0; i < 2; i++)
+        {
+            oscillator[i].setWaveFrequency(midiNoteNumber);
+        }
     }
     adsr.noteOn();
 }
@@ -50,16 +54,19 @@ void SynthVoice::prepareToplay(double sampleRate, int samplesPerBlock, int outpu
     spec.maximumBlockSize = samplesPerBlock;
     spec.sampleRate = sampleRate;
     spec.numChannels = outputChannels;
-
-    for (int ch = 0; ch < numChannelsToProcess; ch++)
+    for (int osc = 0; osc < oscillators.size(); ++osc)
     {
-        //OSC
-        osc[ch].prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
-        //FILTER
-        filter[ch].prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
-        //LFO
-        lfo[ch].prepare(spec);
-        lfo[ch].initialise([](float x) {return std::sin(x); });
+        auto &oscillator = oscillators[osc];
+        for (int ch = 0; ch < numChannelsToProcess; ch++)
+        {
+            //OSC
+            oscillator[ch].prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
+            //FILTER
+            filter[ch].prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
+            //LFO
+            lfo[ch].prepare(spec);
+            lfo[ch].initialise([](float x) {return std::sin(x); });
+        }
     }
         //GAIN
         gain.prepare(spec);
@@ -85,7 +92,12 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int sta
 
         for (int s = 0; s < synthBuffer.getNumSamples(); ++s)
         {
-            buffer[s] = osc[ch].processNextSample(buffer[s])/* + osc[ch].processNextSample(buffer[s])*/;
+            for (int osc = 0; osc < oscillators.size(); ++osc)
+            {
+                auto& oscillator = oscillators[osc];
+                buffer[s] += oscillator[ch].processNextSample(buffer[s]);
+            }
+            //buffer[s] = osc[ch].processNextSample(buffer[s])/* + osc[ch].processNextSample(buffer[s])*/;
         }
     }
 
