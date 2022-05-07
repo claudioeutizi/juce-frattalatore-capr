@@ -67,8 +67,6 @@ private:
     void setFilterParams();
 
     static constexpr int numVoices{ 5 };
-    std::array<juce::dsp::Oscillator<float>,numChannelsToProcess> lfo;
-    std::array<FilterData, numChannelsToProcess> filter;
     std::array<float, numChannelsToProcess> lfoOutput{ 0.0f,0.0f };
 
     //==============================================================================
