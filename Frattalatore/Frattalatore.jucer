@@ -67,7 +67,7 @@
         <MODULEPATH id="juce_gui_extra" path="../../../modules"/>
         <MODULEPATH id="juce_osc" path="../../../modules"/>
         <MODULEPATH id="juce_cryptography" path="../../../modules"/>
-        <MODULEPATH id="foleys_gui_magic" path="..\..\..\Examples GUIS\PluginGuiMagic\modules\foleys_gui_magic"/>
+        <MODULEPATH id="foleys_gui_magic" path="..\..\..\PluginGuiMagic\modules\foleys_gui_magic"/>
       </MODULEPATHS>
     </VS2022>
     <XCODE_IPHONE targetFolder="Builds/iOS">
