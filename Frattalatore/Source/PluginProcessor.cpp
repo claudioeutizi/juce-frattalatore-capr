@@ -204,64 +204,85 @@ juce::AudioProcessorValueTreeState::ParameterLayout FrattalatoreAudioProcessor::
         params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC1TYPE", "Oscillator 1 Type", juce::StringArray
             { "Sine", "Saw", "Square" }, 0));
         params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC1GAIN", "Oscillator 1 Gain", juce::NormalisableRange<float>
-        { -40.0f, 0.2f, 0.1f }, 0.1f, "dB"));
+        { -100.0f, 0.2f, 0.1f }, 0.1f, "dB"));
         params.push_back(std::make_unique<juce::AudioParameterInt>("OSC1PITCH", "Oscillator 1 Pitch", -48, 48, 0));
+        params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC1NOISEGAIN", "Oscillator 1 Noise Gain", juce::NormalisableRange<float>
+        { -100.0f, 0.2f, 0.1f }, 0.1f, "dB"));
+
+        //params.push_back(std::make_unique <juce::AudioParameterBool>("OSC1ONOFF", "On Off", false));
 
     //OSC2
         params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC2TYPE", "Oscillator 2 Type", juce::StringArray
             { "Sine", "Saw", "Square" }, 0));
         params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC2GAIN", "Oscillator 2 Gain", juce::NormalisableRange<float>
-        { -40.0f, 0.2f, 0.1f }, 0.1f, "dB"));
+        { -100.0f, 0.2f, 0.1f }, 0.1f, "dB"));
         params.push_back(std::make_unique<juce::AudioParameterInt>("OSC2PITCH", "Oscillator 2 Pitch", -48, 48, 0));
+        params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC2NOISEGAIN", "Oscillator 2 Noise Gain", juce::NormalisableRange<float>
+        { -100.0f, 0.2f, 0.1f }, 0.1f, "dB"));
+        //params.push_back(std::make_unique <juce::AudioParameterBool>("OSC1ONOFF", "On Off", false));
 
     //OSC3
         params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC3TYPE", "Oscillator 3 Type", juce::StringArray
             { "Sine", "Saw", "Square" }, 0));
         params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC3GAIN", "Oscillator 3 Gain", juce::NormalisableRange<float>
-        { -40.0f, 0.2f, 0.1f }, 0.1f, "dB"));
+        { -100.0f, 0.2f, 0.1f }, 0.1f, "dB"));
         params.push_back(std::make_unique<juce::AudioParameterInt>("OSC3PITCH", "Oscillator 3 Pitch", -48, 48, 0));
+        params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC3NOISEGAIN", "Oscillator 3 Noise Gain", juce::NormalisableRange<float>
+        { -100.0f, 0.2f, 0.1f }, 0.1f, "dB"));
+        //params.push_back(std::make_unique <juce::AudioParameterBool>("OSC1ONOFF", "On Off", false));
 
     //OSC4
         params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC4TYPE", "Oscillator 4 Type", juce::StringArray
             { "Sine", "Saw", "Square" }, 0));
         params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC4GAIN", "Oscillator 4 Gain", juce::NormalisableRange<float>
-        { -40.0f, 0.2f, 0.1f }, 0.1f, "dB"));
+        { -100.0f, 0.2f, 0.1f }, 0.1f, "dB"));
         params.push_back(std::make_unique<juce::AudioParameterInt>("OSC4PITCH", "Oscillator 4 Pitch", -48, 48, 0));
+        params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC4NOISEGAIN", "Oscillator 4 Noise Gain", juce::NormalisableRange<float>
+        { -100.0f, 0.2f, 0.1f }, 0.1f, "dB"));
+        //params.push_back(std::make_unique <juce::AudioParameterBool>("OSC1ONOFF", "On Off", false));
 
     //OSC5
         params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC5TYPE", "Oscillator 5 Type", juce::StringArray
             { "Sine", "Saw", "Square" }, 0));
         params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC5GAIN", "Oscillator 5 Gain", juce::NormalisableRange<float>
-        { -40.0f, 0.2f, 0.1f }, 0.1f, "dB"));
+        { -100.0f, 0.2f, 0.1f }, 0.1f, "dB"));
         params.push_back(std::make_unique<juce::AudioParameterInt>("OSC5PITCH", "Oscillator 5 Pitch", -48, 48, 0));
+        params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC5NOISEGAIN", "Oscillator 5 Noise Gain", juce::NormalisableRange<float>
+        { -100.0f, 0.2f, 0.1f }, 0.1f, "dB"));
+        //params.push_back(std::make_unique <juce::AudioParameterBool>("OSC1ONOFF", "On Off", false));
 
     ////////////////////////////////////////////FM mod oscillators///////////////////////////////////////////////////////////////////
 
+    //frequencies
+
     params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC1FMFREQ", "OSC 1 FM Frequency", juce::NormalisableRange<float>
-    {0.0f, 100.0f, 0.1f}, 0.0f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC1FMDEPTH", "OSC 1 FM Depth", juce::NormalisableRange<float>
-    {0.0f, 10000.0f, 0.1f, 0.3f}, 0.0f)); 
+    {0.0f, 1000.0f, 0.1f}, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC2FMFREQ", "OSC 2 FM Frequency", juce::NormalisableRange<float>
-    {0.0f, 100.0f, 0.1f}, 0.0f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC2FMDEPTH", "OSC 2 FM Depth", juce::NormalisableRange<float>
-    {0.0f, 10000.0f, 0.1f, 0.3f}, 0.0f));
+    {0.0f, 1000.0f, 0.1f}, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC3FMFREQ", "OSC 3 FM Frequency", juce::NormalisableRange<float>
+    {0.0f, 1000.0f, 0.1f}, 0.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC4FMFREQ", "OSC 4 FM Frequency", juce::NormalisableRange<float>
+    {0.0f, 1000.0f, 0.1f}, 0.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC5FMFREQ", "OSC 5 FM Frequency", juce::NormalisableRange<float>
+    {0.0f, 1000.0f, 0.1f}, 0.0f));
+
+    //depths
+
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC1FMDEPTH", "OSC 1 FM Depth", juce::NormalisableRange<float>
+    {0.0f, 100.0f, 0.1f}, 0.0f)); 
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC2FMDEPTH", "OSC 2 FM Depth", juce::NormalisableRange<float>
     {0.0f, 100.0f, 0.1f}, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC3FMDEPTH", "OSC 3 FM Depth", juce::NormalisableRange<float>
-    {0.0f, 10000.0f, 0.1f, 0.3f}, 0.0f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC4FMFREQ", "OSC 4 FM Frequency", juce::NormalisableRange<float>
     {0.0f, 100.0f, 0.1f}, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC4FMDEPTH", "OSC 4 FM Depth", juce::NormalisableRange<float>
-    {0.0f, 10000.0f, 0.1f, 0.3f}, 0.0f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC5FMFREQ", "OSC 5 FM Frequency", juce::NormalisableRange<float>
     {0.0f, 100.0f, 0.1f}, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC5FMDEPTH", "OSC 5 FM Depth", juce::NormalisableRange<float>
-    {0.0f, 10000.0f, 0.1f, 0.3f}, 0.0f));
+    {0.0f, 100.0f, 0.1f}, 0.0f));
 
     ///////////////////////////////////////////////////////LFO//////////////////////////////////////////////////////////////////
 
     params.push_back(std::make_unique<juce::AudioParameterFloat>("LFOFREQ", "LFO Frequency", juce::NormalisableRange<float>
-    { 0.0f, 20.0f, 0.1f }, 20.0f, "Hz"));
+    { 0.0f, 20.0f, 0.1f }, 0.0f, "Hz"));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("LFODEPTH", "LFO Depth", juce::NormalisableRange<float>
     { 0.0f, 10000.0f, 0.1f, 0.3f}, 0.0f, ""));
     //params.push_back(std::make_unique<juce::AudioParameterFloat>("LFO2FREQ", "LFO2 Frequency", juce::NormalisableRange<float>
@@ -320,22 +341,27 @@ void FrattalatoreAudioProcessor::setVoiceParams()
             auto& osc1WaveChoice = *apvts.getRawParameterValue("OSC1TYPE");
             auto& osc1Gain = *apvts.getRawParameterValue("OSC1GAIN");
             auto& osc1Pitch = *apvts.getRawParameterValue("OSC1PITCH");
+            auto& osc1NoiseGain = *apvts.getRawParameterValue("OSC1NOISEGAIN");
             // OSC2
             auto& osc2WaveChoice = *apvts.getRawParameterValue("OSC2TYPE");
             auto& osc2Gain = *apvts.getRawParameterValue("OSC2GAIN");
             auto& osc2Pitch = *apvts.getRawParameterValue("OSC2PITCH");
+            auto& osc2NoiseGain = *apvts.getRawParameterValue("OSC2NOISEGAIN");
             // OSC3
             auto& osc3WaveChoice = *apvts.getRawParameterValue("OSC3TYPE");
             auto& osc3Gain = *apvts.getRawParameterValue("OSC3GAIN");
             auto& osc3Pitch = *apvts.getRawParameterValue("OSC3PITCH");
+            auto& osc3NoiseGain = *apvts.getRawParameterValue("OSC3NOISEGAIN");
             // OSC4
             auto& osc4WaveChoice = *apvts.getRawParameterValue("OSC4TYPE");
             auto& osc4Gain = *apvts.getRawParameterValue("OSC4GAIN");
             auto& osc4Pitch = *apvts.getRawParameterValue("OSC4PITCH");
+            auto& osc4NoiseGain = *apvts.getRawParameterValue("OSC4NOISEGAIN");
             // OS5 
             auto& osc5WaveChoice = *apvts.getRawParameterValue("OSC5TYPE");
             auto& osc5Gain = *apvts.getRawParameterValue("OSC5GAIN");
             auto& osc5Pitch = *apvts.getRawParameterValue("OSC5PITCH");
+            auto& osc5NoiseGain = *apvts.getRawParameterValue("OSC5NOISEGAIN");
 
             ////////////FM MODS///////////////////////////////////////////
 
@@ -368,11 +394,11 @@ void FrattalatoreAudioProcessor::setVoiceParams()
 
             for (int j = 0; j < getTotalNumOutputChannels(); j++)
             {
-                oscillator1[j].setParams(osc1WaveChoice, osc1Gain.load(), osc1Pitch, fm1Freq.load(), fm1Depth.load());
-                oscillator2[j].setParams(osc2WaveChoice, osc2Gain.load(), osc2Pitch, fm2Freq.load(), fm2Depth.load());
-                oscillator3[j].setParams(osc3WaveChoice, osc3Gain.load(), osc3Pitch, fm3Freq.load(), fm3Depth.load());
-                oscillator4[j].setParams(osc4WaveChoice, osc4Gain.load(), osc4Pitch, fm4Freq.load(), fm4Depth.load());
-                oscillator5[j].setParams(osc5WaveChoice, osc5Gain.load(), osc5Pitch, fm5Freq.load(), fm5Depth.load());
+                oscillator1[j].setParams(osc1WaveChoice, osc1Gain.load(), osc1NoiseGain.load(), osc1Pitch, fm1Freq.load(), fm1Depth.load());
+                oscillator2[j].setParams(osc2WaveChoice, osc2Gain.load(), osc2NoiseGain.load(), osc2Pitch, fm2Freq.load(), fm2Depth.load());
+                oscillator3[j].setParams(osc3WaveChoice, osc3Gain.load(), osc3NoiseGain.load(), osc3Pitch, fm3Freq.load(), fm3Depth.load());
+                oscillator4[j].setParams(osc4WaveChoice, osc4Gain.load(), osc4NoiseGain.load(), osc4Pitch, fm4Freq.load(), fm4Depth.load());
+                oscillator5[j].setParams(osc5WaveChoice, osc5Gain.load(), osc5NoiseGain.load(), osc5Pitch, fm5Freq.load(), fm5Depth.load());
             }
 
             auto& adsr = voice->getAdsr();

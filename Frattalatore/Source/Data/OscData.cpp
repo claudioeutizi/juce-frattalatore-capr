@@ -29,13 +29,13 @@ void OscData::setOscWaveType(const int choice)
     switch (choice)
     {
     case 0: //sine wave
-        initialise([](float x) { return std::sin(x); });
+        initialise([](float x) { return std::sin(x); },100);
         break;
     case 1: //saw wave
-        initialise([](float x) { return x / (juce::MathConstants<float>::pi); });
+        initialise([](float x) { return x / (juce::MathConstants<float>::pi); },100);
         break;
     case 2: //square wave
-        initialise([](float x) { return x < 0.0f ? -1.0f : 1.0f; });
+        initialise([](float x) { return x < 0.0f ? -1.0f : 1.0f; },100);
         break;
     default: //error
         jassertfalse;
@@ -48,11 +48,22 @@ void OscData::setGain(const float levelDb)
     gain.setGainDecibels(levelDb);
 }
 
+void OscData::setNoiseGain(const float noiseLevelDb)
+{
+    noiseGain.setGainDecibels(noiseLevelDb);
+}
+
+void OscData::setOnOff(const bool onOff)
+{
+    lastOnOff = onOff;
+}
+
 void OscData::setPitch(const int pitch)
 {
     lastPitch = pitch;
     setFrequency(juce::MidiMessage::getMidiNoteInHertz((lastMidiNote + lastPitch) + fmMod));
 }
+
 
 void OscData::setWaveFrequency(const int midiNoteNumber)
 {
@@ -67,7 +78,6 @@ void OscData::updateFm(const float depth, const float freq)
     fmOsc.setFrequency(freq);
     auto currentFreq = juce::MidiMessage::getMidiNoteInHertz((lastMidiNote + lastPitch) + fmMod);
     setFrequency(currentFreq);
-
 }
 
 void OscData::renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock)
@@ -83,10 +93,11 @@ float OscData::processNextSample(float input)
     return gain.processSample(processSample(input));
 }
 
-void OscData::setParams(const int oscChoice, const float oscGain, const int oscPitch, const float fmFreq, const float fmDepth)
+void OscData::setParams(const int oscChoice, const float oscGain, const float noiseGain, const int oscPitch, const float fmFreq, const float fmDepth)
 {
     setOscWaveType(oscChoice);
     setGain(oscGain);
+    setNoiseGain(noiseGain);
     setPitch(oscPitch);
     updateFm(fmFreq, fmDepth);
 }

@@ -97,7 +97,6 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int sta
                 auto& oscillator = oscillators[osc];
                 buffer[s] += oscillator[ch].processNextSample(buffer[s]);
             }
-            //buffer[s] = osc[ch].processNextSample(buffer[s])/* + osc[ch].processNextSample(buffer[s])*/;
         }
     }
 

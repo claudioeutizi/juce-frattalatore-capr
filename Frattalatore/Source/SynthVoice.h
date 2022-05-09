@@ -37,20 +37,14 @@ public:
     //void updateFilterParams(const int filterType, const float filterCutOff, const float filterResonance, const float lfoFreq, const float lfoDepth);
 private:
     static constexpr int numChannelsToProcess{ 2 };
-
     std::array<std::array<OscData, numChannelsToProcess>,5> oscillators;
-    //std::array<OscData, numChannelsToProcess> osc1;
-    //std::array<OscData, numChannelsToProcess> osc2;
-    //std::array<OscData, numChannelsToProcess> osc3;
-    //std::array<OscData, numChannelsToProcess> osc4;
-    //std::array<OscData, numChannelsToProcess> osc5;
-
+    std::array<float, 5> xCoordinates;
+    std::array<float, 5> yCoordinates;
     std::array<juce::dsp::Oscillator<float>, numChannelsToProcess> lfo;
     std::array<FilterData, numChannelsToProcess> filter;
     juce::AudioBuffer<float> synthBuffer;
     AdsrData adsr;
     std::array<float, numChannelsToProcess> lfoOutput{ 0.0f,0.0f };
-
     juce::dsp::Gain<float> gain;
     bool isPrepared{ false }; //check that what we use has been previously instantiated
 };
