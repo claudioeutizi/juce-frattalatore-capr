@@ -23,6 +23,9 @@ FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (Frattalatore
     lfo(audioProcessor.apvts, "LFOFREQ", "LFODEPTH")
 
 {
+    backgroundImage = juce::ImageCache::getFromMemory(BinaryData::LOGO_Capr_png, BinaryData::LOGO_Capr_pngSize); 
+    backgroundImage = backgroundImage.rescaled(100, 100); 
+    
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     addAndMakeVisible(keyboardComponent);
@@ -75,7 +78,8 @@ FrattalatoreAudioProcessorEditor::~FrattalatoreAudioProcessorEditor()
 void FrattalatoreAudioProcessorEditor::paint(juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour
-    g.fillAll(juce::Colours::black);
+   // g.fillAll(juce::Colours::black);
+    g.drawImageAt(backgroundImage, adsr.getRight() - 200, adsr.getBottom() - 200);
 }
 
 void FrattalatoreAudioProcessorEditor::resized()

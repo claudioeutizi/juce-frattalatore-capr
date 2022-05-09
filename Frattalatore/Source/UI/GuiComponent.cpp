@@ -60,7 +60,7 @@ GuiComponent::~GuiComponent()
 
 void GuiComponent::paint(juce::Graphics& g)
 {
-    g.fillAll(juce::Colours::black);
+    //g.fillAll(juce::Colours::black);
     auto bounds = getLocalBounds();
     g.setColour(boundsColour);
     g.drawRoundedRectangle(bounds.toFloat().reduced(10.0f), 5.0f, 2.0f);
@@ -70,7 +70,7 @@ void GuiComponent::paint(juce::Graphics& g)
     g.setFont(g.getCurrentFont().boldened());
 
     jassert(guiComponentName.isNotEmpty());
-    g.drawText(guiComponentName, 20, 15, 100, 25, juce::Justification::centred);
+    g.drawText(guiComponentName, getWidth()/2.0 - 50, 15, 100, 25, juce::Justification::centred);
 }
 
 void GuiComponent::resized()

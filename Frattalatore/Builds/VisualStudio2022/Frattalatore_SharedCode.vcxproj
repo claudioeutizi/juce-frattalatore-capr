@@ -2252,6 +2252,7 @@
     <ClCompile Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_osc\juce_osc.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_basics.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_devices.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_formats.cpp"/>
@@ -3152,10 +3153,14 @@
     <ClInclude Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_osc\osc\juce_OSCTimeTag.h"/>
     <ClInclude Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_osc\osc\juce_OSCTypes.h"/>
     <ClInclude Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_osc\juce_osc.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\BinaryData.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\JucePluginDefines.h"/>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Source\Resources\Knob2.png"/>
+    <None Include="..\..\Source\Resources\KnobProject.knob"/>
+    <None Include="..\..\Source\Resources\LOGO Capr.png"/>
     <None Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt"/>
     <None Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_devices\native\oboe\README.md"/>
     <None Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_formats\codecs\flac\Flac Licence.txt"/>
