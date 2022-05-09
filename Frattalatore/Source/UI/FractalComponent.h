@@ -11,7 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "Fractal.h"
+#include "GuiComponent.h"
 
 //==============================================================================
 /*
@@ -26,6 +26,9 @@ public:
     void resized() override;
 
 private:
-    Fractal fractal;
+    static constexpr int windowWidth{ 600 };
+    static constexpr int windowHeight{ 600 };
+    juce::ComboBox fractalChoiceBox;
+    juce::ComboBox numPointsChoice;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FractalComponent)
 };

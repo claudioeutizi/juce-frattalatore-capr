@@ -6,8 +6,12 @@ class Fractal
 public:
     Fractal();
     ~Fractal();
-    int ricorsioniMandelbrot(double cr, double ci, int max_iterations);
-    void drawFractal(juce::Image& i);
+    int recursionsMandelbrot(double cr, double ci, int max_iterations);
+    juce::Image drawMandelbrotFractal();
+    juce::Image drawJulia1Fractal();
+    juce::Image drawJulia2Fractal();
+    juce::Image drawBurningShipFractal();
+    juce::Image drawFractal(const int choice);
     int getW() { return W; };
     int getH() { return H; };
 

@@ -19,7 +19,6 @@
 static constexpr float fontSize{ 15.0f };
 
 /* class that abstracts the creation of sliders with labels */
-
 class SliderWithLabel : public juce::Component
 {
 public:

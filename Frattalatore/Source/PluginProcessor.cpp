@@ -197,8 +197,10 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 
 juce::AudioProcessorValueTreeState::ParameterLayout FrattalatoreAudioProcessor::createParams()
 {
-
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
+    /////////////////////////////////////Fractal Choice//////////////////////////////////////////////////////////////////////////////
+    params.push_back(std::make_unique<juce::AudioParameterChoice>("FRACTALTYPE", "Fractal Type", juce::StringArray
+        { "Mandelbrot", "Julia 1", "Julia 2", "Burning Ship"}, 0));
     /////////////////////////////////////OSC select and options//////////////////////////////////////////////////////////////////////
     //OSC1
         params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC1TYPE", "Oscillator 1 Type", juce::StringArray
@@ -335,6 +337,9 @@ void FrattalatoreAudioProcessor::setVoiceParams()
         //check the correct casting for each voice
         if (auto voice = dynamic_cast<SynthVoice*> (synth.getVoice(i)))
         {
+            ////////////Fractal Choice////////////////////////////////////////
+            auto& fractalType = *apvts.getRawParameterValue("FRACTALTYPE");
+
             ////////////OSCILLATORS///////////////////////////////////////////
             
             // OSC1 
@@ -386,12 +391,14 @@ void FrattalatoreAudioProcessor::setVoiceParams()
             auto& decay = *apvts.getRawParameterValue("DECAY");
             auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
             auto& release = *apvts.getRawParameterValue("RELEASE");
+            //Update Fractal params
+
+            //Update oscs params
             auto& oscillator1 = voice->getOscillator(0);
             auto& oscillator2 = voice->getOscillator(1);
             auto& oscillator3 = voice->getOscillator(2);
             auto& oscillator4 = voice->getOscillator(3);
             auto& oscillator5 = voice->getOscillator(4);
-
             for (int j = 0; j < getTotalNumOutputChannels(); j++)
             {
                 oscillator1[j].setParams(osc1WaveChoice, osc1Gain.load(), osc1NoiseGain.load(), osc1Pitch, fm1Freq.load(), fm1Depth.load());
