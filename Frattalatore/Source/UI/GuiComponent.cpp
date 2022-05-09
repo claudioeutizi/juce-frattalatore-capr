@@ -24,7 +24,7 @@ SliderWithLabel::SliderWithLabel(juce::String labelName, juce::String paramId, j
 
     guiSlider.setSliderStyle(style);
     guiSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, textBoxWidth, textBoxHeight);
-    guiSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::black);
+    guiSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentBlack);
     addAndMakeVisible(guiSlider);
 
     guiLabel.setFont(fontSize);
