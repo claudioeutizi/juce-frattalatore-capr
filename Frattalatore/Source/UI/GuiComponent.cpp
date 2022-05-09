@@ -24,6 +24,7 @@ SliderWithLabel::SliderWithLabel(juce::String labelName, juce::String paramId, j
 
     guiSlider.setSliderStyle(style);
     guiSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, textBoxWidth, textBoxHeight);
+    guiSlider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::black);
     addAndMakeVisible(guiSlider);
 
     guiLabel.setFont(fontSize);
@@ -63,13 +64,13 @@ void GuiComponent::paint(juce::Graphics& g)
     auto bounds = getLocalBounds();
     g.setColour(boundsColour);
     g.drawRoundedRectangle(bounds.toFloat().reduced(10.0f), 5.0f, 2.0f);
-
+    
     g.setColour(juce::Colours::yellow);
     g.setFont(fontSize);
     g.setFont(g.getCurrentFont().boldened());
 
     jassert(guiComponentName.isNotEmpty());
-    g.drawText(guiComponentName, 20, 15, 100, 25, juce::Justification::left);
+    g.drawText(guiComponentName, 20, 15, 100, 25, juce::Justification::centred);
 }
 
 void GuiComponent::resized()

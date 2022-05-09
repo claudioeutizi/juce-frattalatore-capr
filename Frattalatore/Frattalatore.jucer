@@ -18,6 +18,10 @@
         <FILE id="DOUdCw" name="AdsrComponent.cpp" compile="1" resource="0"
               file="Source/UI/AdsrComponent.cpp"/>
         <FILE id="D7c4Cd" name="AdsrComponent.h" compile="0" resource="0" file="Source/UI/AdsrComponent.h"/>
+        <FILE id="kOg9bJ" name="CustomLookAndFeel.cpp" compile="1" resource="0"
+              file="Source/UI/CustomLookAndFeel.cpp"/>
+        <FILE id="Iooyli" name="CustomLookAndFeel.h" compile="0" resource="0"
+              file="Source/UI/CustomLookAndFeel.h"/>
         <FILE id="j50tot" name="FilterComponent.cpp" compile="1" resource="0"
               file="Source/UI/FilterComponent.cpp"/>
         <FILE id="omPIkG" name="FilterComponent.h" compile="0" resource="0"
@@ -67,7 +71,6 @@
         <MODULEPATH id="juce_gui_extra" path="../../../modules"/>
         <MODULEPATH id="juce_osc" path="../../../modules"/>
         <MODULEPATH id="juce_cryptography" path="../../../modules"/>
-        <MODULEPATH id="foleys_gui_magic" path="..\..\..\PluginGuiMagic\modules\foleys_gui_magic"/>
       </MODULEPATHS>
     </VS2022>
     <XCODE_IPHONE targetFolder="Builds/iOS">
@@ -91,7 +94,6 @@
         <MODULEPATH id="juce_gui_extra" path="../../../modules"/>
         <MODULEPATH id="juce_osc" path="../../../modules"/>
         <MODULEPATH id="juce_cryptography" path="../../../modules"/>
-        <MODULEPATH id="foleys_gui_magic" path="../../../../../../JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_IPHONE>
     <XCODE_MAC targetFolder="Builds/MacOSX">
@@ -115,12 +117,10 @@
         <MODULEPATH id="juce_gui_extra" path="../../../modules"/>
         <MODULEPATH id="juce_osc" path="../../../modules"/>
         <MODULEPATH id="juce_cryptography" path="../../../modules"/>
-        <MODULEPATH id="foleys_gui_magic" path="../../../../../../JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
   </EXPORTFORMATS>
   <MODULES>
-    <MODULE id="foleys_gui_magic" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
     <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>

@@ -29,8 +29,9 @@ void LfoComponent::resized()
 {
     const auto width = 70;
     const auto height = 88;
-    const auto startY = 40;
+    const auto startX = getWidth()/2.0 - 40;
+    const auto startY = getHeight()/2.0 - height/2.0 + 5;
 
-    lfoFreq.setBounds(18, startY, width, height);
-    lfoDepth.setBounds(90, startY, width, height);
+    lfoFreq.setBounds(startX - width / 2.0, startY, width, height);
+    lfoDepth.setBounds(startX + width / 2.0 + 5, startY, width, height);
 }

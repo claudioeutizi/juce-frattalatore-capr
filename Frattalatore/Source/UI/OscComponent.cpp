@@ -44,9 +44,9 @@ void OscComponent::resized()
     const auto width = 70;
     const auto height = 88;
 
-    oscTypeSelector.setBounds(18, 40, 100, 25);
-    gain.setBounds(120, yStart, width, height);
-    pitch.setBounds(190, yStart, width, height);
-    fmFreq.setBounds(260, yStart, width, height);
-    fmDepth.setBounds(330, yStart, width, height);
+    oscTypeSelector.setBounds(18, 40, 140, 25);
+    gain.setBounds(oscTypeSelector.getX(), oscTypeSelector.getBottom()+10, width, height);
+    pitch.setBounds(oscTypeSelector.getX()+70, oscTypeSelector.getBottom()+10, width, height);
+    fmFreq.setBounds(oscTypeSelector.getX(), gain.getBottom(), width, height);
+    fmDepth.setBounds(oscTypeSelector.getX()+70, pitch.getBottom(), width, height);
 }

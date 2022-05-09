@@ -15,10 +15,10 @@ AdsrComponent::AdsrComponent(juce::AudioProcessorValueTreeState& apvts,
     juce::String decayId, 
     juce::String sustainId, 
     juce::String releaseId): 
-        attack("A", attackId, apvts, sliderWidth, sliderHeight, juce::Slider::SliderStyle::LinearVertical), 
-        decay("D", decayId, apvts, sliderWidth, sliderHeight, juce::Slider::SliderStyle::LinearVertical),
-        sustain("S", sustainId, apvts, sliderWidth, sliderHeight, juce::Slider::SliderStyle::LinearVertical),
-        release("R", releaseId, apvts, sliderWidth, sliderHeight, juce::Slider::SliderStyle::LinearVertical)
+        attack("A", attackId, apvts, sliderWidth, sliderHeight, juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag),
+        decay("D", decayId, apvts, sliderWidth, sliderHeight, juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag),
+        sustain("S", sustainId, apvts, sliderWidth, sliderHeight, juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag),
+        release("R", releaseId, apvts, sliderWidth, sliderHeight, juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag)
 {
     addAndMakeVisible(attack);
     addAndMakeVisible(decay);
@@ -36,6 +36,7 @@ void AdsrComponent::resized()
     const auto startY = 55;
     const auto width = sliderWidth;
     const auto height = sliderHeight + 20;
+    
 
     attack.setBounds(startX, startY, width, height);
     decay.setBounds(attack.getRight(), startY, width, height);

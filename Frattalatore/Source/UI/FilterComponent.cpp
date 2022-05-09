@@ -36,12 +36,13 @@ FilterComponent::~FilterComponent()
 
 void FilterComponent::resized()
 {
-    const auto startX = 18;
-    const auto startY = 80;
+    const auto startX = getWidth()/2.0 - (40);
+    const auto startY = 50;
     const auto width = 70;
     const auto height = 88;
 
-    typeSelector.setBounds(18, 40, 145, 25);
-    cutOff.setBounds(startX, startY, width, height);
-    resonance.setBounds(cutOff.getRight(), startY, width, height);
+    typeSelector.setBounds(startX, startY, 80, 25);
+    cutOff.setBounds(startX - width/2.0, typeSelector.getBottom() + 20, width, height);
+    resonance.setBounds(startX + width/2.0 + 5, typeSelector.getBottom() + 20, width, height);
+
 }
