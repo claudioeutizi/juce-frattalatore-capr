@@ -2826,12 +2826,6 @@
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_osc.cpp">
       <Filter>JUCE Library Code</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\UI\FractalComponent.cpp">
-      <Filter>Frattalatore\Source\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Data\Fractal.cpp">
-      <Filter>Frattalatore\Source\Data</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Data\AdsrData.h">
@@ -5635,12 +5629,6 @@
     </ClInclude>
     <ClInclude Include="..\..\JuceLibraryCode\JucePluginDefines.h">
       <Filter>JUCE Library Code</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\UI\FractalComponent.h">
-      <Filter>Frattalatore\Source\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Data\Fractal.h">
-      <Filter>Frattalatore\Source\Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
