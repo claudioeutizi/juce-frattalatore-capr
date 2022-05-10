@@ -61,11 +61,12 @@ GuiComponent::~GuiComponent()
 void GuiComponent::paint(juce::Graphics& g)
 {
     //g.fillAll(juce::Colours::black);
+    g.setFont(juce::Font("Algerian", 20.0f, juce::Font::bold));
     auto bounds = getLocalBounds();
     g.setColour(boundsColour);
-    g.drawRoundedRectangle(bounds.toFloat().reduced(10.0f), 5.0f, 2.0f);
+    g.drawRoundedRectangle(bounds.toFloat().reduced(10.0f), 5.0f, 3.0f);
     
-    g.setColour(juce::Colours::yellow);
+    g.setColour(juce::Colours::orangered);
     g.setFont(fontSize);
     g.setFont(g.getCurrentFont().boldened());
 

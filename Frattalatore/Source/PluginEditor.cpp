@@ -23,9 +23,13 @@ FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (Frattalatore
     lfo(audioProcessor.apvts, "LFOFREQ", "LFODEPTH")
 
 {
-    backgroundImage = juce::ImageCache::getFromMemory(BinaryData::LOGO_Capr_png, BinaryData::LOGO_Capr_pngSize); 
-    backgroundImage = backgroundImage.rescaled(150, 150); 
-    
+    backgroundImage = juce::ImageCache::getFromMemory(BinaryData::backgroundimage2_jpg, BinaryData::backgroundimage2_jpgSize);
+    //backgroundImage = juce::ImageCache::getFromMemory(BinaryData::backgroundimage_png, BinaryData::backgroundimage_pngSize);
+    backgroundImage = backgroundImage.rescaled(900,600-120);
+
+    logoCapr = juce::ImageCache::getFromMemory(BinaryData::LOGO_Capr_png, BinaryData::LOGO_Capr_pngSize);
+    logoCapr = logoCapr.rescaled(160, 160);
+
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     addAndMakeVisible(keyboardComponent);
@@ -47,17 +51,17 @@ FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (Frattalatore
     //adsr sliders
     addAndMakeVisible(adsr);
 
-    osc1.setComponentName("Oscillator1");
-    osc2.setComponentName("Oscillator2");
-    osc3.setComponentName("Oscillator3");
-    osc4.setComponentName("Oscillator4");
-    osc5.setComponentName("Oscillator5");
-    filter.setComponentName("Filter");
-    lfo.setComponentName("Filter LFO");
+    osc1.setComponentName("OSCILLATOR1");
+    osc2.setComponentName("OSCILLATOR2");
+    osc3.setComponentName("OSCILLATOR3");
+    osc4.setComponentName("OSCILLATOR4");
+    osc5.setComponentName("OSCILLATOR5");
+    filter.setComponentName("FILTER");
+    lfo.setComponentName("LFO");
     adsr.setComponentName("ADSR");
 
-    auto oscColour = juce::Colour::fromRGB(247, 190, 67);
-    auto filterColour = juce::Colour::fromRGB(246, 87, 64);
+    auto oscColour = juce::Colours::darkseagreen;
+    auto filterColour = juce::Colours::darkseagreen;
 
     osc1.setBoundsColour(oscColour);
     osc2.setBoundsColour(oscColour);
@@ -79,7 +83,17 @@ void FrattalatoreAudioProcessorEditor::paint(juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour
    // g.fillAll(juce::Colours::black);
-    g.drawImageAt(backgroundImage,getWidth()/2.0-75, getHeight()/2.0);
+    g.setOpacity(0.5f);
+    g.drawImageAt(backgroundImage,0,0);
+    g.setOpacity(2.0f);
+    g.drawImageAt(logoCapr, getWidth() / 2.0 - 90, getHeight() / 2.0);
+
+    g.setFont(juce::Font("Algerian", 20.0f, juce::Font::bold));
+    g.setColour(juce::Colours::darkorange);
+    g.setFont(fontSize);
+    g.setFont(g.getCurrentFont().boldened());
+
+    g.drawText("FRATTALATORE", getWidth() / 2.0 - 75, getHeight() - 180, 150, 50, juce::Justification::centred);
 }
 
 void FrattalatoreAudioProcessorEditor::resized()
@@ -94,9 +108,9 @@ void FrattalatoreAudioProcessorEditor::resized()
     osc4.setBounds(osc3.getRight(), 0, oscWidth, oscHeight);
     osc5.setBounds(osc4.getRight(), 0, oscWidth, oscHeight);
 
-    filter.setBounds(0, osc5.getBottom(), getWidth()/4.0, 200);
-    lfo.setBounds(filter.getRight(), osc5.getBottom(), getWidth()/4.0, 200);
-    adsr.setBounds(lfo.getRight(), osc4.getBottom(), getWidth()/2.0, 200);
+    filter.setBounds(0, osc5.getBottom(), oscWidth, 200);
+    lfo.setBounds(filter.getRight(), osc5.getBottom(), oscWidth, 200);
+    adsr.setBounds(osc3.getRight(), osc4.getBottom(),oscWidth*2, 200);
 
     keyboardComponent.setBounds(0,filter.getBottom(), getWidth(), 120);
 }

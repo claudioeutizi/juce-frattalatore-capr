@@ -6,11 +6,13 @@
               cppLanguageStandard="17">
   <MAINGROUP id="se2h2i" name="Frattalatore">
     <GROUP id="{C0F91FE8-0C3E-9FE3-FFCD-5FDE5855DD7D}" name="Source">
-      <GROUP id="{2972F0B6-01B1-E2FF-F116-B5569DB6CD9F}" name="Resources">
-        <FILE id="OJP84Q" name="Knob2.png" compile="0" resource="1" file="Source/Resources/Knob2.png"/>
-        <FILE id="lbypxH" name="KnobProject.knob" compile="0" resource="1"
-              file="Source/Resources/KnobProject.knob"/>
-        <FILE id="jPtYOS" name="LOGO Capr.png" compile="0" resource="1" file="Source/Resources/LOGO Capr.png"/>
+      <GROUP id="{34E01083-371C-EA4C-043C-C637DCC432E4}" name="Resources">
+        <FILE id="UN87ua" name="backgroundimage.png" compile="0" resource="1"
+              file="Source/Resources/backgroundimage.png"/>
+        <FILE id="vFbp26" name="backgroundimage2.jpg" compile="0" resource="1"
+              file="Source/Resources/backgroundimage2.jpg"/>
+        <FILE id="JkXmvt" name="Knob2.png" compile="0" resource="1" file="Source/Resources/Knob2.png"/>
+        <FILE id="kWJERh" name="LOGO Capr.png" compile="0" resource="1" file="Source/Resources/LOGO Capr.png"/>
       </GROUP>
       <GROUP id="{AEB390DC-7447-1A74-FE25-7109AF802E88}" name="Data">
         <FILE id="marZiV" name="AdsrData.cpp" compile="1" resource="0" file="Source/Data/AdsrData.cpp"/>

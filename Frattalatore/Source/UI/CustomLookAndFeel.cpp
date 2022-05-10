@@ -11,7 +11,6 @@
 #include "CustomLookAndFeel.h"
 CustomLookAndFeel::CustomLookAndFeel()
 {
-    //File knobImageFile = File::getSpecialLocation(File::SpecialLocationType::globalApplicationsDirectory).getChildFile("Common Files/VST3/Equalizer/Knobs/Knob2.png");
     knobImage = juce::ImageCache::getFromMemory(BinaryData::Knob2_png, BinaryData::Knob2_pngSize);
     setColour(Slider::textBoxTextColourId, Colours::lightgrey);
     setColour(Slider::textBoxOutlineColourId, Colours::darkslategrey);

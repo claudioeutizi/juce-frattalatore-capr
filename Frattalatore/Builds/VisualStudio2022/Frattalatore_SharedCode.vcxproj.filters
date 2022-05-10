@@ -2767,6 +2767,9 @@
     <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp">
       <Filter>JUCE Library Code</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData2.cpp">
+      <Filter>JUCE Library Code</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_basics.cpp">
       <Filter>JUCE Library Code</Filter>
     </ClCompile>
@@ -5468,10 +5471,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Source\Resources\Knob2.png">
+    <None Include="..\..\Source\Resources\backgroundimage.png">
       <Filter>Frattalatore\Source\Resources</Filter>
     </None>
-    <None Include="..\..\Source\Resources\KnobProject.knob">
+    <None Include="..\..\Source\Resources\backgroundimage2.jpg">
+      <Filter>Frattalatore\Source\Resources</Filter>
+    </None>
+    <None Include="..\..\Source\Resources\Knob2.png">
       <Filter>Frattalatore\Source\Resources</Filter>
     </None>
     <None Include="..\..\Source\Resources\LOGO Capr.png">

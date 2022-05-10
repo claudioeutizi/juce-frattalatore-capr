@@ -27,7 +27,7 @@ public:
 
 private:
 
-    static constexpr int sliderWidth = 100;
+    static constexpr int sliderWidth = 85;
     static constexpr int sliderHeight = 80;
 
     SliderWithLabel attack;
