@@ -38,6 +38,6 @@ private:
     CustomLookAndFeel customLookAndFeel;
     juce::MidiKeyboardState keyboardState;
     juce::MidiKeyboardComponent keyboardComponent;
-    juce::Image logoCapr, backgroundImage;
+    juce::Image logoCapr, backgroundImage, fractalImage;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FrattalatoreAudioProcessorEditor)
 };

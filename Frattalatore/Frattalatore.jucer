@@ -6,13 +6,17 @@
               cppLanguageStandard="17">
   <MAINGROUP id="se2h2i" name="Frattalatore">
     <GROUP id="{C0F91FE8-0C3E-9FE3-FFCD-5FDE5855DD7D}" name="Source">
-      <GROUP id="{34E01083-371C-EA4C-043C-C637DCC432E4}" name="Resources">
-        <FILE id="UN87ua" name="backgroundimage.png" compile="0" resource="1"
-              file="Source/Resources/backgroundimage.png"/>
-        <FILE id="vFbp26" name="backgroundimage2.jpg" compile="0" resource="1"
+      <GROUP id="{8CC62CFE-E871-8598-F374-36244EFE5853}" name="Resources">
+        <FILE id="xpXplT" name="backgroundimage2.jpg" compile="0" resource="1"
               file="Source/Resources/backgroundimage2.jpg"/>
-        <FILE id="JkXmvt" name="Knob2.png" compile="0" resource="1" file="Source/Resources/Knob2.png"/>
-        <FILE id="kWJERh" name="LOGO Capr.png" compile="0" resource="1" file="Source/Resources/LOGO Capr.png"/>
+        <FILE id="VGwygD" name="fractal Rainbow.jpeg" compile="0" resource="1"
+              file="Source/Resources/fractal Rainbow.jpeg"/>
+        <FILE id="gafqtH" name="fractalBlue.jpeg" compile="0" resource="1"
+              file="Source/Resources/fractalBlue.jpeg"/>
+        <FILE id="pYFTv1" name="fractalGreen.jpeg" compile="0" resource="1"
+              file="Source/Resources/fractalGreen.jpeg"/>
+        <FILE id="z1pE32" name="Knob2.png" compile="0" resource="1" file="Source/Resources/Knob2.png"/>
+        <FILE id="rx1AYP" name="LOGO Capr.png" compile="0" resource="1" file="Source/Resources/LOGO Capr.png"/>
       </GROUP>
       <GROUP id="{AEB390DC-7447-1A74-FE25-7109AF802E88}" name="Data">
         <FILE id="marZiV" name="AdsrData.cpp" compile="1" resource="0" file="Source/Data/AdsrData.cpp"/>
