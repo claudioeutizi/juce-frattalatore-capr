@@ -35,9 +35,11 @@ private:
     FilterComponent filter;
     AdsrComponent adsr;
     LfoComponent lfo;
+
     CustomLookAndFeel customLookAndFeel;
-    juce::MidiKeyboardState keyboardState;
-    juce::MidiKeyboardComponent keyboardComponent;
     juce::Image logoCapr, backgroundImage;
+    juce::MidiKeyboardState keyboardState;
+    //SynthAudioSource synthAudioSource;
+    juce::MidiKeyboardComponent keyboardComponent;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FrattalatoreAudioProcessorEditor)
 };
