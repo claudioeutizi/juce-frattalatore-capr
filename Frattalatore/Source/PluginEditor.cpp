@@ -88,6 +88,10 @@ void FrattalatoreAudioProcessorEditor::paint(juce::Graphics& g)
     g.setOpacity(2.0f);
     g.drawImageAt(logoCapr, getWidth() / 2.0 - 90, getHeight() / 2.0);
 
+    juce::Rectangle<float> border(0, 0, getWidth(), getHeight() - keyboardComponent.getHeight());
+    g.setColour(juce::Colours::violet);
+    g.drawRoundedRectangle(border, 7.0f, 4.5f);
+    
     g.setFont(juce::Font("Algerian", 20.0f, juce::Font::bold));
     g.setColour(juce::Colours::darkorange);
     g.setFont(fontSize);
