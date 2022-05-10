@@ -2253,6 +2253,7 @@
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp"/>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData2.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_basics.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_devices.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_formats.cpp"/>
@@ -3158,10 +3159,8 @@
     <ClInclude Include="..\..\JuceLibraryCode\JucePluginDefines.h"/>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Source\Resources\backgroundimage.png"/>
     <None Include="..\..\Source\Resources\backgroundimage2.jpg"/>
-    <None Include="..\..\Source\Resources\fractal Rainbow.jpeg"/>
-    <None Include="..\..\Source\Resources\fractalBlue.jpeg"/>
-    <None Include="..\..\Source\Resources\fractalGreen.jpeg"/>
     <None Include="..\..\Source\Resources\Knob2.png"/>
     <None Include="..\..\Source\Resources\LOGO Capr.png"/>
     <None Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt"/>

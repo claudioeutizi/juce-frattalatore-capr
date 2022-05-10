@@ -24,16 +24,11 @@ FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (Frattalatore
 
 {
     backgroundImage = juce::ImageCache::getFromMemory(BinaryData::backgroundimage2_jpg, BinaryData::backgroundimage2_jpgSize);
+    //backgroundImage = juce::ImageCache::getFromMemory(BinaryData::backgroundimage_png, BinaryData::backgroundimage_pngSize);
     backgroundImage = backgroundImage.rescaled(900,600-120);
 
-    //fractalImage = juce::ImageCache::getFromMemory(BinaryData::fractalBlue_jpeg, BinaryData::fractalBlue_jpegSize);
-    fractalImage = juce::ImageCache::getFromMemory(BinaryData::fractalGreen_jpeg, BinaryData::fractalGreen_jpegSize);
-    //fractalImage = juce::ImageCache::getFromMemory(BinaryData::fractal_Rainbow_jpeg, BinaryData::fractal_Rainbow_jpegSize);
-    fractalImage = fractalImage.rescaled(160, 180);
-
     logoCapr = juce::ImageCache::getFromMemory(BinaryData::LOGO_Capr_png, BinaryData::LOGO_Capr_pngSize);
-    //logoCapr = logoCapr.rescaled(160, 160);
-    logoCapr = logoCapr.rescaled(80, 80);
+    logoCapr = logoCapr.rescaled(160, 160);
 
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
@@ -90,30 +85,19 @@ void FrattalatoreAudioProcessorEditor::paint(juce::Graphics& g)
    // g.fillAll(juce::Colours::black);
     g.setOpacity(0.5f);
     g.drawImageAt(backgroundImage,0,0);
-    g.setOpacity(0.75f);
-    g.drawImageAt(fractalImage, getWidth() / 2.0 - fractalImage.getWidth()/2.0, osc3.getBottom()+10);
-   
-    g.setOpacity(0.55f);
-    //g.drawImageAt(logoCapr, getWidth() / 2.0 - 90, getHeight() / 2.0);
-    g.drawImageAt(logoCapr, getWidth() / 2.0 - 140, 150);
+    g.setOpacity(2.0f);
+    g.drawImageAt(logoCapr, getWidth() / 2.0 - 90, getHeight() / 2.0);
 
-    
-    
     juce::Rectangle<float> border(0, 0, getWidth(), getHeight() - keyboardComponent.getHeight());
     g.setColour(juce::Colours::violet);
     g.drawRoundedRectangle(border, 7.0f, 4.5f);
-
-    juce::Rectangle<float> fractalBorder(getWidth()/2.0 - 90, osc5.getBottom(), 180, 200);
-    g.setColour(juce::Colours::darkseagreen);
-    g.drawRoundedRectangle(fractalBorder.reduced(10.0f), 5.0f, 3.0f);
     
     g.setFont(juce::Font("Algerian", 20.0f, juce::Font::bold));
     g.setColour(juce::Colours::darkorange);
     g.setFont(fontSize);
     g.setFont(g.getCurrentFont().boldened());
 
-    //g.drawText("FRATTALATORE", getWidth() / 2.0 - 75, getHeight() - 180, 150, 50, juce::Justification::centred);
-    g.drawText("FRATTALATORE", getWidth() / 2.0 - 75, getHeight() - 170, 150, 50, juce::Justification::centred);
+    g.drawText("FRATTALATORE", getWidth() / 2.0 - 75, getHeight() - 180, 150, 50, juce::Justification::centred);
 }
 
 void FrattalatoreAudioProcessorEditor::resized()
