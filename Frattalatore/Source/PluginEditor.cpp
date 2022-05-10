@@ -85,7 +85,7 @@ void FrattalatoreAudioProcessorEditor::paint(juce::Graphics& g)
    // g.fillAll(juce::Colours::black);
     g.setOpacity(0.5f);
     g.drawImageAt(backgroundImage,0,0);
-    g.setOpacity(2.0f);
+    g.setOpacity(1.0f);
     g.drawImageAt(logoCapr, getWidth() / 2.0 - 90, getHeight() / 2.0);
 
     juce::Rectangle<float> border(0, 0, getWidth(), getHeight() - keyboardComponent.getHeight());
