@@ -146,7 +146,6 @@
     <ClCompile Include="..\..\Source\UI\GuiComponent.cpp"/>
     <ClCompile Include="..\..\Source\UI\LfoComponent.cpp"/>
     <ClCompile Include="..\..\Source\UI\OscComponent.cpp"/>
-    <ClCompile Include="..\..\Source\Synth\SynthAudioSource.cpp"/>
     <ClCompile Include="..\..\Source\Synth\SynthVoice.cpp"/>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp"/>
     <ClCompile Include="..\..\Source\PluginEditor.cpp"/>
@@ -2299,7 +2298,6 @@
     <ClInclude Include="..\..\Source\UI\GuiComponent.h"/>
     <ClInclude Include="..\..\Source\UI\LfoComponent.h"/>
     <ClInclude Include="..\..\Source\UI\OscComponent.h"/>
-    <ClInclude Include="..\..\Source\Synth\SynthAudioSource.h"/>
     <ClInclude Include="..\..\Source\Synth\SynthSound.h"/>
     <ClInclude Include="..\..\Source\Synth\SynthVoice.h"/>
     <ClInclude Include="..\..\Source\PluginProcessor.h"/>

@@ -30,7 +30,6 @@ FrattalatoreAudioProcessor::FrattalatoreAudioProcessor()
     {
         synth.addVoice(new SynthVoice());
     }
-    synth.clearSounds();
 }
 
 FrattalatoreAudioProcessor::/*destructor*/~FrattalatoreAudioProcessor()

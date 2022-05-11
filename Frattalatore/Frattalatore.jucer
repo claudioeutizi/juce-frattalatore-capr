@@ -43,10 +43,6 @@
         <FILE id="pViirn" name="OscComponent.h" compile="0" resource="0" file="Source/UI/OscComponent.h"/>
       </GROUP>
       <GROUP id="{2EDFC50F-228A-BABB-39B3-C3E8613E5DA3}" name="Synth">
-        <FILE id="WoaJWQ" name="SynthAudioSource.cpp" compile="1" resource="0"
-              file="Source/Synth/SynthAudioSource.cpp"/>
-        <FILE id="Q1k0Xl" name="SynthAudioSource.h" compile="0" resource="0"
-              file="Source/Synth/SynthAudioSource.h"/>
         <FILE id="YagrRj" name="SynthSound.h" compile="0" resource="0" file="Source/Synth/SynthSound.h"/>
         <FILE id="wngGRt" name="SynthVoice.cpp" compile="1" resource="0" file="Source/Synth/SynthVoice.cpp"/>
         <FILE id="VLV377" name="SynthVoice.h" compile="0" resource="0" file="Source/Synth/SynthVoice.h"/>

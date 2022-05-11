@@ -522,9 +522,6 @@
     <ClCompile Include="..\..\Source\UI\OscComponent.cpp">
       <Filter>Frattalatore\Source\UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Synth\SynthAudioSource.cpp">
-      <Filter>Frattalatore\Source\Synth</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\Synth\SynthVoice.cpp">
       <Filter>Frattalatore\Source\Synth</Filter>
     </ClCompile>
@@ -2714,9 +2711,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\UI\OscComponent.h">
       <Filter>Frattalatore\Source\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Synth\SynthAudioSource.h">
-      <Filter>Frattalatore\Source\Synth</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Synth\SynthSound.h">
       <Filter>Frattalatore\Source\Synth</Filter>

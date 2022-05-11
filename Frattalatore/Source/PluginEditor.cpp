@@ -34,6 +34,7 @@ FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (Frattalatore
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     addAndMakeVisible(keyboardComponent);
+    keyboardState.addListener(this);
 
     LookAndFeel::setDefaultLookAndFeel(&customLookAndFeel);
     //Oscillator parameters
@@ -73,6 +74,7 @@ FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (Frattalatore
     lfo.setBoundsColour(filterColour);
 
     setSize(900, 600);
+    startTimer(400);
 }
 
 FrattalatoreAudioProcessorEditor::~FrattalatoreAudioProcessorEditor()
