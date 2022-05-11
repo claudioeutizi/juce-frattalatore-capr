@@ -5471,7 +5471,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Source\Resources\backgroundimage2.jpg">
+    <None Include="..\..\Source\Resources\backgroundimage.jpg">
       <Filter>Frattalatore\Source\Resources</Filter>
     </None>
     <None Include="..\..\Source\Resources\Knob2.png">

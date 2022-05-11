@@ -3158,7 +3158,7 @@
     <ClInclude Include="..\..\JuceLibraryCode\JucePluginDefines.h"/>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Source\Resources\backgroundimage2.jpg"/>
+    <None Include="..\..\Source\Resources\backgroundimage.jpg"/>
     <None Include="..\..\Source\Resources\Knob2.png"/>
     <None Include="..\..\Source\Resources\LOGO Capr.png"/>
     <None Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_devices\native\oboe\CMakeLists.txt"/>

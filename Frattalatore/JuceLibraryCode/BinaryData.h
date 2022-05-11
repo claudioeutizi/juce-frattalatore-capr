@@ -8,8 +8,8 @@
 
 namespace BinaryData
 {
-    extern const char*   backgroundimage2_jpg;
-    const int            backgroundimage2_jpgSize = 1969712;
+    extern const char*   backgroundimage_jpg;
+    const int            backgroundimage_jpgSize = 1969712;
 
     extern const char*   Knob2_png;
     const int            Knob2_pngSize = 33608;
