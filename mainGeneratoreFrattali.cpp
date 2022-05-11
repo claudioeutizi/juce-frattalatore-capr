@@ -8,13 +8,9 @@
 #include <complex>
 #include <iomanip>
 #include <stdio.h>
-#include <opencv2/core/core.hpp>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/highgui.hpp>
 
 using namespace sf;
 using namespace std;
-using namespace cv;
 
 const int W = 900;
 const int H = 600;
