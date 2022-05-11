@@ -20,7 +20,8 @@
 //==============================================================================
 /**
 */
-class FrattalatoreAudioProcessorEditor  : public juce::AudioProcessorEditor
+class FrattalatoreAudioProcessorEditor  : public juce::AudioProcessorEditor,
+                                          private juce::Timer
 {
 public:
     FrattalatoreAudioProcessorEditor (FrattalatoreAudioProcessor&);
@@ -38,8 +39,10 @@ private:
 
     CustomLookAndFeel customLookAndFeel;
     juce::Image logoCapr, backgroundImage;
+
+    void timerCallback() override;
+    
     juce::MidiKeyboardState keyboardState;
-    //SynthAudioSource synthAudioSource;
     juce::MidiKeyboardComponent keyboardComponent;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FrattalatoreAudioProcessorEditor)
 };

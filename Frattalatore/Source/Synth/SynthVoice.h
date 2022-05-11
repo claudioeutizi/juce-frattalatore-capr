@@ -11,9 +11,9 @@
 #pragma once
 #include <JuceHeader.h>
 #include "SynthSound.h"
-#include "Data/OscData.h"
-#include "Data/AdsrData.h"
-#include "Data/FilterData.h"
+#include "../Data/OscData.h"
+#include "../Data/AdsrData.h"
+#include "../Data/FilterData.h"
 
 class SynthVoice : public juce::SynthesiserVoice
 {

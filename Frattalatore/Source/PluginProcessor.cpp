@@ -30,6 +30,7 @@ FrattalatoreAudioProcessor::FrattalatoreAudioProcessor()
     {
         synth.addVoice(new SynthVoice());
     }
+    synth.clearSounds();
 }
 
 FrattalatoreAudioProcessor::/*destructor*/~FrattalatoreAudioProcessor()
@@ -159,7 +160,7 @@ void FrattalatoreAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
         buffer.clear (i, 0, buffer.getNumSamples());
 
     setParams();
-
+    keyboardState.processNextMidiBuffer(midiMessages, 0, buffer.getNumSamples(), true);
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 }
 //

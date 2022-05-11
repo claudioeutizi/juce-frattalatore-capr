@@ -12,7 +12,8 @@
 //==============================================================================
 FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (FrattalatoreAudioProcessor& p):
     AudioProcessorEditor (&p),
-    audioProcessor (p), keyboardComponent(keyboardState, juce::MidiKeyboardComponent::horizontalKeyboard),
+    audioProcessor (p),
+    keyboardComponent(keyboardState, juce::MidiKeyboardComponent::horizontalKeyboard),
     osc1(audioProcessor.apvts, "OSC1TYPE", "OSC1GAIN", "OSC1PITCH", "OSC1FMFREQ", "OSC1FMDEPTH"),
     osc2(audioProcessor.apvts, "OSC2TYPE", "OSC2GAIN", "OSC2PITCH", "OSC2FMFREQ", "OSC2FMDEPTH"),
     osc3(audioProcessor.apvts, "OSC3TYPE", "OSC3GAIN", "OSC3PITCH", "OSC3FMFREQ", "OSC3FMDEPTH"),
@@ -117,5 +118,11 @@ void FrattalatoreAudioProcessorEditor::resized()
     adsr.setBounds(osc3.getRight(), osc4.getBottom(),oscWidth*2, 200);
 
     keyboardComponent.setBounds(0,filter.getBottom(), getWidth(), 120);
+}
+
+void FrattalatoreAudioProcessorEditor::timerCallback()
+{
+    keyboardComponent.grabKeyboardFocus();
+    stopTimer();
 }
 

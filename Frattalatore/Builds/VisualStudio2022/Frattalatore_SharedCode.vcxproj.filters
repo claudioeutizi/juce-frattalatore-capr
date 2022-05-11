@@ -11,6 +11,9 @@
     <Filter Include="Frattalatore\Source\UI">
       <UniqueIdentifier>{B0D20676-253B-6005-CD53-A3818423A737}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Frattalatore\Source\Synth">
+      <UniqueIdentifier>{5322DD87-F218-949B-978E-5E3B1FCE8716}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Frattalatore\Source">
       <UniqueIdentifier>{F7B5146B-9805-90B5-4F93-BE7A055FAD85}</UniqueIdentifier>
     </Filter>
@@ -520,8 +523,11 @@
     <ClCompile Include="..\..\Source\UI\OscComponent.cpp">
       <Filter>Frattalatore\Source\UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\SynthVoice.cpp">
-      <Filter>Frattalatore\Source</Filter>
+    <ClCompile Include="..\..\Source\Synth\SynthAudioSource.cpp">
+      <Filter>Frattalatore\Source\Synth</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Synth\SynthVoice.cpp">
+      <Filter>Frattalatore\Source\Synth</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp">
       <Filter>Frattalatore\Source</Filter>
@@ -2841,11 +2847,14 @@
     <ClInclude Include="..\..\Source\UI\OscComponent.h">
       <Filter>Frattalatore\Source\UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SynthSound.h">
-      <Filter>Frattalatore\Source</Filter>
+    <ClInclude Include="..\..\Source\Synth\SynthAudioSource.h">
+      <Filter>Frattalatore\Source\Synth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\SynthVoice.h">
-      <Filter>Frattalatore\Source</Filter>
+    <ClInclude Include="..\..\Source\Synth\SynthSound.h">
+      <Filter>Frattalatore\Source\Synth</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Synth\SynthVoice.h">
+      <Filter>Frattalatore\Source\Synth</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\PluginProcessor.h">
       <Filter>Frattalatore\Source</Filter>

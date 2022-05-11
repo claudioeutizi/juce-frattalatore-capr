@@ -9,8 +9,8 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "SynthVoice.h"
-#include "SynthSound.h"
+#include "Synth/SynthVoice.h"
+#include "Synth/SynthSound.h"
 
 //==============================================================================
 /**
@@ -61,7 +61,7 @@ private:
 
     static constexpr int numChannelsToProcess{ 2 };
     juce::Synthesiser synth;
-
+    juce::MidiKeyboardState keyboardState;
     juce::AudioProcessorValueTreeState::ParameterLayout createParams();
     void setParams();
     void setVoiceParams();
