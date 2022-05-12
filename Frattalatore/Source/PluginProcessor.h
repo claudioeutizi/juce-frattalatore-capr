@@ -15,7 +15,9 @@
 //==============================================================================
 /**
 */
-class FrattalatoreAudioProcessor  : public juce::AudioProcessor
+class FrattalatoreAudioProcessor  : public juce::AudioProcessor,
+    public juce::OSCReceiver,
+    public juce::OSCReceiver::ListenerWithOSCAddress<juce::OSCReceiver::MessageLoopCallback>
 {
 public:
     //==============================================================================
@@ -54,7 +56,7 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
     //==============================================================================
-
+    void oscMessageReceived(const juce::OSCMessage& message) override;
     juce::AudioProcessorValueTreeState apvts;
     juce::MidiKeyboardState& getKeyboardState() { return keyboardState; };
 
@@ -69,6 +71,8 @@ private:
     void setFilterParams();
     static constexpr int numVoices{ 5 };
     std::array<float, numChannelsToProcess> lfoOutput{ 0.0f,0.0f };
+    juce::String OSCAddress;
+    int OSCPort{ 9001 };
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FrattalatoreAudioProcessor)
