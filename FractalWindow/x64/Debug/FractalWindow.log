@@ -1,0 +1,21 @@
+﻿  main.cpp
+C:\Users\Admin\Desktop\Pierluigi\MMI\I°anno\II° Semestre\Computer Music Language and Systems\FractalWindow\Fractal.h(22,26): warning C4244: 'return': conversione da 'const double' a 'int'. Possibile perdita di dati.
+C:\Users\Admin\Desktop\Pierluigi\MMI\I°anno\II° Semestre\Computer Music Language and Systems\FractalWindow\Fractal.h(23,26): warning C4244: 'return': conversione da 'const double' a 'int'. Possibile perdita di dati.
+C:\Users\Admin\Desktop\Pierluigi\MMI\I°anno\II° Semestre\Computer Music Language and Systems\FractalWindow\Fractal.h(24,26): warning C4244: 'return': conversione da 'const double' a 'int'. Possibile perdita di dati.
+C:\Users\Admin\Desktop\Pierluigi\MMI\I°anno\II° Semestre\Computer Music Language and Systems\FractalWindow\Fractal.h(25,26): warning C4244: 'return': conversione da 'const double' a 'int'. Possibile perdita di dati.
+C:\Users\Admin\Desktop\Pierluigi\MMI\I°anno\II° Semestre\Computer Music Language and Systems\FractalWindow\Fractal.h(26,22): warning C4244: 'return': conversione da 'const double' a 'int'. Possibile perdita di dati.
+C:\Users\Admin\Desktop\Pierluigi\MMI\I°anno\II° Semestre\Computer Music Language and Systems\FractalWindow\Fractal.h(27,22): warning C4244: 'return': conversione da 'const double' a 'int'. Possibile perdita di dati.
+C:\Users\Admin\Desktop\Pierluigi\MMI\I°anno\II° Semestre\Computer Music Language and Systems\FractalWindow\Fractal.h(32,27): warning C4244: 'return': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\Admin\Desktop\Pierluigi\MMI\I°anno\II° Semestre\Computer Music Language and Systems\FractalWindow\Fractal.h(34,27): warning C4244: 'return': conversione da 'double' a 'int'. Possibile perdita di dati.
+C:\Users\Admin\Desktop\Pierluigi\MMI\I°anno\II° Semestre\Computer Music Language and Systems\Window\WINDOW\main.cpp(13,55): warning C4244: 'argomento': conversione da 'T' a 'float'. Possibile perdita di dati.
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\Admin\Desktop\Pierluigi\MMI\I°anno\II° Semestre\Computer Music Language and Systems\Window\WINDOW\main.cpp(13,37): warning C4244: 'argomento': conversione da 'T' a 'float'. Possibile perdita di dati.
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\Admin\Desktop\Pierluigi\MMI\I°anno\II° Semestre\Computer Music Language and Systems\Window\WINDOW\main.cpp(18,22): warning C4101: 'arrayOSC': variabile locale senza riferimenti
+  FractalWindow.vcxproj -> C:\Users\Admin\Desktop\Pierluigi\MMI\I°anno\II° Semestre\Computer Music Language and Systems\FractalWindow\x64\Debug\FractalWindow.exe
