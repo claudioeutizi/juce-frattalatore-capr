@@ -9,6 +9,7 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include <algorithm>
+#include <tuple>
 
 //==============================================================================
 FrattalatoreAudioProcessor::FrattalatoreAudioProcessor()
@@ -99,7 +100,12 @@ const juce::String FrattalatoreAudioProcessor::getProgramName (int index)
 void FrattalatoreAudioProcessor::changeProgramName (int index, const juce::String& newName)
 {
 }
+//////////////////////////////////////OSC////////////////////////////////////////
+void FrattalatoreAudioProcessor::oscMessageReceived(const juce::OSCMessage& message)
+{
+    if (message.isEmpty()) jassertfalse;
 
+}
 //==============================================================================
 void FrattalatoreAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
@@ -186,10 +192,6 @@ void FrattalatoreAudioProcessor::setStateInformation (const void* data, int size
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
-}
-
-void FrattalatoreAudioProcessor::oscMessageReceived(const juce::OSCMessage& message) 
-{
 }
 
 //==============================================================================

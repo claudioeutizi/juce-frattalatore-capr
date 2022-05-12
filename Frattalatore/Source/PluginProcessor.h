@@ -63,16 +63,25 @@ public:
 private:
 
     static constexpr int numChannelsToProcess{ 2 };
+    static constexpr int maxNumPointsOSC{ 5 };
+    static constexpr int numVoices{ 5 };
+
     juce::Synthesiser synth;
     juce::MidiKeyboardState keyboardState;
     juce::AudioProcessorValueTreeState::ParameterLayout createParams();
     void setParams();
     void setVoiceParams();
     void setFilterParams();
-    static constexpr int numVoices{ 5 };
     std::array<float, numChannelsToProcess> lfoOutput{ 0.0f,0.0f };
+
+    //OSC comunication
     juce::String OSCAddress;
     int OSCPort{ 9001 };
+    std::array<std::tuple<float, float, float>, maxNumPointsOSC> OSCValues;
+    //Default parameters that will be modified by the OSC messages
+    static constexpr float defaultFMFreq{ 0.0f };
+    static constexpr float defaultFMDepth{ 0.0f };
+    static constexpr float defaultOscGain{ -60.0f };
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FrattalatoreAudioProcessor)
