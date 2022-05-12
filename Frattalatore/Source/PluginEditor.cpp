@@ -13,7 +13,7 @@
 FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (FrattalatoreAudioProcessor& p):
     AudioProcessorEditor (&p),
     audioProcessor (p),
-    keyboardComponent(keyboardState, juce::MidiKeyboardComponent::horizontalKeyboard),
+    keyboardComponent(audioProcessor.keyboardState, juce::MidiKeyboardComponent::horizontalKeyboard),
     osc1(audioProcessor.apvts, "OSC1TYPE", "OSC1GAIN", "OSC1PITCH", "OSC1FMFREQ", "OSC1FMDEPTH"),
     osc2(audioProcessor.apvts, "OSC2TYPE", "OSC2GAIN", "OSC2PITCH", "OSC2FMFREQ", "OSC2FMDEPTH"),
     osc3(audioProcessor.apvts, "OSC3TYPE", "OSC3GAIN", "OSC3PITCH", "OSC3FMFREQ", "OSC3FMDEPTH"),

@@ -159,7 +159,7 @@ void FrattalatoreAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
         buffer.clear (i, 0, buffer.getNumSamples());
 
     setParams();
-    keyboardState.processNextMidiBuffer(midiMessages, 0, buffer.getNumSamples(), true);
+    keyboardState.processNextMidiBuffer(midiMessages, 0,buffer.getNumSamples(), true);
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 }
 //

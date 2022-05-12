@@ -56,17 +56,15 @@ public:
     //==============================================================================
 
     juce::AudioProcessorValueTreeState apvts;
-
+    juce::MidiKeyboardState keyboardState;
 private:
 
     static constexpr int numChannelsToProcess{ 2 };
     juce::Synthesiser synth;
-    juce::MidiKeyboardState keyboardState;
     juce::AudioProcessorValueTreeState::ParameterLayout createParams();
     void setParams();
     void setVoiceParams();
     void setFilterParams();
-
     static constexpr int numVoices{ 5 };
     std::array<float, numChannelsToProcess> lfoOutput{ 0.0f,0.0f };
 

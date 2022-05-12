@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/OpenGL.hpp>
+#include <SFML/Window.hpp>
 #include <time.h>
 #include <cmath>
 #include <iostream>

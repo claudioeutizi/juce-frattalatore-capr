@@ -41,8 +41,8 @@ private:
     juce::Image logoCapr, backgroundImage;
 
     void timerCallback() override;
-    
-    juce::MidiKeyboardState keyboardState;
     juce::MidiKeyboardComponent keyboardComponent;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FrattalatoreAudioProcessorEditor)
 };
+
+
