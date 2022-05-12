@@ -80,7 +80,7 @@ void OscData::renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock)
 
 float OscData::processNextSample(float input)
 {
-    fmMod = fmOsc.processSample(input) * fmDepth;
+    fmMod = fmOsc.processSample(input) * std::abs(fmDepth);
     return gain.processSample(processSample(input));
 }
 

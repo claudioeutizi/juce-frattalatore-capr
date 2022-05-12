@@ -237,15 +237,15 @@ juce::AudioProcessorValueTreeState::ParameterLayout FrattalatoreAudioProcessor::
     //frequencies
 
     params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC1FMFREQ", "OSC 1 FM Frequency", juce::NormalisableRange<float>
-    {0.0f, 1000.0f, 0.1f}, 0.0f));
+    {0.0f, 100.0f, 0.1f}, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC2FMFREQ", "OSC 2 FM Frequency", juce::NormalisableRange<float>
-    {0.0f, 1000.0f, 0.1f}, 0.0f));
+    {0.0f, 100.0f, 0.1f}, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC3FMFREQ", "OSC 3 FM Frequency", juce::NormalisableRange<float>
-    {0.0f, 1000.0f, 0.1f}, 0.0f));
+    {0.0f, 100.0f, 0.1f}, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC4FMFREQ", "OSC 4 FM Frequency", juce::NormalisableRange<float>
-    {0.0f, 1000.0f, 0.1f}, 0.0f));
+    {0.0f, 100.0f, 0.1f}, 0.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("OSC5FMFREQ", "OSC 5 FM Frequency", juce::NormalisableRange<float>
-    {0.0f, 1000.0f, 0.1f}, 0.0f));
+    {0.0f, 100.0f, 0.1f}, 0.0f));
 
     //depths
 
@@ -287,7 +287,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout FrattalatoreAudioProcessor::
     params.push_back(std::make_unique<juce::AudioParameterChoice>("FILTERTYPE", "Filter Type", 
         juce::StringArray{ "LPF", "BPF", "HPF" }, 0));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("FILTERCUTOFF", "Filter CutOff", juce::NormalisableRange<float>
-    {20.0f, 20000.0f, 0.1f, 0.6f}, 100.0f));
+    {20.0f, 20000.0f, 0.1f, 0.6f}, 20000.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("FILTERRESONANCE", "Filter Resonance", juce::NormalisableRange<float>
     {1.0f, 2.0f, 0.1f}, 0.1f));
 
