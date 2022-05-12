@@ -265,7 +265,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout FrattalatoreAudioProcessor::
     params.push_back(std::make_unique<juce::AudioParameterFloat>("LFOFREQ", "LFO Frequency", juce::NormalisableRange<float>
     { 0.0f, 20.0f, 0.1f }, 0.0f, "Hz"));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("LFODEPTH", "LFO Depth", juce::NormalisableRange<float>
-    { 0.0f, 1000.0f, 0.1f, 0.3f}, 0.0f, ""));
+    { 0.0f, 10000.0f, 0.1f, 0.3f}, 0.0f, ""));
     //params.push_back(std::make_unique<juce::AudioParameterFloat>("LFO2FREQ", "LFO2 Frequency", juce::NormalisableRange<float>
     //{ 0.0f, 20.0f, 0.1f }, 20.0f, "Hz"));
     //params.push_back(std::make_unique<juce::AudioParameterFloat>("LFO2DEPTH", "LFO2 Depth", juce::NormalisableRange<float>
@@ -287,7 +287,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout FrattalatoreAudioProcessor::
     params.push_back(std::make_unique<juce::AudioParameterChoice>("FILTERTYPE", "Filter Type", 
         juce::StringArray{ "LPF", "BPF", "HPF" }, 0));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("FILTERCUTOFF", "Filter CutOff", juce::NormalisableRange<float>
-    {20.0f, 20000.0f, 0.1f, 0.6f}, 20000.0f));
+    {20.0f, 20000.0f, 0.1f, 0.6f}, 100.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("FILTERRESONANCE", "Filter Resonance", juce::NormalisableRange<float>
     {1.0f, 2.0f, 0.1f}, 0.1f));
 
