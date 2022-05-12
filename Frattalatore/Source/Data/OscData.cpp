@@ -48,15 +48,6 @@ void OscData::setGain(const float levelDb)
     gain.setGainDecibels(levelDb);
 }
 
-void OscData::setNoiseGain(const float noiseLevelDb)
-{
-    noiseGain.setGainDecibels(noiseLevelDb);
-}
-
-void OscData::setOnOff(const bool onOff)
-{
-    lastOnOff = onOff;
-}
 
 void OscData::setPitch(const int pitch)
 {
@@ -93,13 +84,12 @@ float OscData::processNextSample(float input)
     return gain.processSample(processSample(input));
 }
 
-void OscData::setParams(const int oscChoice, const float oscGain, const float noiseGain, const int oscPitch, const float fmFreq, const float fmDepth)
+void OscData::setParams(const int oscChoice, const float oscGain, const int oscPitch, const float fmFreq, const float freqDepth)
 {
     setOscWaveType(oscChoice);
     setGain(oscGain);
-    setNoiseGain(noiseGain);
     setPitch(oscPitch);
-    updateFm(fmFreq, fmDepth);
+    updateFm(freqDepth, fmFreq);
 }
 
 void OscData::resetOsc()

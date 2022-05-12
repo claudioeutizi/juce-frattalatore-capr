@@ -56,11 +56,13 @@ public:
     //==============================================================================
 
     juce::AudioProcessorValueTreeState apvts;
-    juce::MidiKeyboardState keyboardState;
+    juce::MidiKeyboardState& getKeyboardState() { return keyboardState; };
+
 private:
 
     static constexpr int numChannelsToProcess{ 2 };
     juce::Synthesiser synth;
+    juce::MidiKeyboardState keyboardState;
     juce::AudioProcessorValueTreeState::ParameterLayout createParams();
     void setParams();
     void setVoiceParams();

@@ -17,8 +17,6 @@ class OscData : public juce::dsp::Oscillator<float>
 public:
     virtual void OscData::setOscWaveType(const int choice);
     virtual void OscData::setGain(const float levelDb);
-    virtual void OscData::setNoiseGain(const float noiseLevelDb);
-    virtual void OscData::setOnOff(const bool onOff);
     virtual void OscData::updateFm(const float depth, const float freq);
     virtual void OscData::setWaveFrequency(const int midiNoteNumber);
     virtual void OscData::setPitch(const int pitch);
@@ -26,13 +24,11 @@ public:
     virtual void OscData::renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock);
     virtual float processNextSample(float input);
     virtual void OscData::resetOsc();
-    virtual void setParams(const int oscChoice, const float oscGain, const float noiseGain, const int oscPitch, const float fmFreq, const float fmDepth);
+    virtual void setParams(const int oscChoice, const float oscGain, const int oscPitch, const float fmFreq, const float fmDepth);
 
 private:
     juce::dsp::Oscillator<float> fmOsc{ [](float x) {return sin(x); } }; 
     juce::dsp::Gain<float> gain;
-    juce::Random noise;
-    juce::dsp::Gain<float> noiseGain;
     float fmMod{ 0.0f };
     float fmDepth{ 0.0f };
     bool lastOnOff{ false };

@@ -13,7 +13,7 @@
 FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (FrattalatoreAudioProcessor& p):
     AudioProcessorEditor (&p),
     audioProcessor (p),
-    keyboardComponent(audioProcessor.keyboardState, juce::MidiKeyboardComponent::horizontalKeyboard),
+    keyboardComponent(p.getKeyboardState(), juce::MidiKeyboardComponent::horizontalKeyboard),
     osc1(audioProcessor.apvts, "OSC1TYPE", "OSC1GAIN", "OSC1PITCH", "OSC1FMFREQ", "OSC1FMDEPTH"),
     osc2(audioProcessor.apvts, "OSC2TYPE", "OSC2GAIN", "OSC2PITCH", "OSC2FMFREQ", "OSC2FMDEPTH"),
     osc3(audioProcessor.apvts, "OSC3TYPE", "OSC3GAIN", "OSC3PITCH", "OSC3FMFREQ", "OSC3FMDEPTH"),
@@ -33,7 +33,6 @@ FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (Frattalatore
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     addAndMakeVisible(keyboardComponent);
-    //keyboardState.addListener(this);
 
     LookAndFeel::setDefaultLookAndFeel(&customLookAndFeel);
     //Oscillator parameters
