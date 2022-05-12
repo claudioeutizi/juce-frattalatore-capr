@@ -24,14 +24,14 @@ FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (Frattalatore
     lfo(audioProcessor.apvts, "LFOFREQ", "LFODEPTH")
 
 {
-    /*backgroundImage = juce::ImageCache::getFromMemory(BinaryData::burningShipBackgroundImg_jpg, BinaryData::burningShipBackgroundImg_jpgSize);
-    backgroundImage = backgroundImage.rescaled(900,600-120);*/
+    backgroundImage = juce::ImageCache::getFromMemory(BinaryData::burningShipBackgroundImg_jpg, BinaryData::burningShipBackgroundImg_jpgSize);
+    backgroundImage = backgroundImage.rescaled(900,600-120);
 
     /*backgroundImage = juce::ImageCache::getFromMemory(BinaryData::JuliaBackgroundImg_png, BinaryData::JuliaBackgroundImg_pngSize);
     backgroundImage = backgroundImage.rescaled(900,600-120);*/
 
-    backgroundImage = juce::ImageCache::getFromMemory(BinaryData::mandelbrotBackgroundImg_jpg, BinaryData::mandelbrotBackgroundImg_jpgSize);
-    backgroundImage = backgroundImage.rescaled(900,600-120);
+    /*backgroundImage = juce::ImageCache::getFromMemory(BinaryData::mandelbrotBackgroundImg_jpg, BinaryData::mandelbrotBackgroundImg_jpgSize);
+    backgroundImage = backgroundImage.rescaled(900,600-120);*/
 
     logoCapr = juce::ImageCache::getFromMemory(BinaryData::LOGO_Capr_png, BinaryData::LOGO_Capr_pngSize);
     logoCapr = logoCapr.rescaled(160, 160);

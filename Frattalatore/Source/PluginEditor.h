@@ -21,7 +21,7 @@
 /**
 */
 class FrattalatoreAudioProcessorEditor  :   public juce::AudioProcessorEditor,
-                                            private juce::Timer,
+                                            private juce::Timer
 {
 public:
     FrattalatoreAudioProcessorEditor (FrattalatoreAudioProcessor&);
