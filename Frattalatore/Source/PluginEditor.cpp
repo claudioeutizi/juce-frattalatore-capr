@@ -24,7 +24,13 @@ FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (Frattalatore
     lfo(audioProcessor.apvts, "LFOFREQ", "LFODEPTH")
 
 {
-    backgroundImage = juce::ImageCache::getFromMemory(BinaryData::backgroundimage_jpg, BinaryData::backgroundimage_jpgSize);
+    /*backgroundImage = juce::ImageCache::getFromMemory(BinaryData::burningShipBackgroundImg_jpg, BinaryData::burningShipBackgroundImg_jpgSize);
+    backgroundImage = backgroundImage.rescaled(900,600-120);*/
+
+    /*backgroundImage = juce::ImageCache::getFromMemory(BinaryData::JuliaBackgroundImg_png, BinaryData::JuliaBackgroundImg_pngSize);
+    backgroundImage = backgroundImage.rescaled(900,600-120);*/
+
+    backgroundImage = juce::ImageCache::getFromMemory(BinaryData::mandelbrotBackgroundImg_jpg, BinaryData::mandelbrotBackgroundImg_jpgSize);
     backgroundImage = backgroundImage.rescaled(900,600-120);
 
     logoCapr = juce::ImageCache::getFromMemory(BinaryData::LOGO_Capr_png, BinaryData::LOGO_Capr_pngSize);
@@ -60,8 +66,8 @@ FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (Frattalatore
     lfo.setComponentName("LFO");
     adsr.setComponentName("ADSR");
 
-    auto oscColour = juce::Colours::darkseagreen;
-    auto filterColour = juce::Colours::darkseagreen;
+    auto oscColour = juce::Colours::indianred;
+    auto filterColour = oscColour;
 
     osc1.setBoundsColour(oscColour);
     osc2.setBoundsColour(oscColour);
@@ -84,14 +90,20 @@ void FrattalatoreAudioProcessorEditor::paint(juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour
    // g.fillAll(juce::Colours::black);
-    g.setOpacity(0.5f);
+    g.setOpacity(0.4f);
     g.drawImageAt(backgroundImage,0,0);
-    g.setOpacity(0.8f);
+    g.setOpacity(1.0f);
     g.drawImageAt(logoCapr, getWidth() / 2.0 - 90, getHeight() / 2.0);
 
+   
+
     juce::Rectangle<float> border(0, 0, getWidth(), getHeight() - keyboardComponent.getHeight());
-    g.setColour(juce::Colours::violet);
-    g.drawRoundedRectangle(border, 7.0f, 4.5f);
+    g.setColour(juce::Colours::darkslategrey);
+    g.drawRoundedRectangle(border, 8.0f, 5.0f);
+
+    /*juce::Rectangle<float> border2(0, 0, getWidth(), getHeight() - keyboardComponent.getHeight()-2);
+    g.setColour(juce::Colours::orangered);
+    g.drawRoundedRectangle(border2,3.0f, 1.5f);*/
     
     g.setFont(juce::Font("Algerian", 20.0f, juce::Font::bold));
     g.setColour(juce::Colours::darkorange);

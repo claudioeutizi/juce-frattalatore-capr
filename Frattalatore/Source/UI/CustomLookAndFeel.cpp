@@ -12,9 +12,9 @@
 CustomLookAndFeel::CustomLookAndFeel()
 {
     knobImage = juce::ImageCache::getFromMemory(BinaryData::Knob2_png, BinaryData::Knob2_pngSize);
-    setColour(Slider::textBoxTextColourId, Colours::lightgrey);
-    setColour(Slider::textBoxOutlineColourId, Colours::darkslategrey);
-    setColour(Label::textColourId, Colours::slategrey);
+    //setColour(Slider::textBoxTextColourId, Colours::lightgrey);
+    //setColour(Slider::textBoxOutlineColourId, Colours::darkslategrey);
+    setColour(Label::textColourId, Colours::antiquewhite);
 }
 
 CustomLookAndFeel::~CustomLookAndFeel()

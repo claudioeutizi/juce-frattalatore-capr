@@ -3159,7 +3159,6 @@
     <ClInclude Include="..\..\JuceLibraryCode\JucePluginDefines.h"/>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Source\Resources\backgroundimage.jpg"/>
     <None Include="..\..\Source\Resources\burningShipBackgroundImg.jpg"/>
     <None Include="..\..\Source\Resources\JuliaBackgroundImg.png"/>
     <None Include="..\..\Source\Resources\Knob2.png"/>

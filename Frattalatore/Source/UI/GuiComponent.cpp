@@ -30,6 +30,7 @@ SliderWithLabel::SliderWithLabel(juce::String labelName, juce::String paramId, j
     guiLabel.setFont(fontSize);
     guiLabel.setText(labelName, juce::dontSendNotification);
     guiLabel.setJustificationType(juce::Justification::centred);
+    //guiLabel.setColour(juce::Label::textColourId, juce::Colours::antiquewhite);
     addAndMakeVisible(guiLabel);
 
     guiSliderAttachment = std::make_unique<SliderAttachment>(apvts, paramId, guiSlider);
@@ -64,7 +65,7 @@ void GuiComponent::paint(juce::Graphics& g)
     g.setFont(juce::Font("Algerian", 20.0f, juce::Font::bold));
     auto bounds = getLocalBounds();
     g.setColour(boundsColour);
-    g.drawRoundedRectangle(bounds.toFloat().reduced(10.0f), 5.0f, 3.0f);
+    g.drawRoundedRectangle(bounds.toFloat().reduced(10.0f), 5.0f, 3.5f);
     
     g.setColour(juce::Colours::orangered);
     g.setFont(fontSize);

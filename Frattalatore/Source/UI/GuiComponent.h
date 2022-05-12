@@ -55,7 +55,7 @@ public:
 
 private:
     juce::String guiComponentName{ "" };
-    juce::Colour boundsColour{ juce::Colours::darkseagreen };
+    juce::Colour boundsColour{ juce::Colours::indianred };
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(GuiComponent)
 };
 
