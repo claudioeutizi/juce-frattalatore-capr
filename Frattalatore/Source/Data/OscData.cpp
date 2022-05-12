@@ -68,7 +68,7 @@ void OscData::updateFm(const float depth, const float freq)
     fmDepth = depth;
     fmOsc.setFrequency(freq);
     auto currentFreq = juce::MidiMessage::getMidiNoteInHertz((lastMidiNote + lastPitch) + fmMod);
-    setFrequency(currentFreq);
+    setFrequency(currentFreq >= 0 ? currentFreq : currentFreq * -1.0f);
 }
 
 void OscData::renderNextBlock(juce::dsp::AudioBlock<float>& audioBlock)

@@ -31,15 +31,20 @@ public:
     virtual void reset();
 
     void updateFilterParams(const int filterType, const float filterCutOff, const float resonance, const float lfoFreq, const float lfoDepth);
-    std::array<std::array<OscData, 2>,5>& getOscillators() { return this->oscillators; };
-    std::array<OscData, 2>& getOscillator(const int idxOscillator) { return oscillators[idxOscillator]; };
+    std::array<OscData, 2>& getOscillator1() { return this->oscillator1; };
+    std::array<OscData, 2>& getOscillator2() { return this->oscillator2; };
+    std::array<OscData, 2>& getOscillator3() { return this->oscillator3; };
+    std::array<OscData, 2>& getOscillator4() { return this->oscillator4; };
+    std::array<OscData, 2>& getOscillator5() { return this->oscillator5; };
     AdsrData& getAdsr() { return this->adsr; };
-    //void updateFilterParams(const int filterType, const float filterCutOff, const float filterResonance, const float lfoFreq, const float lfoDepth);
+
 private:
     static constexpr int numChannelsToProcess{ 2 };
-    std::array<std::array<OscData, numChannelsToProcess>,5> oscillators;
-    std::array<float, 5> xCoordinates;
-    std::array<float, 5> yCoordinates;
+    std::array<OscData, numChannelsToProcess> oscillator1;
+    std::array<OscData, numChannelsToProcess> oscillator2;
+    std::array<OscData, numChannelsToProcess> oscillator3;
+    std::array<OscData, numChannelsToProcess> oscillator4;
+    std::array<OscData, numChannelsToProcess> oscillator5;
     std::array<juce::dsp::Oscillator<float>, numChannelsToProcess> lfo;
     std::array<FilterData, numChannelsToProcess> filter;
     juce::AudioBuffer<float> synthBuffer;

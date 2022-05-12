@@ -18,13 +18,13 @@ bool SynthVoice::canPlaySound(juce::SynthesiserSound* sound)
 
 void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound* sound, int currentPitchWheelPosition)
 {
-    for (int osc = 0; osc < oscillators.size(); ++osc)
+    for (int i = 0; i < 2; i++)
     {
-        auto &oscillator = oscillators[osc];
-        for (int i = 0; i < 2; i++)
-        {
-            oscillator[i].setWaveFrequency(midiNoteNumber);
-        }
+        oscillator1[i].setWaveFrequency(midiNoteNumber);
+        oscillator2[i].setWaveFrequency(midiNoteNumber);
+        oscillator3[i].setWaveFrequency(midiNoteNumber);
+        oscillator4[i].setWaveFrequency(midiNoteNumber);
+        oscillator5[i].setWaveFrequency(midiNoteNumber);
     }
     adsr.noteOn();
 }
@@ -54,19 +54,19 @@ void SynthVoice::prepareToplay(double sampleRate, int samplesPerBlock, int outpu
     spec.maximumBlockSize = samplesPerBlock;
     spec.sampleRate = sampleRate;
     spec.numChannels = outputChannels;
-    for (int osc = 0; osc < oscillators.size(); ++osc)
+    for (int ch = 0; ch < numChannelsToProcess; ++ch)
     {
-        auto &oscillator = oscillators[osc];
-        for (int ch = 0; ch < numChannelsToProcess; ch++)
-        {
-            //OSC
-            oscillator[ch].prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
-            //FILTER
-            filter[ch].prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
-            //LFO
-            lfo[ch].prepare(spec);
-            lfo[ch].initialise([](float x) {return std::sin(x); });
-        }
+        //OSC
+        oscillator1[ch].prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
+        oscillator2[ch].prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
+        oscillator3[ch].prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
+        oscillator4[ch].prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
+        oscillator5[ch].prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
+        //FILTER
+        filter[ch].prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
+        //LFO
+        lfo[ch].prepare(spec);
+        lfo[ch].initialise([](float x) {return std::sin(x); });
     }
         //GAIN
         gain.prepare(spec);
@@ -92,11 +92,11 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float>& outputBuffer, int sta
 
         for (int s = 0; s < synthBuffer.getNumSamples(); ++s)
         {
-            for (int osc = 0; osc < oscillators.size(); ++osc)
-            {
-                auto& oscillator = oscillators[osc];
-                buffer[s] += oscillator[ch].processNextSample(buffer[s]);
-            }
+            buffer[s] = oscillator1[ch].processNextSample(buffer[s])
+                + oscillator2[ch].processNextSample(buffer[s])
+                + oscillator3[ch].processNextSample(buffer[s])
+                + oscillator4[ch].processNextSample(buffer[s])
+                + oscillator5[ch].processNextSample(buffer[s]);
         }
     }
 
