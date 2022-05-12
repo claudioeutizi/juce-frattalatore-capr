@@ -9,8 +9,14 @@
       <GROUP id="{34E01083-371C-EA4C-043C-C637DCC432E4}" name="Resources">
         <FILE id="vFbp26" name="backgroundimage.jpg" compile="0" resource="1"
               file="Source/Resources/backgroundimage.jpg"/>
+        <FILE id="ZK9hvS" name="burningShipBackgroundImg.jpg" compile="0" resource="1"
+              file="Source/Resources/burningShipBackgroundImg.jpg"/>
+        <FILE id="I6Xsnn" name="JuliaBackgroundImg.png" compile="0" resource="1"
+              file="Source/Resources/JuliaBackgroundImg.png"/>
         <FILE id="JkXmvt" name="Knob2.png" compile="0" resource="1" file="Source/Resources/Knob2.png"/>
         <FILE id="kWJERh" name="LOGO Capr.png" compile="0" resource="1" file="Source/Resources/LOGO Capr.png"/>
+        <FILE id="kBmR3w" name="mandelbrotBackgroundImg.jpg" compile="0" resource="1"
+              file="Source/Resources/mandelbrotBackgroundImg.jpg"/>
       </GROUP>
       <GROUP id="{AEB390DC-7447-1A74-FE25-7109AF802E88}" name="Data">
         <FILE id="marZiV" name="AdsrData.cpp" compile="1" resource="0" file="Source/Data/AdsrData.cpp"/>
