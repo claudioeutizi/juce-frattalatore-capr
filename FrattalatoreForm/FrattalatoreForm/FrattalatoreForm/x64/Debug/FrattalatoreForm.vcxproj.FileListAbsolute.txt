@@ -1,0 +1,4 @@
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FrattalatoreForm\FrattalatoreForm\FrattalatoreForm\x64\Debug\FrattalatoreForm.vcxproj.AssemblyReference.cache
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FrattalatoreForm\FrattalatoreForm\FrattalatoreForm\x64\Debug\FrattalatoreForm.vcxproj.SuggestedBindingRedirects.cache
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FrattalatoreForm\FrattalatoreForm\FrattalatoreForm\x64\Debug\FrattalatoreForm.Form1.resources
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FrattalatoreForm\FrattalatoreForm\FrattalatoreForm\x64\Debug\FrattalatoreForm.vcxproj.GenerateResource.cache
