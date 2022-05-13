@@ -36,10 +36,10 @@ namespace CppCLRWinFormsProject {
 			}
 		}
 	private: System::Windows::Forms::ComboBox^ fractalChoice;
-	private: System::Windows::Forms::NumericUpDown^ numIterations;
+
 
 	private: System::Windows::Forms::Button^ generateButton;
-	private: System::Windows::Forms::Label^ iterationsLabel;
+
 	private: System::Windows::Forms::Label^ fractalLabel;
 	private: System::Windows::Forms::Label^ FrattalatoreLabel;
 
@@ -59,12 +59,9 @@ namespace CppCLRWinFormsProject {
 		void InitializeComponent(void)
 		{
 			this->fractalChoice = (gcnew System::Windows::Forms::ComboBox());
-			this->numIterations = (gcnew System::Windows::Forms::NumericUpDown());
 			this->generateButton = (gcnew System::Windows::Forms::Button());
-			this->iterationsLabel = (gcnew System::Windows::Forms::Label());
 			this->fractalLabel = (gcnew System::Windows::Forms::Label());
 			this->FrattalatoreLabel = (gcnew System::Windows::Forms::Label());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numIterations))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// fractalChoice
@@ -82,19 +79,6 @@ namespace CppCLRWinFormsProject {
 			this->fractalChoice->TabIndex = 0;
 			this->fractalChoice->SelectedIndexChanged += gcnew System::EventHandler(this, &Form1::fractalChoice_SelectedIndexChanged);
 			// 
-			// numIterations
-			// 
-			this->numIterations->Font = (gcnew System::Drawing::Font(L"Stencil", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->numIterations->Location = System::Drawing::Point(210, 579);
-			this->numIterations->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 5, 0, 0, 0 });
-			this->numIterations->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
-			this->numIterations->Name = L"numIterations";
-			this->numIterations->Size = System::Drawing::Size(197, 31);
-			this->numIterations->TabIndex = 1;
-			this->numIterations->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
-			this->numIterations->ValueChanged += gcnew System::EventHandler(this, &Form1::numIterations_ValueChanged);
-			// 
 			// generateButton
 			// 
 			this->generateButton->AutoSize = true;
@@ -107,18 +91,6 @@ namespace CppCLRWinFormsProject {
 			this->generateButton->Text = L"Generate";
 			this->generateButton->UseVisualStyleBackColor = true;
 			this->generateButton->Click += gcnew System::EventHandler(this, &Form1::generateButton_Click);
-			// 
-			// iterationsLabel
-			// 
-			this->iterationsLabel->BackColor = System::Drawing::Color::Transparent;
-			this->iterationsLabel->Font = (gcnew System::Drawing::Font(L"Stencil", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->iterationsLabel->Location = System::Drawing::Point(206, 553);
-			this->iterationsLabel->Name = L"iterationsLabel";
-			this->iterationsLabel->Size = System::Drawing::Size(201, 23);
-			this->iterationsLabel->TabIndex = 3;
-			this->iterationsLabel->Text = L"iterations";
-			this->iterationsLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// fractalLabel
 			// 
@@ -154,23 +126,18 @@ namespace CppCLRWinFormsProject {
 			this->ClientSize = System::Drawing::Size(604, 704);
 			this->Controls->Add(this->FrattalatoreLabel);
 			this->Controls->Add(this->fractalLabel);
-			this->Controls->Add(this->iterationsLabel);
 			this->Controls->Add(this->generateButton);
-			this->Controls->Add(this->numIterations);
 			this->Controls->Add(this->fractalChoice);
 			this->Name = L"Form1";
 			this->Text = L"Frattalatore Form";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numIterations))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	private: System::Void fractalChoice_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-	}
-private: System::Void numIterations_ValueChanged(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void generateButton_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-};
+		private: System::Void fractalChoice_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+		}
+		private: System::Void generateButton_Click(System::Object^ sender, System::EventArgs^ e) {
+		}
+	};
 }
