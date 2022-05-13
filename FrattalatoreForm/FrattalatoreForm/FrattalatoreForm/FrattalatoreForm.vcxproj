@@ -148,7 +148,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\Capr_Frattalatore_Background.bmp" />
     <Image Include="app.ico" />
+    <Image Include="Image1.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

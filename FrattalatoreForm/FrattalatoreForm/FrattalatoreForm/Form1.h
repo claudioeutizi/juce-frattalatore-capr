@@ -8,6 +8,7 @@ namespace CppCLRWinFormsProject {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Resources;
 
 	/// <summary>
 	/// Summary for Form1
@@ -57,7 +58,6 @@ namespace CppCLRWinFormsProject {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Form1::typeid));
 			this->fractalChoice = (gcnew System::Windows::Forms::ComboBox());
 			this->numIterations = (gcnew System::Windows::Forms::NumericUpDown());
 			this->generateButton = (gcnew System::Windows::Forms::Button());
@@ -80,6 +80,7 @@ namespace CppCLRWinFormsProject {
 			this->fractalChoice->Name = L"fractalChoice";
 			this->fractalChoice->Size = System::Drawing::Size(197, 32);
 			this->fractalChoice->TabIndex = 0;
+			this->fractalChoice->SelectedIndexChanged += gcnew System::EventHandler(this, &Form1::fractalChoice_SelectedIndexChanged);
 			// 
 			// numIterations
 			// 
@@ -92,6 +93,7 @@ namespace CppCLRWinFormsProject {
 			this->numIterations->Size = System::Drawing::Size(197, 31);
 			this->numIterations->TabIndex = 1;
 			this->numIterations->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
+			this->numIterations->ValueChanged += gcnew System::EventHandler(this, &Form1::numIterations_ValueChanged);
 			// 
 			// generateButton
 			// 
@@ -104,6 +106,7 @@ namespace CppCLRWinFormsProject {
 			this->generateButton->TabIndex = 2;
 			this->generateButton->Text = L"Generate";
 			this->generateButton->UseVisualStyleBackColor = true;
+			this->generateButton->Click += gcnew System::EventHandler(this, &Form1::generateButton_Click);
 			// 
 			// iterationsLabel
 			// 
@@ -114,7 +117,7 @@ namespace CppCLRWinFormsProject {
 			this->iterationsLabel->Name = L"iterationsLabel";
 			this->iterationsLabel->Size = System::Drawing::Size(201, 23);
 			this->iterationsLabel->TabIndex = 3;
-			this->iterationsLabel->Text = L"Fractal choice";
+			this->iterationsLabel->Text = L"iterations";
 			this->iterationsLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// fractalLabel
@@ -146,9 +149,9 @@ namespace CppCLRWinFormsProject {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(Image::FromFile("..\\..\\Capr_Frattalatore_Background.bmp")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(615, 704);
+			this->ClientSize = System::Drawing::Size(604, 704);
 			this->Controls->Add(this->FrattalatoreLabel);
 			this->Controls->Add(this->fractalLabel);
 			this->Controls->Add(this->iterationsLabel);
@@ -156,12 +159,18 @@ namespace CppCLRWinFormsProject {
 			this->Controls->Add(this->numIterations);
 			this->Controls->Add(this->fractalChoice);
 			this->Name = L"Form1";
-			this->Text = L"Form1";
+			this->Text = L"Frattalatore Form";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numIterations))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	};
+	private: System::Void fractalChoice_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+	}
+private: System::Void numIterations_ValueChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void generateButton_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+};
 }
