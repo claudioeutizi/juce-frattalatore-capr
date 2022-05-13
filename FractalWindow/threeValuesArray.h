@@ -11,7 +11,7 @@ class threeValuesArray
     {
         double x;
         double y;
-        int numiter;
+        float perc;
     };
 
 public:
@@ -19,7 +19,7 @@ public:
     std::vector <threeValues> calcoloJuliaSet1(double cr, double ci, int iterazioni_user);
     std::vector <threeValues> calcoloJuliaSet2(double cr, double ci, int iterazioni_user);
     std::vector <threeValues> calcoloBurninhShip(double cr, double ci, int iterazioni_user);
-    void stampaThreevalues(threeValues vectorToPrint);
+   // void stampaThreevalues(threeValues vectorToPrint);
 
 private:
  
