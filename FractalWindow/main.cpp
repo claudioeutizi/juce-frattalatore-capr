@@ -14,8 +14,8 @@ static double yPoint;
 int main()
 {
     // Create the main window
-    RenderWindow MENU(VideoMode(800, 800), "Main Menu", Style::Default);
-    MainMenu mainMenu(MENU.getSize().x, MENU.getSize().y);
+    RenderWindow menu(VideoMode(800, 800), "Main Menu", Style::Default);
+    MainMenu mainMenu(menu.getSize().x, menu.getSize().y);
     Image plotFrattale;
     Fractal mainFractal;
     double xNew;
@@ -34,14 +34,14 @@ int main()
     background.setTexture(&Maintexture);
 
 
-    while (MENU.isOpen())
+    while (menu.isOpen())
     {
         Event event;
-        while (MENU.pollEvent(event))
+        while (menu.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
             {
-                MENU.close();
+                menu.close();
                 break;
             }
 
@@ -66,7 +66,7 @@ int main()
                 else  if (event.key.code == sf::Keyboard::Enter)
                 {
 
-                  int scelta = mainMenu.MainMenuPressed();
+                  int scelta = mainMenu.getMainMenuPressed();
 
                   if (scelta == 0) {
 
@@ -336,10 +336,10 @@ int main()
             }
             
         }
-        MENU.clear();
-        MENU.draw(background);
-        mainMenu.draw(MENU);
-        MENU.display();    
+        menu.clear();
+        menu.draw(background);
+        mainMenu.draw(menu);
+        menu.display();
     }
     return 0;
 }

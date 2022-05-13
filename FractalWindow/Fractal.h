@@ -1,9 +1,9 @@
-
+#pragma once
 #include "threeValuesArray.h"
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Shader.hpp>
-#pragma once
 
+using namespace sf;
 class Fractal
 {
 	

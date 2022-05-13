@@ -8,23 +8,24 @@ using namespace sf;
 
 #define Max_main_menu 5
 
-class MainMenu{
+class MainMenu
+{
     
 public:
     MainMenu(float width, float height);
     ~MainMenu();
 
-    void draw(RenderWindow& window);
-    void MoveUp();
-    void MoveDown();
+    virtual void draw(RenderWindow& window);
+    virtual void MoveUp();
+    virtual void MoveDown();
     
-    int MainMenuPressed() {
-        return MainMenuSelected;
+    int getMainMenuPressed() {
+        return mainMenuSelected;
     }
     
     
 private:
-    int MainMenuSelected;
+    int mainMenuSelected;
     sf::Font font;
     sf::Text mainMenu[Max_main_menu];
     

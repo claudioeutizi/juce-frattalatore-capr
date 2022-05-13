@@ -1,5 +1,5 @@
 #include "changeParameters.h"
-
+using namespace sf;
 
 
 double changeParameters::nuovaCoordinataX(int x)

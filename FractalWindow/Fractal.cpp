@@ -1,7 +1,7 @@
 #include "Fractal.h"
 #include <cstdlib>
 #include <vector>
-
+using namespace sf;
 
 int Fractal::ricorsioniMandelbrot(double cr, double ci, int max_iterations)
 {
