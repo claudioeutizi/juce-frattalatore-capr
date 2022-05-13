@@ -3,7 +3,16 @@
 #include "Fractal.h"
 #include "threeValuesArray.h"
 #include "changeParameters.h"
+#include "osc/osc/OscOutboundPacketStream.h"
+#include "osc/ip/UdpSocket.h"
+
+
+#define ADDRESS "127.0.0.1"
+#define PORT 7000
+
+#define OUTPUT_BUFFER_SIZE 1024
 using namespace sf;
+
 
 //static variables
 static int x_fp = 0;
@@ -13,6 +22,8 @@ static double yPoint;
 
 int main()
 {
+    //OSC
+    UdpTransmitSocket transmitSocket(IpEndpointName(ADDRESS, PORT));
     // Create the main window
     RenderWindow menu(VideoMode(800, 800), "Main Menu", Style::Default);
     MainMenu mainMenu(menu.getSize().x, menu.getSize().y);
