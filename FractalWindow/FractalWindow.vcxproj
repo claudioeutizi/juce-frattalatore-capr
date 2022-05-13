@@ -145,16 +145,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Window\WINDOW\main.cpp" />
-    <ClCompile Include="..\Window\WINDOW\MainMenu.cpp" />
     <ClCompile Include="changeParameters.cpp" />
     <ClCompile Include="Fractal.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="threeValuesArray.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Window\WINDOW\MainMenu.hpp" />
     <ClInclude Include="changeParameters.h" />
     <ClInclude Include="Fractal.h" />
+    <ClInclude Include="MainMenu.hpp" />
     <ClInclude Include="threeValuesArray.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

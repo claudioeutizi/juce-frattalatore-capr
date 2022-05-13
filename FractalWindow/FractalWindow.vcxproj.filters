@@ -15,12 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Window\WINDOW\main.cpp">
-      <Filter>File di origine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Window\WINDOW\MainMenu.cpp">
-      <Filter>File di origine</Filter>
-    </ClCompile>
     <ClCompile Include="Fractal.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
@@ -28,6 +22,12 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="changeParameters.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,10 +38,10 @@
     <ClInclude Include="Fractal.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
-    <ClInclude Include="..\Window\WINDOW\MainMenu.hpp">
+    <ClInclude Include="threeValuesArray.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
-    <ClInclude Include="threeValuesArray.h">
+    <ClInclude Include="MainMenu.hpp">
       <Filter>File di intestazione</Filter>
     </ClInclude>
   </ItemGroup>
