@@ -1,2 +1,0 @@
-C:\Users\Admin\Desktop\Pierluigi\MMI\I°anno\II° Semestre\Computer Music Language and Systems\FractalWindow\x64\Debug\FractalWindow.exe
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\x64\Debug\FractalWindow.exe
