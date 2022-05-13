@@ -158,12 +158,32 @@
     <ClCompile Include="Fractal.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="osc\ip\IpEndpointName.cpp" />
+    <ClCompile Include="osc\ip\win32\NetworkingUtils.cpp" />
+    <ClCompile Include="osc\ip\win32\UdpSocket.cpp" />
+    <ClCompile Include="osc\osc\OscOutboundPacketStream.cpp" />
+    <ClCompile Include="osc\osc\OscPrintReceivedElements.cpp" />
+    <ClCompile Include="osc\osc\OscReceivedElements.cpp" />
+    <ClCompile Include="osc\osc\OscTypes.cpp" />
     <ClCompile Include="threeValuesArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="changeParameters.h" />
     <ClInclude Include="Fractal.h" />
     <ClInclude Include="MainMenu.hpp" />
+    <ClInclude Include="osc\ip\IpEndpointName.h" />
+    <ClInclude Include="osc\ip\NetworkingUtils.h" />
+    <ClInclude Include="osc\ip\PacketListener.h" />
+    <ClInclude Include="osc\ip\TimerListener.h" />
+    <ClInclude Include="osc\ip\UdpSocket.h" />
+    <ClInclude Include="osc\osc\MessageMappingOscPacketListener.h" />
+    <ClInclude Include="osc\osc\OscException.h" />
+    <ClInclude Include="osc\osc\OscHostEndianness.h" />
+    <ClInclude Include="osc\osc\OscOutboundPacketStream.h" />
+    <ClInclude Include="osc\osc\OscPacketListener.h" />
+    <ClInclude Include="osc\osc\OscPrintReceivedElements.h" />
+    <ClInclude Include="osc\osc\OscReceivedElements.h" />
+    <ClInclude Include="osc\osc\OscTypes.h" />
     <ClInclude Include="threeValuesArray.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

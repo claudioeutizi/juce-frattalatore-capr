@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="File di intestazione\OSC">
+      <UniqueIdentifier>{11f7627c-0043-415b-9e77-8ef10042ce36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="File di origine\OSC">
+      <UniqueIdentifier>{08a7fb13-34cf-471a-bae9-60aaf7c5debe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="File di intestazione\OSC\IP">
+      <UniqueIdentifier>{37514e3a-e2d3-4917-ae31-75dc3fa09ef4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="File di origine\OSC\IP">
+      <UniqueIdentifier>{4186d053-56ac-432c-ba77-6af759008ece}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fractal.cpp">
@@ -30,6 +42,27 @@
     <ClCompile Include="MainMenu.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="osc\osc\OscOutboundPacketStream.cpp">
+      <Filter>File di origine\OSC</Filter>
+    </ClCompile>
+    <ClCompile Include="osc\osc\OscPrintReceivedElements.cpp">
+      <Filter>File di origine\OSC</Filter>
+    </ClCompile>
+    <ClCompile Include="osc\osc\OscReceivedElements.cpp">
+      <Filter>File di origine\OSC</Filter>
+    </ClCompile>
+    <ClCompile Include="osc\osc\OscTypes.cpp">
+      <Filter>File di origine\OSC</Filter>
+    </ClCompile>
+    <ClCompile Include="osc\ip\IpEndpointName.cpp">
+      <Filter>File di origine\OSC\IP</Filter>
+    </ClCompile>
+    <ClCompile Include="osc\ip\win32\NetworkingUtils.cpp">
+      <Filter>File di origine\OSC\IP</Filter>
+    </ClCompile>
+    <ClCompile Include="osc\ip\win32\UdpSocket.cpp">
+      <Filter>File di origine\OSC\IP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="changeParameters.h">
@@ -43,6 +76,45 @@
     </ClInclude>
     <ClInclude Include="MainMenu.hpp">
       <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="osc\ip\IpEndpointName.h">
+      <Filter>File di intestazione\OSC\IP</Filter>
+    </ClInclude>
+    <ClInclude Include="osc\ip\NetworkingUtils.h">
+      <Filter>File di intestazione\OSC\IP</Filter>
+    </ClInclude>
+    <ClInclude Include="osc\ip\PacketListener.h">
+      <Filter>File di intestazione\OSC\IP</Filter>
+    </ClInclude>
+    <ClInclude Include="osc\ip\TimerListener.h">
+      <Filter>File di intestazione\OSC\IP</Filter>
+    </ClInclude>
+    <ClInclude Include="osc\ip\UdpSocket.h">
+      <Filter>File di intestazione\OSC\IP</Filter>
+    </ClInclude>
+    <ClInclude Include="osc\osc\MessageMappingOscPacketListener.h">
+      <Filter>File di intestazione\OSC</Filter>
+    </ClInclude>
+    <ClInclude Include="osc\osc\OscException.h">
+      <Filter>File di intestazione\OSC</Filter>
+    </ClInclude>
+    <ClInclude Include="osc\osc\OscHostEndianness.h">
+      <Filter>File di intestazione\OSC</Filter>
+    </ClInclude>
+    <ClInclude Include="osc\osc\OscOutboundPacketStream.h">
+      <Filter>File di intestazione\OSC</Filter>
+    </ClInclude>
+    <ClInclude Include="osc\osc\OscPacketListener.h">
+      <Filter>File di intestazione\OSC</Filter>
+    </ClInclude>
+    <ClInclude Include="osc\osc\OscPrintReceivedElements.h">
+      <Filter>File di intestazione\OSC</Filter>
+    </ClInclude>
+    <ClInclude Include="osc\osc\OscReceivedElements.h">
+      <Filter>File di intestazione\OSC</Filter>
+    </ClInclude>
+    <ClInclude Include="osc\osc\OscTypes.h">
+      <Filter>File di intestazione\OSC</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
