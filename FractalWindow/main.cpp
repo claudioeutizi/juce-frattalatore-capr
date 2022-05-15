@@ -10,7 +10,7 @@
 #define ADDRESS "127.0.0.1"
 #define PORT 7000
 
-#define OUTPUT_BUFFER_SIZE 512
+#define OUTPUT_BUFFER_SIZE 1536
 using namespace sf;
 
 
@@ -26,9 +26,20 @@ int main()
     UdpTransmitSocket transmitSocket(IpEndpointName(ADDRESS, PORT));
     char buffer[OUTPUT_BUFFER_SIZE];
     osc::OutboundPacketStream p(buffer, OUTPUT_BUFFER_SIZE);
-    p << osc::BeginArray
-        << 1 << 2 << 3; osc::EndArray;
+    p.Clear();
+    p << osc::BeginBundle(1234)
+        << osc::BeginMessage("/an_int") << 1 << osc::EndMessage
+        << osc::BeginMessage("/an_int") << 2 << osc::EndMessage
+        << osc::BeginMessage("/an_int") << 3 << osc::EndMessage
+        << osc::BeginMessage("/an_int") << 4 << osc::EndMessage
+        << osc::BeginBundle(12345)
+        << osc::BeginMessage("/an_int") << 5 << osc::EndMessage
+        << osc::BeginMessage("/an_int") << 6 << osc::EndMessage
+        << osc::EndBundle
+        << osc::EndBundle;
+
     transmitSocket.Send(p.Data(), p.Size());
+
 
     // Create the main window
     RenderWindow menu(VideoMode(800, 800), "Main Menu", Style::Default);
@@ -359,4 +370,5 @@ int main()
         menu.display();
     }
     return 0;
+
 }

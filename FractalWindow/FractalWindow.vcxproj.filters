@@ -63,9 +63,6 @@
     <ClCompile Include="osc\ip\win32\UdpSocket.cpp">
       <Filter>File di origine\OSC\IP</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\oscpack\trunk\examples\SimpleReceive.cpp">
-      <Filter>File di origine\OSC</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="changeParameters.h">

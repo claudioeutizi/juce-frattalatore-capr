@@ -11,13 +11,14 @@
 #include <JuceHeader.h>
 #include "Synth/SynthVoice.h"
 #include "Synth/SynthSound.h"
+#include ""
 
 //==============================================================================
 /**
 */
 class FrattalatoreAudioProcessor  : public juce::AudioProcessor,
     public juce::OSCReceiver,
-    public juce::OSCReceiver::ListenerWithOSCAddress<juce::OSCReceiver::RealtimeCallback>
+    public juce::OSCReceiver::Listener<juce::OSCReceiver::RealtimeCallback>
 {
 public:
     //==============================================================================
@@ -57,6 +58,7 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
     //==============================================================================
     void oscMessageReceived(const juce::OSCMessage& message) override;
+    void oscBundleReceived(const juce::OSCBundle& bundle) override;
     void showConnectionErrorMessage(const juce::String&) {}
     juce::AudioProcessorValueTreeState apvts;
     juce::MidiKeyboardState& getKeyboardState() { return keyboardState; };

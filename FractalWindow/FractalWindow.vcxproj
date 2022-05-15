@@ -158,7 +158,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\oscpack\trunk\examples\SimpleReceive.cpp" />
     <ClCompile Include="changeParameters.cpp" />
     <ClCompile Include="Fractal.cpp" />
     <ClCompile Include="main.cpp" />
