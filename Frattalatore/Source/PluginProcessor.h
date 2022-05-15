@@ -11,14 +11,12 @@
 #include <JuceHeader.h>
 #include "Synth/SynthVoice.h"
 #include "Synth/SynthSound.h"
-#include ""
+#include "PluginPacketListener.h"
 
 //==============================================================================
 /**
 */
-class FrattalatoreAudioProcessor  : public juce::AudioProcessor,
-    public juce::OSCReceiver,
-    public juce::OSCReceiver::Listener<juce::OSCReceiver::RealtimeCallback>
+class FrattalatoreAudioProcessor  : public juce::AudioProcessor
 {
 public:
     //==============================================================================
@@ -57,9 +55,6 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
     //==============================================================================
-    void oscMessageReceived(const juce::OSCMessage& message) override;
-    void oscBundleReceived(const juce::OSCBundle& bundle) override;
-    void showConnectionErrorMessage(const juce::String&) {}
     juce::AudioProcessorValueTreeState apvts;
     juce::MidiKeyboardState& getKeyboardState() { return keyboardState; };
 
@@ -78,8 +73,7 @@ private:
     std::array<float, numChannelsToProcess> lfoOutput{ 0.0f,0.0f };
 
     //OSC comunication
-    juce::String OSCAddress{"127.0.0.1"};
-    int OSCPort{ 7000 };
+    PluginPacketListener listener;
     //Default parameters that will be modified by the OSC messages
     static constexpr float defaultFMFreq{ 0.0f };
     static constexpr float defaultFMDepth{ 0.0f };

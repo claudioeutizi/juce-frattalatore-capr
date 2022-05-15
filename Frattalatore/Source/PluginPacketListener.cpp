@@ -1,29 +1,7 @@
-//#pragma once
-/*
-    Example of two different ways to process received OSC messages using oscpack.
-    Receives the messages from the SimpleSend.cpp example.
-*/
+#include "PluginPacketListener.h"
+#include <juce_core/system/juce_PlatformDefs.h>
 
-#include <iostream>
-#include <cstring>
-
-#if defined(__BORLANDC__) // workaround for BCB4 release build intrinsics bug
-namespace std {
-    using ::__strcmp__;  // avoid error: E2316 '__strcmp__' is not a member of 'std'.
-}
-#endif
-
-#include "OscReceivedElements.h"
-#include "OscPacketListener.h"
-#include "../ip/UdpSocket.h"
-
-
-#define PORT 7000
-
-class ExamplePacketListener : public osc::OscPacketListener {
-protected:
-
-    virtual void ProcessMessage(const osc::ReceivedMessage& m,
+void  PluginPacketListener::ProcessMessage(const osc::ReceivedMessage& m,
         const IpEndpointName& remoteEndpoint)
     {
         (void)remoteEndpoint; // suppress unused parameter warning
@@ -41,8 +19,8 @@ protected:
                 const char* a4;
                 args >> a1 >> a2 >> a3 >> a4 >> osc::EndMessage;
 
-                std::cout << "received '/test1' message with arguments: "
-                    << a1 << " " << a2 << " " << a3 << " " << a4 << "\n";
+                DBG(args);
+                    //<< a1 << " " << a2 << " " << a3 << " " << a4 << "\n";
 
             }
             else if (std::strcmp(m.AddressPattern(), "/test2") == 0) {
@@ -57,15 +35,14 @@ protected:
                 if (arg != m.ArgumentsEnd())
                     throw osc::ExcessArgumentException();
 
-                std::cout << "received '/test2' message with arguments: "
-                    << a1 << " " << a2 << " " << a3 << " " << a4 << "\n";
+                DBG(args);
+                   // << a1 << " " << a2 << " " << a3 << " " << a4 << "\n";
             }
         }
         catch (osc::Exception& e) {
             // any parsing errors such as unexpected argument types, or 
             // missing arguments get thrown as exceptions.
-            std::cout << "error while parsing message: "
-                << m.AddressPattern() << ": " << e.what() << "\n";
+            DBG("error while parsing message: ");
+                //<< m.AddressPattern() << ": " << e.what() << "\n";
         }
     }
-};

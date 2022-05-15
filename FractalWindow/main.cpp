@@ -10,7 +10,7 @@
 #define ADDRESS "127.0.0.1"
 #define PORT 7000
 
-#define OUTPUT_BUFFER_SIZE 1536
+#define OUTPUT_BUFFER_SIZE 2048
 using namespace sf;
 
 
@@ -20,22 +20,21 @@ static int y_fp = 0;
 static double xPoint;
 static double yPoint;
 
-int main()
+int main(int argc, char* argv[])
 {
-    //OSC
+    (void)argc; // suppress unused parameter warnings
+    (void)argv; // suppress unused parameter warnings
+
     UdpTransmitSocket transmitSocket(IpEndpointName(ADDRESS, PORT));
+
     char buffer[OUTPUT_BUFFER_SIZE];
     osc::OutboundPacketStream p(buffer, OUTPUT_BUFFER_SIZE);
-    p.Clear();
-    p << osc::BeginBundle(1234)
-        << osc::BeginMessage("/an_int") << 1 << osc::EndMessage
-        << osc::BeginMessage("/an_int") << 2 << osc::EndMessage
-        << osc::BeginMessage("/an_int") << 3 << osc::EndMessage
-        << osc::BeginMessage("/an_int") << 4 << osc::EndMessage
-        << osc::BeginBundle(12345)
-        << osc::BeginMessage("/an_int") << 5 << osc::EndMessage
-        << osc::BeginMessage("/an_int") << 6 << osc::EndMessage
-        << osc::EndBundle
+
+    p << osc::BeginBundleImmediate
+        << osc::BeginMessage("/test1")
+        << true << 23 << (float)3.1415 << "hello" << osc::EndMessage
+        << osc::BeginMessage("/test2")
+        << true << 24 << (float)10.8 << "world" << osc::EndMessage
         << osc::EndBundle;
 
     transmitSocket.Send(p.Data(), p.Size());

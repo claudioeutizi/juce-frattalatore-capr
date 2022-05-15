@@ -9,7 +9,10 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include <algorithm>
+#include <iostream>
 #include <tuple>
+
+#define PORT 7000
 
 //==============================================================================
 FrattalatoreAudioProcessor::FrattalatoreAudioProcessor()
@@ -25,9 +28,6 @@ FrattalatoreAudioProcessor::FrattalatoreAudioProcessor()
     apvts(*this, nullptr, "Parameters", createParams())
 #endif
 {
-    connect(OSCPort);
-    juce::OSCReceiver::addListener(this);
-
     //polyphonic synthesiser
     synth.addSound(new SynthSound());
     for (int v = 0; v < numVoices; v++) 
@@ -103,26 +103,11 @@ void FrattalatoreAudioProcessor::changeProgramName (int index, const juce::Strin
 }
 //////////////////////////////////////OSC////////////////////////////////////////
 
-void FrattalatoreAudioProcessor::oscMessageReceived(const juce::OSCMessage& message)
-{
-    if (!message.isEmpty()) std::cout << message.size() << std::endl;
-}
-
-void FrattalatoreAudioProcessor::oscBundleReceived(const juce::OSCBundle& bundle)
-{
-    if (!bundle.isEmpty()) std::cout << bundle.size() << std::endl;
-}
-
-void showConnectionErrorMessage(const juce::String& messageText)
-{
-    juce::AlertWindow::showMessageBoxAsync(juce::AlertWindow::WarningIcon,
-        "Connection error",
-        messageText,
-        "OK");
-}
 //==============================================================================
 void FrattalatoreAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
+    UdpListeningReceiveSocket s(IpEndpointName(IpEndpointName(ADDRESS, PORT)), &listener);
+    s.RunUntilSigInt();
     synth.setCurrentPlaybackSampleRate(sampleRate);
     for (int i = 0; i < synth.getNumVoices(); i++)
     {

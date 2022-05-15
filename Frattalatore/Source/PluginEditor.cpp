@@ -110,7 +110,7 @@ void FrattalatoreAudioProcessorEditor::paint(juce::Graphics& g)
     g.setFont(fontSize);
     g.setFont(g.getCurrentFont().boldened());
 
-    g.drawText("FRATTALATORE", getWidth() / 2.0 - 75, getHeight() - 180, 150, 50, juce::Justification::centred);
+    g.drawText("FRATTALATORE", getWidth() / 2.0 - 75.0, getHeight() - 180.0, 150.0, 50.0, juce::Justification::centred);
 }
 
 void FrattalatoreAudioProcessorEditor::resized()
