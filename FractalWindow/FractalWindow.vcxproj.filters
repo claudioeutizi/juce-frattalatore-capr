@@ -63,6 +63,9 @@
     <ClCompile Include="osc\ip\win32\UdpSocket.cpp">
       <Filter>File di origine\OSC\IP</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\oscpack\trunk\examples\SimpleReceive.cpp">
+      <Filter>File di origine\OSC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="changeParameters.h">
@@ -114,6 +117,9 @@
       <Filter>File di intestazione\OSC</Filter>
     </ClInclude>
     <ClInclude Include="osc\osc\OscTypes.h">
+      <Filter>File di intestazione\OSC</Filter>
+    </ClInclude>
+    <ClInclude Include="ExamplePacketListener.h">
       <Filter>File di intestazione\OSC</Filter>
     </ClInclude>
   </ItemGroup>

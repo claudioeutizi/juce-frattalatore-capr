@@ -158,6 +158,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\oscpack\trunk\examples\SimpleReceive.cpp" />
     <ClCompile Include="changeParameters.cpp" />
     <ClCompile Include="Fractal.cpp" />
     <ClCompile Include="main.cpp" />
@@ -174,6 +175,7 @@
   <ItemGroup>
     <ClInclude Include="changeParameters.h" />
     <ClInclude Include="Fractal.h" />
+    <ClInclude Include="ExamplePacketListener.h" />
     <ClInclude Include="MainMenu.hpp" />
     <ClInclude Include="osc\ip\IpEndpointName.h" />
     <ClInclude Include="osc\ip\NetworkingUtils.h" />

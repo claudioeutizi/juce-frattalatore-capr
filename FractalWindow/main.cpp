@@ -7,6 +7,7 @@
 #include "osc/ip/UdpSocket.h"
 
 
+
 #define ADDRESS "127.0.0.1"
 #define PORT 9001
 
@@ -33,6 +34,15 @@ int main()
         << true << 24 << (float)10.8 << "world" << osc::EndMessage
         << osc::EndBundle;
     transmitSocket.Send(p.Data(), p.Size());
+
+    ExamplePacketListener listener;
+    UdpListeningReceiveSocket s(
+        IpEndpointName(IpEndpointName::ANY_ADDRESS, PORT),
+        &listener);
+
+    std::cout << "press ctrl-c to end\n";
+
+    s.RunUntilSigInt();
     // Create the main window
     RenderWindow menu(VideoMode(800, 800), "Main Menu", Style::Default);
     MainMenu mainMenu(menu.getSize().x, menu.getSize().y);
