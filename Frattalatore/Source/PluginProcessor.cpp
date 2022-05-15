@@ -102,14 +102,10 @@ void FrattalatoreAudioProcessor::changeProgramName (int index, const juce::Strin
 {
 }
 //////////////////////////////////////OSC////////////////////////////////////////
+
 void FrattalatoreAudioProcessor::oscMessageReceived(const juce::OSCMessage& message)
 {
-    if (!message.isEmpty())
-    {
-        juce::String mess = message[0].getString();
-        std::cout << mess << std::endl;
-    }
-
+    if (!message.isEmpty()) std::cout << message.size() << std::endl;
 }
 
 void showConnectionErrorMessage(const juce::String& messageText)
@@ -217,6 +213,7 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 juce::AudioProcessorValueTreeState::ParameterLayout FrattalatoreAudioProcessor::createParams()
 {
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
+
     /////////////////////////////////////OSC select and options//////////////////////////////////////////////////////////////////////
     //OSC1
         params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC1TYPE", "Oscillator 1 Type", juce::StringArray

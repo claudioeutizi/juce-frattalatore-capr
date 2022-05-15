@@ -249,7 +249,7 @@ int32 ReceivedMessageArgument::AsInt32Unchecked() const
 
     return u.i;
 #else
-	return *(int32*)argumentPtr_;
+	return *(int32*)argument_;
 #endif
 }
 
@@ -280,7 +280,7 @@ float ReceivedMessageArgument::AsFloatUnchecked() const
 
     return u.f;
 #else
-	return *(float*)argumentPtr_;
+	return *(float*)argument_;
 #endif
 }
 
@@ -400,7 +400,7 @@ double ReceivedMessageArgument::AsDoubleUnchecked() const
 
     return u.d;
 #else
-	return *(double*)argumentPtr_;
+	return *(double*)argument_;
 #endif
 }
 

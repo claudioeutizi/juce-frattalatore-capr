@@ -1,5 +1,4 @@
-﻿  SimpleReceive.cpp
-  main.cpp
+﻿  main.cpp
 C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\Fractal.h(22,26): warning C4244: 'return': conversione da 'const double' a 'int'. Possibile perdita di dati.
 C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\Fractal.h(23,26): warning C4244: 'return': conversione da 'const double' a 'int'. Possibile perdita di dati.
 C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\Fractal.h(24,26): warning C4244: 'return': conversione da 'const double' a 'int'. Possibile perdita di dati.
@@ -8,15 +7,14 @@ C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalW
 C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\Fractal.h(27,22): warning C4244: 'return': conversione da 'const double' a 'int'. Possibile perdita di dati.
 C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\Fractal.h(32,27): warning C4244: 'return': conversione da 'double' a 'int'. Possibile perdita di dati.
 C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\Fractal.h(34,27): warning C4244: 'return': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(38,55): warning C4244: 'argomento': conversione da 'T' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(35,55): warning C4244: 'argomento': conversione da 'T' a 'float'. Possibile perdita di dati.
           with
           [
               T=unsigned int
           ]
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(38,37): warning C4244: 'argomento': conversione da 'T' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(35,37): warning C4244: 'argomento': conversione da 'T' a 'float'. Possibile perdita di dati.
           with
           [
               T=unsigned int
           ]
-  Generazione del codice in corso...
   FractalWindow.vcxproj -> C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\x64\Debug\FractalWindow.exe
