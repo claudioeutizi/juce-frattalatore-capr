@@ -5,7 +5,7 @@
 #include "changeParameters.h"
 #include "osc/osc/OscOutboundPacketStream.h"
 #include "osc/ip/UdpSocket.h"
-
+#include "osc/osc/ExamplePacketListener.h"
 
 
 #define ADDRESS "127.0.0.1"
