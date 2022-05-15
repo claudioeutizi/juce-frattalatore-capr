@@ -27,6 +27,7 @@ FrattalatoreAudioProcessor::FrattalatoreAudioProcessor()
 {
     connect(OSCPort);
     juce::OSCReceiver::addListener(this, "/juce");
+
     //polyphonic synthesiser
     synth.addSound(new SynthSound());
     for (int v = 0; v < numVoices; v++) 
@@ -103,8 +104,20 @@ void FrattalatoreAudioProcessor::changeProgramName (int index, const juce::Strin
 //////////////////////////////////////OSC////////////////////////////////////////
 void FrattalatoreAudioProcessor::oscMessageReceived(const juce::OSCMessage& message)
 {
-    if (message.isEmpty()) jassertfalse;
+    if (!message.isEmpty())
+    {
+        juce::String mess = message[0].getString();
+        std::cout << mess << std::endl;
+    }
 
+}
+
+void showConnectionErrorMessage(const juce::String& messageText)
+{
+    juce::AlertWindow::showMessageBoxAsync(juce::AlertWindow::WarningIcon,
+        "Connection error",
+        messageText,
+        "OK");
 }
 //==============================================================================
 void FrattalatoreAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)

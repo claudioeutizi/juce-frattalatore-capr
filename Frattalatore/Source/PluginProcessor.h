@@ -75,7 +75,7 @@ private:
     std::array<float, numChannelsToProcess> lfoOutput{ 0.0f,0.0f };
 
     //OSC comunication
-    juce::String OSCAddress;
+    juce::String OSCAddress{"127.0.0.1"};
     int OSCPort{ 9001 };
     std::array<std::tuple<float, float, float>, maxNumPointsOSC> OSCValues;
     //Default parameters that will be modified by the OSC messages
