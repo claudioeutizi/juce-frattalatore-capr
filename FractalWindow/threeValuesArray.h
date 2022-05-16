@@ -2,7 +2,6 @@
 #include <vector>
 
 
-
 class threeValuesArray
 {
     //threeValuesArray();
@@ -12,14 +11,14 @@ class threeValuesArray
     {
         double x;
         double y;
-        float perc;
+        int numeroIterazioni;
     };
 
 public:
-    std::vector <threeValues> calcoloMandelbrot(double cr, double ci, int iterazioni_user);
-    std::vector <threeValues> calcoloJuliaSet1(double cr, double ci, int iterazioni_user);
-    std::vector <threeValues> calcoloJuliaSet2(double cr, double ci, int iterazioni_user);
-    std::vector <threeValues> calcoloBurninhShip(double cr, double ci, int iterazioni_user);
+    std::vector <threeValues> calcoloMandelbrot(double cr, double ci, int iterazioni_user, int bellaiterazione);
+    std::vector <threeValues> calcoloJuliaSet1(double cr, double ci, int iterazioni_user, int bellaiterazione);
+    std::vector <threeValues> calcoloJuliaSet2(double cr, double ci, int iterazioni_user, int bellaiterazione);
+    std::vector <threeValues> calcoloBurninhShip(double cr, double ci, int iterazioni_user, int bellaiterazione);
    // void stampaThreevalues(threeValues vectorToPrint);
 
 private:

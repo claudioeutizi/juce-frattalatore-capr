@@ -8,7 +8,7 @@ int Fractal::ricorsioniMandelbrot(double cr, double ci, int max_iterations)
     double parteRealeZ = 0, parteImmaginariaZ = 0;
     int numeroRicorsioni = 0;
 
-    while (numeroRicorsioni < max_iter && parteRealeZ * parteRealeZ + parteImmaginariaZ * parteImmaginariaZ < 4.0)
+    while (numeroRicorsioni < max_iterations && parteRealeZ * parteRealeZ + parteImmaginariaZ * parteImmaginariaZ < 4.0)
     {
         double temp = parteRealeZ * parteRealeZ - parteImmaginariaZ * parteImmaginariaZ + cr;
         parteImmaginariaZ = 2.0 * parteRealeZ * parteImmaginariaZ + ci;
@@ -24,7 +24,7 @@ int Fractal::ricorsioniJuliaSet1(double cr, double ci, int max_iterations)
 {
     double parteRealeC = -0.7269, parteImmaginariaC = 0.1889; // costante c di partenza del set
     int numeroRicorsioni = 0;
-    while (numeroRicorsioni < max_iter && (cr * cr + ci * ci) < 4.0)
+    while (numeroRicorsioni < max_iterations && cr * cr + ci * ci < 4.0)
     {
         double tempX = cr * cr - ci * ci + parteRealeC;
         double tempY = 2.0 * cr * ci + parteImmaginariaC;
@@ -40,7 +40,7 @@ int Fractal::ricorsioniJuliaSet2(double cr, double ci, int max_iterations)
 {
     double parteRealeC = 0.285, parteImmaginariaC = 0.01; // costante c di partenza del set
     int numeroRicorsioni = 0;
-    while (numeroRicorsioni < max_iter && (cr * cr + ci * ci) < 4.0)
+    while (numeroRicorsioni < max_iterations && cr * cr + ci * ci < 4.0)
     {
         double tempX = cr * cr - ci * ci + parteRealeC;
         double tempY = 2.0 * cr * ci + parteImmaginariaC;
@@ -57,7 +57,7 @@ int Fractal::ricorsioniBurning_ship(double cr, double ci, int max_iterations)
     double parteRealeZ = 0, parteImmaginariaZ = 0;
     int numeroRicorsioni = 0;
 
-    while (numeroRicorsioni < max_iter && parteRealeZ * parteRealeZ + parteImmaginariaZ * parteImmaginariaZ < 4.0)
+    while (numeroRicorsioni < max_iterations && parteRealeZ * parteRealeZ + parteImmaginariaZ * parteImmaginariaZ < 4.0)
     {
         double temp = parteRealeZ * parteRealeZ - parteImmaginariaZ * parteImmaginariaZ + cr;
         parteImmaginariaZ = 2.0 * abs(parteRealeZ * parteImmaginariaZ) + ci;
@@ -86,6 +86,31 @@ sf::Color Fractal::paint_fractal(int n, int max_iter)
 
     auto const b = 1 - a;
     return sf::Color(b * v.r + a * u.r, b * v.g + a * u.g, b * v.b + a * u.b);
+}
+
+void Fractal::setMaxIter(int n) {
+
+max_iter = n;
+}
+
+void Fractal::setMinRe(double x)
+{
+    min_re = x;
+}
+
+void Fractal::setMaxRe(double x)
+{
+    max_re = x;
+}
+
+void Fractal::setMinIm(double x)
+{
+    min_im = x;
+}
+
+void Fractal::setMaxIm(double x)
+{
+    max_im = x;
 }
 
 void Fractal::setXfp(double x_mouse)

@@ -5,9 +5,11 @@ class changeParameters
 public:
 	double getZoom() { return zoom; };
 	double get_w() { return w; };
+	void set_w(double x);
+	void set_h(double x);
 	double get_h() { return h; };
 	double getStep() { return step; };
-
+	
 	double nuovaCoordinataX(int x);
 	double nuovaCoordinataY(int y);
 	

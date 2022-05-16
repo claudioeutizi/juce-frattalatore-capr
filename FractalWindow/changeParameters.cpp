@@ -1,6 +1,16 @@
 #include "changeParameters.h"
-using namespace sf;
 
+
+
+void changeParameters::set_w(double x)
+{
+    w = x;
+}
+
+void changeParameters::set_h(double x)
+{
+    h = x;
+}
 
 double changeParameters::nuovaCoordinataX(int x)
 {

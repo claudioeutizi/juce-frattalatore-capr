@@ -1,4 +1,4 @@
-#pragma once
+
 #include "MainMenu.hpp"
 
 MainMenu::MainMenu(float width, float height){
@@ -10,32 +10,26 @@ MainMenu::MainMenu(float width, float height){
     mainMenu[0].setFont(font);
     mainMenu[0].setFillColor(sf::Color::White);
     mainMenu[0].setString("MANDELBROT");
-    mainMenu[0].setCharacterSize(50);
-    mainMenu[0].setPosition(50,50);
+    mainMenu[0].setCharacterSize(40);
+    mainMenu[0].setPosition(450,60);
     
     mainMenu[1].setFont(font);
     mainMenu[1].setFillColor(sf::Color::White);
     mainMenu[1].setString("JULIA 1");
-    mainMenu[1].setCharacterSize(50);
-    mainMenu[1].setPosition(50,150);
+    mainMenu[1].setCharacterSize(40);
+    mainMenu[1].setPosition(450,130);
     
     mainMenu[2].setFont(font);
     mainMenu[2].setFillColor(sf::Color::White);
     mainMenu[2].setString("JULIA 2");
-    mainMenu[2].setCharacterSize(50);
-    mainMenu[2].setPosition(50,250);
+    mainMenu[2].setCharacterSize(40);
+    mainMenu[2].setPosition(450,210);
     
     mainMenu[3].setFont(font);
     mainMenu[3].setFillColor(sf::Color::White);
     mainMenu[3].setString("BURNING SHIP");
-    mainMenu[3].setCharacterSize(50);
-    mainMenu[3].setPosition(50,350);
-    
-    mainMenu[4].setFont(font);
-    mainMenu[4].setFillColor(sf::Color::White);
-    mainMenu[4].setString("EXIT");
-    mainMenu[4].setCharacterSize(50);
-    mainMenu[4].setPosition(50,700);
+    mainMenu[3].setCharacterSize(40);
+    mainMenu[3].setPosition(450,290);
     
     
     
@@ -55,14 +49,14 @@ void MainMenu::draw(RenderWindow& window){
 
 //MoveUp
 void MainMenu::MoveUp(){
-    if(mainMenuSelected-1 >= 0){
+    if(mainMenuSelected >= 0){
         mainMenu[mainMenuSelected].setFillColor(Color::White);
         
         mainMenuSelected--;
         if(mainMenuSelected == -1){
-            mainMenuSelected = 2;
+            mainMenuSelected = 3;
         }
-        mainMenu[mainMenuSelected].setFillColor(Color::Blue);
+        mainMenu[mainMenuSelected].setFillColor(Color::Black);
     }
 }
 
@@ -75,6 +69,6 @@ void MainMenu::MoveDown(){
         if(mainMenuSelected == 4){
             mainMenuSelected = 0;
         }
-        mainMenu[mainMenuSelected].setFillColor(Color::Blue);
+        mainMenu[mainMenuSelected].setFillColor(Color::Black);
     }
 }

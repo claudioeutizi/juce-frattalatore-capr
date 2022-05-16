@@ -3,80 +3,52 @@
 #include "Fractal.h"
 #include "threeValuesArray.h"
 #include "changeParameters.h"
-#include "osc/OscOutboundPacketStream.h"
-#include "ip/UdpSocket.h"
-
+//#include "osc/osc/OscOutboundPacketStream.h"
+//#include "osc/ip/UdpSocket.h"
+//#include "ExamplePacketListener.h"
 
 
 #define ADDRESS "127.0.0.1"
-#define PORT 7000
+#define PORT 9001
 
 #define OUTPUT_BUFFER_SIZE 1024
 using namespace sf;
 
-
+double zoom = 1.0;
+double step = 20.0;
 //static variables
 static int x_fp = 0;
 static int y_fp = 0;
-static double xPoint;
-static double yPoint;
+float XoscToSend;
+float YoscToSend;
+int nIteratioForElement;
+//static double xPoint;
+//static double yPoint;
 
-int main(int argc, char* argv[])
+int main()
 {
-    (void)argc; // suppress unused parameter warnings
-    (void)argv; // suppress unused parameter warnings
+    /*//OSC
     UdpTransmitSocket transmitSocket(IpEndpointName(ADDRESS, PORT));
-
     char buffer[OUTPUT_BUFFER_SIZE];
     osc::OutboundPacketStream p(buffer, OUTPUT_BUFFER_SIZE);
-
-    //p << osc::BeginBundle()
-    //    << osc::BeginMessage("/test1")
-    //    << "hello" << osc::EndMessage
-    //    << osc::BeginMessage("/test2")
-    //    <<"world" << osc::EndMessage
-    //    << osc::EndBundle;
-
-    p.Clear();
-    p << osc::BeginBundle(1234)
-        << osc::BeginBundle(12345)
-        << osc::BeginMessage("/the_i1") << 500 << osc::EndMessage
-        << osc::BeginMessage("/the_x1") << 1.0f << osc::EndMessage
-        << osc::BeginMessage("/the_y1") << 2.0f << osc::EndMessage
-        << osc::EndBundle
-        << osc::BeginBundle(12345)
-        << osc::BeginMessage("/the_i2") << 500 << osc::EndMessage
-        << osc::BeginMessage("/the_x2") << 1.0f << osc::EndMessage
-        << osc::BeginMessage("/the_y2") << 2.0f << osc::EndMessage
-        << osc::EndBundle
-        << osc::BeginBundle(12345)
-        << osc::BeginMessage("/the_i3") << 500 << osc::EndMessage
-        << osc::BeginMessage("/the_x3") << 1.0f << osc::EndMessage
-        << osc::BeginMessage("/the_y3") << 2.0f << osc::EndMessage
-        << osc::EndBundle
-        << osc::BeginBundle(12345)
-        << osc::BeginMessage("/the_i4") << 500 << osc::EndMessage
-        << osc::BeginMessage("/the_x4") << 1.0f << osc::EndMessage
-        << osc::BeginMessage("/the_y4") << 2.0f << osc::EndMessage
-        << osc::EndBundle
-        << osc::BeginBundle(12345)
-        << osc::BeginMessage("/the_i5") << 500 << osc::EndMessage
-        << osc::BeginMessage("/the_x5") << 1.0f << osc::EndMessage
-        << osc::BeginMessage("/the_y5") << 2.0f << osc::EndMessage
-        << osc::EndBundle
-    << osc::EndBundle;
-
-    //socket.Send(p.Data(), p.Size());
-
+        p << osc::BeginBundleImmediate
+        << osc::BeginMessage("/test1")
+        << true << 23 << (float)3.1415 << "hello" << osc::EndMessage
+        << osc::BeginMessage("/test2")
+        << true << 24 << (float)10.8 << "world" << osc::EndMessage
+        << osc::EndBundle;
     transmitSocket.Send(p.Data(), p.Size());
+    */
+
+
 
     // Create the main window
-    RenderWindow menu(VideoMode(800, 800), "Main Menu", Style::Default);
+    RenderWindow menu(VideoMode(800, 400), "Main Menu", Style::Default);
     MainMenu mainMenu(menu.getSize().x, menu.getSize().y);
-    sf::Image plotFrattale;
+    Image plotFrattale;
     Fractal mainFractal;
-    double xNew;
-    double yNew;
+    double xNew = 0;
+    double yNew = 0;
     static Event newEvent;
     threeValuesArray arrayOSC;
     Texture texture;
@@ -85,9 +57,9 @@ int main(int argc, char* argv[])
     plotFrattale.create(mainFractal.getW(), mainFractal.getH());
     //set background
     RectangleShape background;
-    background.setSize(Vector2f(800, 800));
+    background.setSize(Vector2f(800, 400));
     Texture Maintexture;
-    Maintexture.loadFromFile("Images/Orange.png");
+    Maintexture.loadFromFile("Images/Orange.jpg");
     background.setTexture(&Maintexture);
 
 
@@ -125,80 +97,138 @@ int main(int argc, char* argv[])
 
                   int scelta = mainMenu.getMainMenuPressed();
 
-                  if (scelta == 0) {
-
-                      RenderWindow MandelbrotWindow(VideoMode(600, 600), "Mandelbrot");
-                      while (MandelbrotWindow.isOpen())
+                  if (scelta == 0)
+                  {
+                      RenderWindow MandelWindow(VideoMode(600, 600), "Julia2");
+                      Fractal MandelFractal;
+                      int iter = 0;
+                      iter = MandelFractal.getMaxIter();
+                      
+                      while (MandelWindow.isOpen())
                       {
-                          Event mandelbrotEvent;
-                          while (MandelbrotWindow.pollEvent(mandelbrotEvent))
+                          Event mandelEvent;
+                          while (MandelWindow.pollEvent(mandelEvent))
                           {
-                              if (mandelbrotEvent.type == Event::Closed)
+                              if (mandelEvent.type == Event::Closed)
                               {
-                                  MandelbrotWindow.close();
+                                  MandelWindow.close();
                               }
-                              else if (mandelbrotEvent.type == Event::KeyPressed)
+                              if (mandelEvent.type == Event::KeyPressed)
                               {
-                                  if (mandelbrotEvent.key.code == Keyboard::Escape)
+                                  if (mandelEvent.key.code == Keyboard::Escape)
                                   {
-                                      MandelbrotWindow.close();
+                                      MandelWindow.close();
                                   }
                               }
-                          }
-
+                              
                               for (int y = 0; y < mainFractal.getH(); y++)
                               {
                                   for (int x = 0; x < mainFractal.getW(); x++)
                                   {
-                                      double cr = mainFractal.getMinRe() + (static_cast<double>(mainFractal.getMaxRe()) - mainFractal.getMinRe()) * x / mainFractal.getW();
-                                      double ci = mainFractal.getMinIm() + (static_cast<double>(mainFractal.getMaxIm()) - mainFractal.getMinIm()) * y / mainFractal.getH();
-                                      int n = mainFractal.ricorsioniMandelbrot(cr, ci, mainFractal.getMaxIter());
-                                      Color c = mainFractal.paint_fractal(n, mainFractal.getMaxIter());
+                                      double cr = MandelFractal.getMinRe() + (static_cast<double>(MandelFractal.getMaxRe()) - MandelFractal.getMinRe()) * x / MandelFractal.getW();
+                                      double ci = MandelFractal.getMinIm() + (static_cast<double>(MandelFractal.getMaxIm()) - MandelFractal.getMinIm()) * y / MandelFractal.getH();
+                                      int n = MandelFractal.ricorsioniMandelbrot(cr, ci, iter);
+                                      Color c = MandelFractal.paint_fractal(n, iter);
                                       plotFrattale.setPixel(x, y, Color(c));
                                   }
                               }
                               texture.loadFromImage(plotFrattale);
                               sprite.setTexture(texture);
-                              MandelbrotWindow.draw(sprite);
-                              MandelbrotWindow.display();
-
-                              if (mandelbrotEvent.key.code == Keyboard::Enter)
+                              MandelWindow.draw(sprite);
+                              MandelWindow.display();
+                              
+                              if (mandelEvent.type == Event::KeyPressed)
                               {
-                                  const Vector2i mouse_pos = Mouse::getPosition(MandelbrotWindow);
-                                  mainFractal.setXfp(mouse_pos.x);
-                                  mainFractal.setYfp(mouse_pos.y);
-
-                                  if (mainFractal.getXfp() > mainFractal.getW() || mainFractal.getYfp() > mainFractal.getH() || mainFractal.getXfp() < 0 || mainFractal.getYfp() < 0)
+                                  if (mandelEvent.key.code == Keyboard::Enter)
                                   {
-                                      cout << "prendi un un punto appartenente alla window;";
+                                      const Vector2i mouse_pos = Mouse::getPosition(MandelWindow);
+                                      MandelFractal.setXfp(mouse_pos.x);
+                                      MandelFractal.setYfp(mouse_pos.y);
+
+                                      if (MandelFractal.getXfp() > MandelFractal.getW() || MandelFractal.getYfp() > MandelFractal.getH() || MandelFractal.getXfp() < 0 || MandelFractal.getYfp() < 0)
+                                      {
+                                          cout << "prendi un un punto appartenente alla window;";
+                                      }
+                                      
+                                      else
+                                      {
+                                          cout << "le coordinate del punto scelto sono: " << "x :" << MandelFractal.getXfp() << " y: " << MandelFractal.getYfp() << endl;
+                                          xNew = modifier.nuovaCoordinataX(MandelFractal.getXfp());
+                                          yNew = modifier.nuovaCoordinataY(MandelFractal.getYfp());
+
+                                          cout << " la nuova coordinata x e :" << xNew << endl;
+
+                                          cout << " la nuova coordinata y e :" << yNew << endl;
+
+                                          arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter);
+
+                                           XoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[0].x;
+                                           YoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[0].y;
+                                           nIteratioForElement = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[0].numeroIterazioni;
+                                           XoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[1].x;
+                                           YoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[1].y;
+                                           nIteratioForElement = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[1].numeroIterazioni;
+                                           XoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[2].x;
+                                           YoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[2].y;
+                                           nIteratioForElement = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[2].numeroIterazioni;
+                                           XoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[3].x;
+                                           YoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[3].y;
+                                           nIteratioForElement = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[3].numeroIterazioni;
+                                           XoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[4].x;
+                                           YoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[4].y;
+                                           nIteratioForElement = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[4].numeroIterazioni;
+
+                                          
+
+                                          //arrayOSC.calcoloMandelbrot(xNew, yNew, 5)[i].perc
+
+                                      }
                                   }
-                                  else
-                                  {
-                                      cout << "le coordinate del punto scelto sono: " << "x :" << mainFractal.getXfp() << " y: " << mainFractal.getYfp() << endl;
-                                      xNew = modifier.nuovaCoordinataX(mainFractal.getXfp());
-                                      yNew = modifier.nuovaCoordinataY(mainFractal.getYfp());
-
-                                      cout << " la nuova coordinata x e :" << xNew << endl;
-
-                                      cout << " la nuova coordinata y e :" << yNew << endl;
-
-                                      arrayOSC.calcoloMandelbrot(xNew, yNew, 5);
-                                      break;
-                                  }
-                                  
                               }
-                          
+                              
+                              else if (mandelEvent.type == Event::MouseWheelScrolled)
+                              {
+                                  int newIter = 0;
+                                  if (mandelEvent.MouseWheelScrolled)
+                                  {
+                                      if (mandelEvent.mouseWheelScroll.wheel == Mouse::VerticalWheel)
+                                      {
+                                          if (mandelEvent.mouseWheelScroll.delta > 0)
+                                          {
+                                              newIter = iter*2;
+                                              iter = newIter;
+                                              cout << "newIter +: "<< iter;
+                                          }
+                                          else
+                                          {
+                                              newIter = iter /2;
+                                              iter = newIter;
+                                              cout << "newIter -: "<< iter;
+                                          
+                                              if(iter < 1) iter = 1;
+                                          }
+                                      }
+                                  }
+                              }
+                          }
                       }
-
                   }
-                  else if (scelta == 1) {
-
+                      
+                   
+            
+                                     
+                  else if (scelta == 1)
+                  {
                       RenderWindow Julia1Window(VideoMode(600, 600), "Julia1");
+                      Fractal julia1Fractal;
+                      int bellaiterazione = 0;
+                      bellaiterazione = julia1Fractal.getMaxIter();
+                      
                       while (Julia1Window.isOpen())
                       {
                           Event julia1Event;
-                          while (Julia1Window
-                              .pollEvent(julia1Event)) {
+                          while (Julia1Window.pollEvent(julia1Event))
+                          {
                               if (julia1Event.type == Event::Closed)
                               {
                                   Julia1Window.close();
@@ -210,189 +240,409 @@ int main(int argc, char* argv[])
                                       Julia1Window.close();
                                   }
                               }
-                          }
-
-                          for (int y = 0; y < mainFractal.getH(); y++)
-                          {
-                              for (int x = 0; x < mainFractal.getW(); x++)
+                              
+                              for (int y = 0; y < mainFractal.getH(); y++)
                               {
-                                  double cr = mainFractal.getMinRe() + (static_cast<double>(mainFractal.getMaxRe()) - mainFractal.getMinRe()) * x / mainFractal.getW();
-                                  double ci = mainFractal.getMinIm() + (static_cast<double>(mainFractal.getMaxIm()) - mainFractal.getMinIm()) * y / mainFractal.getH();
-                                  int n = mainFractal.ricorsioniJuliaSet1(cr, ci, mainFractal.getMaxIter());
-                                  Color c = mainFractal.paint_fractal(n, mainFractal.getMaxIter());
-                                  plotFrattale.setPixel(x, y, Color(c));
+                                  for (int x = 0; x < mainFractal.getW(); x++)
+                                  {
+                                      double cr = julia1Fractal.getMinRe() + (static_cast<double>(julia1Fractal.getMaxRe()) - julia1Fractal.getMinRe()) * x / julia1Fractal.getW();
+                                      double ci = julia1Fractal.getMinIm() + (static_cast<double>(julia1Fractal.getMaxIm()) - julia1Fractal.getMinIm()) * y / julia1Fractal.getH();
+                                      int n = julia1Fractal.ricorsioniJuliaSet1(cr, ci, bellaiterazione);
+                                      Color c = julia1Fractal.paint_fractal(n, bellaiterazione);
+                                      plotFrattale.setPixel(x, y, Color(c));
+                                  }
                               }
-                          }
-                          texture.loadFromImage(plotFrattale);
-                          sprite.setTexture(texture);
-                          Julia1Window.draw(sprite);
-                          Julia1Window.display();
-                          if (julia1Event.key.code == Keyboard::Enter)
-                          {
-                              const Vector2i mouse_pos = Mouse::getPosition(Julia1Window);
-                              mainFractal.setXfp(mouse_pos.x);
-                              mainFractal.setYfp(mouse_pos.y);
-
-                              if (mainFractal.getXfp() > mainFractal.getW() || mainFractal.getYfp() > mainFractal.getH() || mainFractal.getXfp() < 0 || mainFractal.getYfp() < 0)
+                              texture.loadFromImage(plotFrattale);
+                              sprite.setTexture(texture);
+                              Julia1Window.draw(sprite);
+                              Julia1Window.display();
+                              
+                              if (julia1Event.type == Event::KeyPressed)
                               {
-                                  cout << "prendi un un punto appartenente alla window;";
+                                  if (julia1Event.key.code == Keyboard::Enter)
+                                  {
+                                      const Vector2i mouse_pos = Mouse::getPosition(Julia1Window);
+                                      julia1Fractal.setXfp(mouse_pos.x);
+                                      julia1Fractal.setYfp(mouse_pos.y);
+
+                                      if (julia1Fractal.getXfp() > julia1Fractal.getW() || julia1Fractal.getYfp() > julia1Fractal.getH() || julia1Fractal.getXfp() < 0 || julia1Fractal.getYfp() < 0)
+                                      {
+                                          cout << "prendi un un punto appartenente alla window;";
+                                      }
+                                      
+                                      else
+                                      {
+                                          cout << "le coordinate del punto scelto sono: " << "x :" << julia1Fractal.getXfp() << " y: " << julia1Fractal.getYfp() << endl;
+                                          xNew = modifier.nuovaCoordinataX(julia1Fractal.getXfp());
+                                          yNew = modifier.nuovaCoordinataY(julia1Fractal.getYfp());
+
+                                          cout << " la nuova coordinata x e :" << xNew << endl;
+
+                                          cout << " la nuova coordinata y e :" << yNew << endl;
+
+                                          arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione);
+
+                                          XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[0].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[0].y;
+                                          nIteratioForElement = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[0].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[1].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[1].y;
+                                          nIteratioForElement = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[1].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[2].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[2].y;
+                                          nIteratioForElement = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[2].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[3].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[3].y;
+                                          nIteratioForElement = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[3].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[4].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[4].y;
+                                          nIteratioForElement = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[4].numeroIterazioni;
+
+
+                                      }
+                                  }
                               }
-                              else
+                              
+                              else if (julia1Event.type == Event::MouseWheelScrolled)
                               {
-                                  cout << "le coordinate del punto scelto sono: " << "x :" << mainFractal.getXfp() << " y: " << mainFractal.getYfp() << endl;
-                                  xNew = modifier.nuovaCoordinataX(mainFractal.getXfp());
-                                  yNew = modifier.nuovaCoordinataY(mainFractal.getYfp());
-
-                                  cout << " la nuova coordinata x e :" << xNew << endl;
-
-                                  cout << " la nuova coordinata y e :" << yNew << endl;
-
-                                  arrayOSC.calcoloJuliaSet1(xNew, yNew, 5);
-                                  break;
-                              }
-
-                          }
-                      }
-                  }
-                  else if (scelta == 2)
-                  {
-
-                      RenderWindow Julia2Window(VideoMode(600, 600), "Julia2");
-                      while (Julia2Window.isOpen())
-                      {
-                          Event julia2Event;
-                          while (Julia2Window
-                              .pollEvent(julia2Event)) {
-                              if (julia2Event.type == Event::Closed) {
-                                  Julia2Window.close();
-                              }
-                              if (julia2Event.type == Event::KeyPressed) {
-                                  if (julia2Event.key.code == Keyboard::Escape) {
-                                      Julia2Window.close();
+                                  int newIter = 0;
+                                  if (julia1Event.MouseWheelScrolled)
+                                  {
+                                      if (julia1Event.mouseWheelScroll.wheel == Mouse::VerticalWheel)
+                                      {
+                                          if (julia1Event.mouseWheelScroll.delta > 0)
+                                          {
+                                              newIter = bellaiterazione*2;
+                                              bellaiterazione = newIter;
+                                              cout << "newIter +: "<< bellaiterazione;
+                                          }
+                                          else
+                                          {
+                                              newIter = bellaiterazione /2;
+                                              bellaiterazione = newIter;
+                                              cout << "newIter -: "<< bellaiterazione;
+                                          
+                                              if(bellaiterazione < 1) bellaiterazione = 1;
+                                          }
+                                      }
                                   }
                               }
                           }
-
-                          for (int y = 0; y < mainFractal.getH(); y++)
+                      }
+                  }
+                
+                  else if (scelta == 2)
+                  {
+                      RenderWindow Julia2Window(VideoMode(600, 600), "Julia2");
+                      Fractal julia2Fractal;
+                      int bellaiterazione = 0;
+                      bellaiterazione = julia2Fractal.getMaxIter();
+                      
+                      while (Julia2Window.isOpen())
+                      {
+                          Event julia2Event;
+                          while (Julia2Window.pollEvent(julia2Event))
                           {
-                              for (int x = 0; x < mainFractal.getW(); x++)
+                              if (julia2Event.type == Event::Closed)
                               {
-                                  double cr = mainFractal.getMinRe() + (static_cast<double>(mainFractal.getMaxRe()) - mainFractal.getMinRe()) * x / mainFractal.getW();
-                                  double ci = mainFractal.getMinIm() + (static_cast<double>(mainFractal.getMaxIm()) - mainFractal.getMinIm()) * y / mainFractal.getH();
-                                  int n = mainFractal.ricorsioniJuliaSet2(cr, ci, mainFractal.getMaxIter());
-                                  Color c = mainFractal.paint_fractal(n, mainFractal.getMaxIter());
-                                  plotFrattale.setPixel(x, y, Color(c));
+                                  Julia2Window.close();
                               }
-                          }
-                          texture.loadFromImage(plotFrattale);
-                          sprite.setTexture(texture);
-                          Julia2Window.draw(sprite);
-                          Julia2Window.display();
-
-                          if (julia2Event.key.code == Keyboard::Enter)
-                          {
-                              const Vector2i mouse_pos = Mouse::getPosition(Julia2Window);
-                              mainFractal.setXfp(mouse_pos.x);
-                              mainFractal.setYfp(mouse_pos.y);
-
-                              if (mainFractal.getXfp() > mainFractal.getW() || mainFractal.getYfp() > mainFractal.getH() || mainFractal.getXfp() < 0 || mainFractal.getYfp() < 0)
+                              if (julia2Event.type == Event::KeyPressed)
                               {
-                                  cout << "prendi un un punto appartenente alla window;";
-                              }
-                              else
-                              {
-                                  cout << "le coordinate del punto scelto sono: " << "x :" << mainFractal.getXfp() << " y: " << mainFractal.getYfp() << endl;
-                                  xNew = modifier.nuovaCoordinataX(mainFractal.getXfp());
-                                  yNew = modifier.nuovaCoordinataY(mainFractal.getYfp());
-
-                                  cout << " la nuova coordinata x e :" << xNew << endl;
-
-                                  cout << " la nuova coordinata y e :" << yNew << endl;
-
-                                  arrayOSC.calcoloJuliaSet2(xNew, yNew, 5);
-                                  break;
+                                  if (julia2Event.key.code == Keyboard::Escape)
+                                  {
+                                      Julia2Window.close();
+                                  }
                               }
                               
+                              for (int y = 0; y < mainFractal.getH(); y++)
+                              {
+                                  for (int x = 0; x < mainFractal.getW(); x++)
+                                  {
+                                      double cr = julia2Fractal.getMinRe() + (static_cast<double>(julia2Fractal.getMaxRe()) - julia2Fractal.getMinRe()) * x / julia2Fractal.getW();
+                                      double ci = julia2Fractal.getMinIm() + (static_cast<double>(julia2Fractal.getMaxIm()) - julia2Fractal.getMinIm()) * y / julia2Fractal.getH();
+                                      int n = julia2Fractal.ricorsioniJuliaSet2(cr, ci, bellaiterazione);
+                                      Color c = julia2Fractal.paint_fractal(n, bellaiterazione);
+                                      plotFrattale.setPixel(x, y, Color(c));
+                                  }
+                              }
+                              texture.loadFromImage(plotFrattale);
+                              sprite.setTexture(texture);
+                              Julia2Window.draw(sprite);
+                              Julia2Window.display();
+                              
+                              if (julia2Event.type == Event::KeyPressed)
+                              {
+                                  if (julia2Event.key.code == Keyboard::Enter)
+                                  {
+                                      const Vector2i mouse_pos = Mouse::getPosition(Julia2Window);
+                                      julia2Fractal.setXfp(mouse_pos.x);
+                                      julia2Fractal.setYfp(mouse_pos.y);
+
+                                      if (julia2Fractal.getXfp() > julia2Fractal.getW() || julia2Fractal.getYfp() > julia2Fractal.getH() || julia2Fractal.getXfp() < 0 || julia2Fractal.getYfp() < 0)
+                                      {
+                                          cout << "prendi un un punto appartenente alla window;";
+                                      }
+                                      
+                                      else
+                                      {
+                                          cout << "le coordinate del punto scelto sono: " << "x :" << julia2Fractal.getXfp() << " y: " << julia2Fractal.getYfp() << endl;
+                                          xNew = modifier.nuovaCoordinataX(julia2Fractal.getXfp());
+                                          yNew = modifier.nuovaCoordinataY(julia2Fractal.getYfp());
+
+                                          cout << " la nuova coordinata x e :" << xNew << endl;
+
+                                          cout << " la nuova coordinata y e :" << yNew << endl;
+
+                                          arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione);
+
+                                          XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[0].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[0].y;
+                                          nIteratioForElement = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[0].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[1].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[1].y;
+                                          nIteratioForElement = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[1].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[2].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[2].y;
+                                          nIteratioForElement = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[2].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[3].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[3].y;
+                                          nIteratioForElement = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[3].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[4].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[4].y;
+                                          nIteratioForElement = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[4].numeroIterazioni;
+
+                                         
+                                      }
+                                  }
+                              }
+                              
+                              else if (julia2Event.type == Event::MouseWheelScrolled)
+                              {
+                                  int newIter = 0;
+                                  if (julia2Event.MouseWheelScrolled)
+                                  {
+                                      if (julia2Event.mouseWheelScroll.wheel == Mouse::VerticalWheel)
+                                      {
+                                          if (julia2Event.mouseWheelScroll.delta > 0)
+                                          {
+                                              newIter = bellaiterazione*2;
+                                              bellaiterazione = newIter;
+                                              cout << "newIter +: "<< bellaiterazione;
+                                          }
+                                          else
+                                          {
+                                              newIter = bellaiterazione /2;
+                                              bellaiterazione = newIter;
+                                              cout << "newIter -: "<< bellaiterazione;
+                                          
+                                              if(bellaiterazione < 1) bellaiterazione = 1;
+                                          }
+                                      }
+                                  }
+                              }
                           }
                       }
-
-                  } else 
-                    {
-
-                        RenderWindow BurningShipWindow(VideoMode(600, 600), "Burning ship");
-                        while (BurningShipWindow.isOpen())
-                        {
-                            Event burningEvent;
-                            while (BurningShipWindow
-                                .pollEvent(burningEvent))
-                            {
-                                if (burningEvent.type == Event::Closed)
-                                {
-                                    BurningShipWindow.close();
-                                }
-                                if (burningEvent.type == Event::KeyPressed)
-                                {
-                                    if (burningEvent.key.code == Keyboard::Escape)
-                                    {
-                                        BurningShipWindow.close();
-                                    }
-                                }
-                            }
-
-
-                            for (int y = 0; y < mainFractal.getH(); y++)
-                            {
-                                for (int x = 0; x < mainFractal.getW(); x++)
-                                {
-                                    double cr = mainFractal.getMinRe() + (static_cast<double>(mainFractal.getMaxRe()) - mainFractal.getMinRe()) * x / mainFractal.getW();
-                                    double ci = mainFractal.getMinIm() + (static_cast<double>(mainFractal.getMaxIm()) - mainFractal.getMinIm()) * y / mainFractal.getH();
-                                    int n = mainFractal.ricorsioniBurning_ship(cr, ci, mainFractal.getMaxIter());
-                                    Color c = mainFractal.paint_fractal(n, mainFractal.getMaxIter());
-                                    plotFrattale.setPixel(x, y, Color(c));
-                                }
-                            }
-                            texture.loadFromImage(plotFrattale);
-                            sprite.setTexture(texture);
-                            BurningShipWindow.draw(sprite);
-                            BurningShipWindow.display();
-
-                            if (burningEvent.key.code == Keyboard::Enter)
-                            {
-                                const Vector2i mouse_pos = Mouse::getPosition(BurningShipWindow);
-                                mainFractal.setXfp(mouse_pos.x);
-                                mainFractal.setYfp(mouse_pos.y);
-
-                                if (mainFractal.getXfp() > mainFractal.getW() || mainFractal.getYfp() > mainFractal.getH() || mainFractal.getXfp() < 0 || mainFractal.getYfp() < 0)
-                                {
-                                    cout << "prendi un un punto appartenente alla window;";
-                                }
-                                else
-                                {
-                                    cout << "le coordinate del punto scelto sono: " << "x :" << mainFractal.getXfp() << " y: " << mainFractal.getYfp() << endl;
-                                    xNew = modifier.nuovaCoordinataX(mainFractal.getXfp());
-                                    yNew = modifier.nuovaCoordinataY(mainFractal.getYfp());
-                                    
-                                    cout << " la nuova coordinata x e :" << xNew << endl;
-                                    
-                                    cout << " la nuova coordinata y e :" << yNew << endl;
-
-                                    arrayOSC.calcoloBurninhShip(xNew, yNew, 5);
-                                     break;
-                                }
-                               
-                            }
-                           
-
-                        }
-                    
-                   
                   }
+                      
                     
+                  else if (scelta == 3)
+                  {
+                      RenderWindow BurningShipWindow(VideoMode(600, 600), "Burning ship");
+                      Fractal burningFractal;
+                      int bellaiterazione = 0;
+                      bellaiterazione = burningFractal.getMaxIter();
+                      
+                      while (BurningShipWindow.isOpen())
+                      {
+                          Event burningEvent;
+                          while (BurningShipWindow.pollEvent(burningEvent))
+                          {
+                              if (burningEvent.type == Event::Closed)
+                              {
+                                  BurningShipWindow.close();
+                              }
+                              if (burningEvent.type == Event::KeyPressed)
+                              {
+                                  if (burningEvent.key.code == Keyboard::Escape)
+                                  {
+                                      BurningShipWindow.close();
+                                  }
+                              }
 
+                              for (int y = 0; y < mainFractal.getH(); y++)
+                              {
+                                  for (int x = 0; x < mainFractal.getW(); x++)
+                                  {
+                                      double cr = burningFractal.getMinRe() + (static_cast<double>(burningFractal.getMaxRe()) - burningFractal.getMinRe()) * x / burningFractal.getW();
+                                      double ci = burningFractal.getMinIm() + (static_cast<double>(burningFractal.getMaxIm()) - burningFractal.getMinIm()) * y / burningFractal.getH();
+                                      int n = burningFractal.ricorsioniBurning_ship(cr, ci, bellaiterazione);
+                                      Color c = burningFractal.paint_fractal(n, bellaiterazione);
+                                      plotFrattale.setPixel(x, y, Color(c));
+                                  }
+                              }
+                              texture.loadFromImage(plotFrattale);
+                              sprite.setTexture(texture);
+                              BurningShipWindow.draw(sprite);
+                              BurningShipWindow.display();
+                            
+                              if (burningEvent.type == Event::KeyPressed)
+                              {
+                                  if (burningEvent.key.code == Keyboard::Enter)
+                                  {
+                                      const Vector2i mouse_pos = Mouse::getPosition(BurningShipWindow);
+                                      burningFractal.setXfp(mouse_pos.x);
+                                      burningFractal.setYfp(mouse_pos.y);
+
+                                      if (burningFractal.getXfp() > burningFractal.getW() || burningFractal.getYfp() > burningFractal.getH() || burningFractal.getXfp() < 0 || burningFractal.getYfp() < 0)
+                                      {
+                                          cout << "prendi un un punto appartenente alla window;";
+                                      }
+                                      
+                                      else
+                                      {
+                                          cout << "le coordinate del punto scelto sono: " << "x :" << burningFractal.getXfp() << " y: " << burningFractal.getYfp() << endl;
+                                          xNew = modifier.nuovaCoordinataX(burningFractal.getXfp());
+                                          yNew = modifier.nuovaCoordinataY(burningFractal.getYfp());
+
+                                          cout << " la nuova coordinata x e :" << xNew << endl;
+
+                                          cout << " la nuova coordinata y e :" << yNew << endl;
+
+                                          arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione);
+
+
+                                          XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[0].x;
+                                          YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[0].y;
+                                          nIteratioForElement = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[0].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[1].x;
+                                          YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[1].y;
+                                          nIteratioForElement = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[1].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[2].x;
+                                          YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[2].y;
+                                          nIteratioForElement = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[2].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[3].x;
+                                          YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[3].y;
+                                          nIteratioForElement = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[3].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[4].x;
+                                          YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[4].y;
+                                          nIteratioForElement = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[4].numeroIterazioni;
+                                      }
+                                  }
+                                  //move image with keyboard arrows
+
+                                  if (burningEvent.key.code == Keyboard::Left)
+                                  {
+                                      double tempXMin = 0;
+                                      double tempXMax = 0;
+                                      cout << " sposoto l immagine a sinistra";
+                                      tempXMin = (burningFractal.getMinRe() - modifier.get_w());
+                                      tempXMax = (burningFractal.getMaxRe() - modifier.get_w());
+                                      burningFractal.setMinRe(tempXMin);
+                                      burningFractal.setMaxRe(tempXMax);
+
+                                      //min_re -= w, max_re -= w;
+                                      
+                                      burningFractal.setXfp(xNew - modifier.get_w());
+                                      //xPoint -= w;
+                                      cout << " coeff traslazione: " << modifier.get_w() << " la coordinata traslata e: " << xNew << endl;
+
+                                  }
+                                  /* if (burningEvent.key.code == Keyboard::Right)
+                                  {
+                                      min_re += w, max_re += w;
+                                      xPoint += w;
+                                      cout << " coeff traslazione: " << w << " la coordinata traslata e: " << xPoint << endl;
+                                  }
+                                  if (burningEvent.key.code == Keyboard::Up)
+                                  {
+                                      min_im -= h, max_im -= h;
+                                      yPoint -= h;
+                                      cout << " coeff traslazione: " << h << " la coordinata traslata e: " << yPoint << endl;
+                                  }
+                                  if (burningEvent.key.code == Keyboard::Down)
+                                  {
+                                      min_im += h, max_im += h;
+                                      yPoint += h;
+                                      cout << " coeff traslazione: " << h << " la coordinata traslata e: " << yPoint << endl;
+                                  }*/
+                              }
+                          
+                             else if (burningEvent.type == Event::MouseButtonPressed)
+                              {
+                                  auto zoom_x = [&](double z)
+                                  {
+                                      //mouse point will be new center point
+                                      double cr = (burningFractal.getMinRe() + (static_cast<double>(burningFractal.getMaxRe()) - burningFractal.getMinRe()) * burningEvent.mouseButton.x / burningFractal.getW());
+                                      double ci = (burningFractal.getMinIm() + (static_cast<double>(burningFractal.getMaxIm()) - burningFractal.getMinIm()) * burningEvent.mouseButton.y / burningFractal.getH());
+                                      
+                                      cout << " cr: " << cr;
+                                      cout << " ci: " << ci;
+                                 
+                                      //zoom
+                                      double tminr = cr - (static_cast<double>(burningFractal.getMaxRe()) - burningFractal.getMinRe()) / 2 / z;
+                                      burningFractal.setMaxRe(cr + (static_cast<double>(burningFractal.getMaxRe()) - burningFractal.getMinRe()) / 2 / z);
+                                      burningFractal.setMinRe(tminr);
+                                      double tmini = ci - (static_cast<double>(burningFractal.getMaxIm()) - burningFractal.getMinIm()) / 2 / z;
+                                      burningFractal.setMaxIm(ci + (static_cast<double>(burningFractal.getMaxIm()) - burningFractal.getMinIm()) / 2 / z);
+                                      burningFractal.setMinIm(tmini);
+
+                                  };
+                                  if (burningEvent.mouseButton.button == Mouse::Left)
+                                  {
+                                      cout << "click mouse sisnito";
+                                      zoom_x(2);
+                                      zoom *= 2;
+                                      modifier.set_w((burningFractal.getMaxRe() - burningFractal.getMinRe()) * step / burningFractal.getW());
+                                      modifier.set_h((burningFractal.getMaxIm() - burningFractal.getMinIm()) * step / burningFractal.getH());
+                                  }
+                                  if (burningEvent.mouseButton.button == Mouse::Right)
+                                  {
+                                      cout << "click mouse destro";
+                                      zoom_x(1.0 / 2);
+                                      zoom /= 2;
+                                      modifier.set_w((burningFractal.getMaxRe() - burningFractal.getMinRe()) * step / burningFractal.getW());
+                                      modifier.set_h((burningFractal.getMaxIm() - burningFractal.getMinIm()) * step / burningFractal.getH());
+                                  }
+                              }
+                              
+                              else if (burningEvent.type == Event::MouseWheelScrolled)
+                              {
+                                  int newIter = 0;
+                                  if (burningEvent.MouseWheelScrolled)
+                                  {
+                                      if (burningEvent.mouseWheelScroll.wheel == Mouse::VerticalWheel)
+                                      {
+                                          if (burningEvent.mouseWheelScroll.delta > 0)
+                                          {
+                                              newIter = bellaiterazione*2;
+                                              bellaiterazione = newIter;
+                                              cout << "newIter +: "<< bellaiterazione;
+                                          }
+                                          else
+                                          {
+                                              newIter = bellaiterazione /2;
+                                              bellaiterazione = newIter;
+                                              cout << "newIter -: "<< bellaiterazione;
+                                          
+                                              if(bellaiterazione < 1) bellaiterazione = 1;
+                                          }
+                                      }
+                                  }
+                              }
+                              
+                                 
+
+                              
+
+                             
+                          }
+                      }
+                  }
                 }
             }
-            
         }
+        
         menu.clear();
         menu.draw(background);
         mainMenu.draw(menu);
