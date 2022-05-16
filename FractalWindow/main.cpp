@@ -36,6 +36,7 @@ int main(int argc, char* argv[])
     //    << osc::BeginMessage("/test2")
     //    <<"world" << osc::EndMessage
     //    << osc::EndBundle;
+
     p.Clear();
     p << osc::BeginBundle(1234)
         << osc::BeginBundle(12345)

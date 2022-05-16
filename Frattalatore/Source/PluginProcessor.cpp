@@ -310,7 +310,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout FrattalatoreAudioProcessor::
     params.push_back(std::make_unique<juce::AudioParameterFloat>("FILTERCUTOFF", "Filter CutOff", juce::NormalisableRange<float>
     {20.0f, 20000.0f, 0.1f, 0.6f}, 20000.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("FILTERRESONANCE", "Filter Resonance", juce::NormalisableRange<float>
-    {1.0f, 2.0f, 0.1f}, 0.1f));
+    {0.1f, 1.0f, 0.1f}, 0.1f));
 
     //ADSR
     params.push_back(std::make_unique<juce::AudioParameterFloat>("ATTACK", "Attack", juce::NormalisableRange<float>
@@ -399,31 +399,27 @@ void FrattalatoreAudioProcessor::setVoiceParams()
     }
 }
 
-//void FrattalatoreAudioProcessor::setFMOscParams(float oscFMFreq, float oscFMDepth, int oscillatorIdx)
-//{
-//    for (int i = 0; i < synth.getNumVoices(); ++i)
-//    {
-//        //check the correct casting for each voice
-//        if (auto voice = dynamic_cast<SynthVoice*> (synth.getVoice(i)))
-//        {
-//            auto& oscillator1 = voice->getOscillator1();
-//            auto& oscillator2 = voice->getOscillator2();
-//            auto& oscillator3 = voice->getOscillator3();
-//            auto& oscillator4 = voice->getOscillator4();
-//            auto& oscillator5 = voice->getOscillator5();
-//
-//            for (int j = 0; j < getTotalNumOutputChannels(); j++)
-//            {
-//                oscillator1[j].updateFm(oscFMFreq, oscFMDepth);
-//                oscillator2[j].setParams(osc2WaveChoice, osc2Gain.load(), osc2Pitch, fm2Freq.load(), fm2Depth.load());
-//                oscillator3[j].setParams(osc3WaveChoice, osc3Gain.load(), osc3Pitch, fm3Freq.load(), fm3Depth.load());
-//                oscillator4[j].setParams(osc4WaveChoice, osc4Gain.load(), osc4Pitch, fm4Freq.load(), fm4Depth.load());
-//                oscillator5[j].setParams(osc5WaveChoice, osc5Gain.load(), osc5Pitch, fm5Freq.load(), fm5Depth.load());
-//            }           
-//        }
-//    }
-//
-//}
+void FrattalatoreAudioProcessor::setFMOscParams(float oscFMFreq, float oscFMDepth, int oscillatorIdx)
+{
+    for (int i = 0; i < synth.getNumVoices(); ++i)
+    {
+        //check the correct casting for each voice
+        if (auto voice = dynamic_cast<SynthVoice*> (synth.getVoice(i)))
+        {
+            auto& oscillator1 = voice->getOscillator1();
+            auto& oscillator2 = voice->getOscillator2();
+            auto& oscillator3 = voice->getOscillator3();
+            auto& oscillator4 = voice->getOscillator4();
+            auto& oscillator5 = voice->getOscillator5();
+
+            for (int j = 0; j < getTotalNumOutputChannels(); j++)
+            {
+                voice->getOscillator(oscillatorIdx)[j].updateFm(oscFMFreq, oscFMDepth);
+            }           
+        }
+    }
+
+}
 
 void FrattalatoreAudioProcessor::setFilterParams()
 {

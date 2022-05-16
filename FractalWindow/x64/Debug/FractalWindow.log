@@ -1,10 +1,10 @@
 ﻿  main.cpp
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(74,55): warning C4244: 'argomento': conversione da 'T' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(75,55): warning C4244: 'argomento': conversione da 'T' a 'float'. Possibile perdita di dati.
           with
           [
               T=unsigned int
           ]
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(74,37): warning C4244: 'argomento': conversione da 'T' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(75,37): warning C4244: 'argomento': conversione da 'T' a 'float'. Possibile perdita di dati.
           with
           [
               T=unsigned int
