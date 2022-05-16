@@ -389,9 +389,9 @@ void FrattalatoreAudioProcessor::setVoiceParams()
             {
                 voice->getOscillator1()[j].setParams(osc1WaveChoice, osc1Gain.load(), osc1Pitch, fm1Freq.load(), fm1Depth.load());
                 voice->getOscillator2()[j].setParams(osc2WaveChoice, osc2Gain.load(), osc2Pitch, fm2Freq.load(), fm2Depth.load());
-                voice->getOscillator3()[j].setParams(osc3WaveChoice, osc2Gain.load(), osc3Pitch, fm3Freq.load(), fm3Depth.load());
-                voice->getOscillator4()[j].setParams(osc4WaveChoice, osc3Gain.load(), osc4Pitch, fm4Freq.load(), fm4Depth.load());
-                voice->getOscillator5()[j].setParams(osc5WaveChoice, osc4Gain.load(), osc5Pitch, fm5Freq.load(), fm5Depth.load());
+                voice->getOscillator3()[j].setParams(osc3WaveChoice, osc3Gain.load(), osc3Pitch, fm3Freq.load(), fm3Depth.load());
+                voice->getOscillator4()[j].setParams(osc4WaveChoice, osc4Gain.load(), osc4Pitch, fm4Freq.load(), fm4Depth.load());
+                voice->getOscillator5()[j].setParams(osc5WaveChoice, osc5Gain.load(), osc5Pitch, fm5Freq.load(), fm5Depth.load());
             }
             auto& adsr = voice->getAdsr();
             adsr.updateADSR(attack.load(), decay.load(), sustain.load(), release.load()); //the pointer is for a AtomicFloat -> convert it into float iot save 
