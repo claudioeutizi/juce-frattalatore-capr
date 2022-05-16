@@ -12,7 +12,7 @@
 #define PORT 7000
 
 #define OUTPUT_BUFFER_SIZE 1024
-//using namespace sf;
+using namespace sf;
 
 
 //static variables
@@ -32,9 +32,9 @@ int main(int argc, char* argv[])
 
     p << osc::BeginBundle()
         << osc::BeginMessage("/test1")
-        << true << 23 << (float)3.1415 << "hello" << osc::EndMessage
+        << "hello" << osc::EndMessage
         << osc::BeginMessage("/test2")
-        << true << 24 << (float)10.8 << "world" << osc::EndMessage
+        <<"world" << osc::EndMessage
         << osc::EndBundle;
 
     transmitSocket.Send(p.Data(), p.Size());

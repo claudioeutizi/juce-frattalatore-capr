@@ -107,13 +107,22 @@ void FrattalatoreAudioProcessor::changeProgramName (int index, const juce::Strin
 //////////////////////////////////////OSC////////////////////////////////////////
 void FrattalatoreAudioProcessor::oscMessageReceived(const juce::OSCMessage& message)
 {
-    if (!connect(7000))                       
-        showConnectionErrorMessage("Error: could not connect to UDP port 7000.");
-    if (!message.isEmpty()) DBG(message.size());
+    DBG(message[0].getString());
 }
 void FrattalatoreAudioProcessor::oscBundleReceived(const juce::OSCBundle& bundle)
 {
-    if (!bundle.isEmpty()) DBG(bundle.size());
+    if (!connect(7000)) showConnectionErrorMessage("Error: could not connect to UDP port 7000.");
+    if (!bundle.isEmpty())
+    {
+        for (int i = 0; i < bundle.size(); ++i)
+        {
+            auto elem = bundle[i];
+            if (elem.isMessage())
+                oscMessageReceived(elem.getMessage());
+            else if (elem.isBundle())
+                oscBundleReceived(elem.getBundle());
+        }
+    }
 }
 
 void FrattalatoreAudioProcessor::showConnectionErrorMessage(const juce::String& messageText)
