@@ -28,6 +28,8 @@ FrattalatoreAudioProcessor::FrattalatoreAudioProcessor()
     apvts(*this, nullptr, "Parameters", createParams())
 #endif
 {
+    juce::OSCReceiver::addListener(this);
+    connect(PORT);
     //polyphonic synthesiser
     synth.addSound(new SynthSound());
     for (int v = 0; v < numVoices; v++) 
@@ -101,13 +103,29 @@ const juce::String FrattalatoreAudioProcessor::getProgramName (int index)
 void FrattalatoreAudioProcessor::changeProgramName (int index, const juce::String& newName)
 {
 }
-//////////////////////////////////////OSC////////////////////////////////////////
 
+//////////////////////////////////////OSC////////////////////////////////////////
+void FrattalatoreAudioProcessor::oscMessageReceived(const juce::OSCMessage& message)
+{
+    if (!connect(7000))                       
+        showConnectionErrorMessage("Error: could not connect to UDP port 7000.");
+    if (!message.isEmpty()) DBG(message.size());
+}
+void FrattalatoreAudioProcessor::oscBundleReceived(const juce::OSCBundle& bundle)
+{
+    if (!bundle.isEmpty()) DBG(bundle.size());
+}
+
+void FrattalatoreAudioProcessor::showConnectionErrorMessage(const juce::String& messageText)
+{
+    juce::AlertWindow::showMessageBoxAsync(juce::AlertWindow::WarningIcon,
+        "Connection error",
+        messageText,
+        "OK");
+}
 //==============================================================================
 void FrattalatoreAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    UdpListeningReceiveSocket s(IpEndpointName(IpEndpointName(ADDRESS, PORT)), &listener);
-    s.RunUntilSigInt();
     synth.setCurrentPlaybackSampleRate(sampleRate);
     for (int i = 0; i < synth.getNumVoices(); i++)
     {

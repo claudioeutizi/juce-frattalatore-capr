@@ -3,15 +3,16 @@
 #include "Fractal.h"
 #include "threeValuesArray.h"
 #include "changeParameters.h"
-#include "osc/osc/OscOutboundPacketStream.h"
-#include "osc/ip/UdpSocket.h"
+#include "osc/OscOutboundPacketStream.h"
+#include "ip/UdpSocket.h"
+
 
 
 #define ADDRESS "127.0.0.1"
 #define PORT 7000
 
-#define OUTPUT_BUFFER_SIZE 2048
-using namespace sf;
+#define OUTPUT_BUFFER_SIZE 1024
+//using namespace sf;
 
 
 //static variables
@@ -24,13 +25,12 @@ int main(int argc, char* argv[])
 {
     (void)argc; // suppress unused parameter warnings
     (void)argv; // suppress unused parameter warnings
-
     UdpTransmitSocket transmitSocket(IpEndpointName(ADDRESS, PORT));
 
     char buffer[OUTPUT_BUFFER_SIZE];
     osc::OutboundPacketStream p(buffer, OUTPUT_BUFFER_SIZE);
 
-    p << osc::BeginBundleImmediate
+    p << osc::BeginBundle()
         << osc::BeginMessage("/test1")
         << true << 23 << (float)3.1415 << "hello" << osc::EndMessage
         << osc::BeginMessage("/test2")
@@ -39,11 +39,10 @@ int main(int argc, char* argv[])
 
     transmitSocket.Send(p.Data(), p.Size());
 
-
     // Create the main window
     RenderWindow menu(VideoMode(800, 800), "Main Menu", Style::Default);
     MainMenu mainMenu(menu.getSize().x, menu.getSize().y);
-    Image plotFrattale;
+    sf::Image plotFrattale;
     Fractal mainFractal;
     double xNew;
     double yNew;
@@ -369,5 +368,4 @@ int main(int argc, char* argv[])
         menu.display();
     }
     return 0;
-
 }

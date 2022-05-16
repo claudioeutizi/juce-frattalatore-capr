@@ -14,16 +14,16 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="File di intestazione\OSC">
-      <UniqueIdentifier>{11f7627c-0043-415b-9e77-8ef10042ce36}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="File di origine\OSC">
-      <UniqueIdentifier>{08a7fb13-34cf-471a-bae9-60aaf7c5debe}</UniqueIdentifier>
+      <UniqueIdentifier>{8f3c4d09-29d9-4abf-92ec-036c3e9369fb}</UniqueIdentifier>
     </Filter>
     <Filter Include="File di intestazione\OSC\IP">
-      <UniqueIdentifier>{37514e3a-e2d3-4917-ae31-75dc3fa09ef4}</UniqueIdentifier>
+      <UniqueIdentifier>{b1cfceb1-0322-4330-a2b0-7c1d387d6948}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="File di origine\OSC">
+      <UniqueIdentifier>{1b6f3b47-6d17-40eb-af16-85a6fbae0992}</UniqueIdentifier>
     </Filter>
     <Filter Include="File di origine\OSC\IP">
-      <UniqueIdentifier>{4186d053-56ac-432c-ba77-6af759008ece}</UniqueIdentifier>
+      <UniqueIdentifier>{1bd82842-50f9-40bf-8be3-239558f3b54b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -77,18 +77,6 @@
     <ClInclude Include="MainMenu.hpp">
       <Filter>File di intestazione</Filter>
     </ClInclude>
-    <ClInclude Include="osc\ip\IpEndpointName.h">
-      <Filter>File di intestazione\OSC\IP</Filter>
-    </ClInclude>
-    <ClInclude Include="osc\ip\NetworkingUtils.h">
-      <Filter>File di intestazione\OSC\IP</Filter>
-    </ClInclude>
-    <ClInclude Include="osc\ip\PacketListener.h">
-      <Filter>File di intestazione\OSC\IP</Filter>
-    </ClInclude>
-    <ClInclude Include="osc\ip\TimerListener.h">
-      <Filter>File di intestazione\OSC\IP</Filter>
-    </ClInclude>
     <ClInclude Include="osc\osc\MessageMappingOscPacketListener.h">
       <Filter>File di intestazione\OSC</Filter>
     </ClInclude>
@@ -113,11 +101,17 @@
     <ClInclude Include="osc\osc\OscTypes.h">
       <Filter>File di intestazione\OSC</Filter>
     </ClInclude>
-    <ClInclude Include="ExamplePacketListener.h">
-      <Filter>File di intestazione\OSC</Filter>
+    <ClInclude Include="osc\ip\IpEndpointName.h">
+      <Filter>File di intestazione\OSC\IP</Filter>
     </ClInclude>
-    <ClInclude Include="osc\ip\UdpSocket.h">
-      <Filter>File di intestazione\OSC</Filter>
+    <ClInclude Include="osc\ip\NetworkingUtils.h">
+      <Filter>File di intestazione\OSC\IP</Filter>
+    </ClInclude>
+    <ClInclude Include="osc\ip\PacketListener.h">
+      <Filter>File di intestazione\OSC\IP</Filter>
+    </ClInclude>
+    <ClInclude Include="osc\ip\TimerListener.h">
+      <Filter>File di intestazione\OSC\IP</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -493,12 +493,6 @@
     <Filter Include="JUCE Library Code">
       <UniqueIdentifier>{7ED5A90E-41AF-A1EF-659B-37CEEAB9BA61}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Frattalatore\Source\OSC">
-      <UniqueIdentifier>{57134e7a-4c86-406a-9526-13e9b21fd817}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Frattalatore\Source\OSC\IP">
-      <UniqueIdentifier>{eef7cac8-97a2-4dbb-82c0-b92630f021a7}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Data\AdsrData.cpp">
@@ -2690,30 +2684,6 @@
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_osc.cpp">
       <Filter>JUCE Library Code</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\PluginPacketListener.cpp">
-      <Filter>Frattalatore\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\osc\osc\OscOutboundPacketStream.cpp">
-      <Filter>Frattalatore\Source\OSC</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\osc\osc\OscPrintReceivedElements.cpp">
-      <Filter>Frattalatore\Source\OSC</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\osc\osc\OscReceivedElements.cpp">
-      <Filter>Frattalatore\Source\OSC</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\osc\osc\OscTypes.cpp">
-      <Filter>Frattalatore\Source\OSC</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\osc\ip\IpEndpointName.cpp">
-      <Filter>Frattalatore\Source\OSC\IP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\osc\ip\win32\NetworkingUtils.cpp">
-      <Filter>Frattalatore\Source\OSC\IP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\osc\ip\win32\UdpSocket.cpp">
-      <Filter>Frattalatore\Source\OSC\IP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -5368,51 +5338,6 @@
     </ClInclude>
     <ClInclude Include="..\..\JuceLibraryCode\JucePluginDefines.h">
       <Filter>JUCE Library Code</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\PluginPacketListener.h">
-      <Filter>Frattalatore\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\osc\osc\ExamplePacketListener.h">
-      <Filter>Frattalatore\Source\OSC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\osc\osc\MessageMappingOscPacketListener.h">
-      <Filter>Frattalatore\Source\OSC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\osc\osc\OscException.h">
-      <Filter>Frattalatore\Source\OSC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\osc\osc\OscHostEndianness.h">
-      <Filter>Frattalatore\Source\OSC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\osc\osc\OscOutboundPacketStream.h">
-      <Filter>Frattalatore\Source\OSC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\osc\osc\OscPacketListener.h">
-      <Filter>Frattalatore\Source\OSC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\osc\osc\OscPrintReceivedElements.h">
-      <Filter>Frattalatore\Source\OSC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\osc\osc\OscReceivedElements.h">
-      <Filter>Frattalatore\Source\OSC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\osc\osc\OscTypes.h">
-      <Filter>Frattalatore\Source\OSC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\osc\ip\IpEndpointName.h">
-      <Filter>Frattalatore\Source\OSC\IP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\osc\ip\NetworkingUtils.h">
-      <Filter>Frattalatore\Source\OSC\IP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\osc\ip\PacketListener.h">
-      <Filter>Frattalatore\Source\OSC\IP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\osc\ip\TimerListener.h">
-      <Filter>Frattalatore\Source\OSC\IP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\osc\ip\UdpSocket.h">
-      <Filter>Frattalatore\Source\OSC\IP</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
