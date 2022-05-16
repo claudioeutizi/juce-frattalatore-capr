@@ -23,8 +23,8 @@ std::vector<threeValuesArray::threeValues> threeValuesArray::calcoloMandelbrot(d
 
         //calcolo numero di ricorsioni per elemento
         double parteRealeZ1 = 0, parteImmaginariaZ1 = 0;
-        int cr1 = parteRealeZ;
-        int ci1 = parteImmaginariaZ;
+        double cr1 = parteRealeZ;
+        double ci1 = parteImmaginariaZ;
         int numeroRicorsioniperelemento = 0;
         while (numeroRicorsioniperelemento < fractal.getMaxIter() && parteRealeZ1 * parteRealeZ1 + parteImmaginariaZ1 * parteImmaginariaZ1 < 4.0)
         {
@@ -56,8 +56,8 @@ std::vector<threeValuesArray::threeValues> threeValuesArray::calcoloJuliaSet1(do
 
     //calcolo numero di ricorsioni per primo elemento
     int numeroRicorsioni_first = 0;
-    int cr0 = cr;
-    int ci0 = ci;
+    double cr0 = cr;
+    double ci0 = ci;
     while (numeroRicorsioni_first < fractal.getMaxIter() && cr0 * cr0 + ci0 * ci0 < 4.0)
     {
         double tempX = cr0 * cr0 - ci0 * ci0 + parteRealeC;
@@ -79,8 +79,8 @@ std::vector<threeValuesArray::threeValues> threeValuesArray::calcoloJuliaSet1(do
         numeroRicorsioni++;
 
         //calcolo numero di ricorsioni per elemento
-        int cr1 = cr;
-        int ci1 = ci;
+        double cr1 = cr;
+        double ci1 = ci;
         int numeroRicorsioniperelemento = 0;
         while (numeroRicorsioniperelemento < fractal.getMaxIter() && cr1 * cr1 + ci1 * ci1 < 4.0)
         {
@@ -114,8 +114,8 @@ std::vector<threeValuesArray::threeValues> threeValuesArray::calcoloJuliaSet2(do
 
     //calcolo numero di ricorsioni per primo elemento
     int numeroRicorsioni_first = 0;
-    int cr0 = cr;
-    int ci0 = ci;
+    double cr0 = cr;
+    double ci0 = ci;
     while (numeroRicorsioni_first < fractal.getMaxIter() && cr0 * cr0 + ci0 * ci0 < 4.0)
     {
         double tempX = cr0 * cr0 - ci0 * ci0 + parteRealeC;
@@ -138,8 +138,8 @@ std::vector<threeValuesArray::threeValues> threeValuesArray::calcoloJuliaSet2(do
         numeroRicorsioni++;
 
         //calcolo numero di ricorsioni per elemento
-        int cr1 = cr;
-        int ci1 = ci;
+        double cr1 = cr;
+        double ci1 = ci;
         int numeroRicorsioniperelemento = 0;
         while (numeroRicorsioniperelemento < fractal.getMaxIter() && cr1 * cr1 + ci1 * ci1 < 4.0)
         {
@@ -183,8 +183,8 @@ std::vector<threeValuesArray::threeValues> threeValuesArray::calcoloBurninhShip(
         
         //calcolo numero di ricorsioni per elemento
         double parteRealeZ1 = 0, parteImmaginariaZ1 = 0;
-        int cr1 = parteRealeZ;
-        int ci1 = parteImmaginariaZ;
+        double cr1 = parteRealeZ;
+        double ci1 = parteImmaginariaZ;
         int numeroRicorsioniperelemento = 0;
         while (numeroRicorsioniperelemento < fractal.getMaxIter() && parteRealeZ1 * parteRealeZ1 + parteImmaginariaZ1 * parteImmaginariaZ1 < 4.0)
         {

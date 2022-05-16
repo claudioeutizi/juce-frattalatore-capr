@@ -30,12 +30,42 @@ int main(int argc, char* argv[])
     char buffer[OUTPUT_BUFFER_SIZE];
     osc::OutboundPacketStream p(buffer, OUTPUT_BUFFER_SIZE);
 
-    p << osc::BeginBundle()
-        << osc::BeginMessage("/test1")
-        << "hello" << osc::EndMessage
-        << osc::BeginMessage("/test2")
-        <<"world" << osc::EndMessage
-        << osc::EndBundle;
+    //p << osc::BeginBundle()
+    //    << osc::BeginMessage("/test1")
+    //    << "hello" << osc::EndMessage
+    //    << osc::BeginMessage("/test2")
+    //    <<"world" << osc::EndMessage
+    //    << osc::EndBundle;
+    p.Clear();
+    p << osc::BeginBundle(1234)
+        << osc::BeginBundle(12345)
+        << osc::BeginMessage("/the_i1") << 500 << osc::EndMessage
+        << osc::BeginMessage("/the_x1") << 1.0f << osc::EndMessage
+        << osc::BeginMessage("/the_y1") << 2.0f << osc::EndMessage
+        << osc::EndBundle
+        << osc::BeginBundle(12345)
+        << osc::BeginMessage("/the_i2") << 500 << osc::EndMessage
+        << osc::BeginMessage("/the_x2") << 1.0f << osc::EndMessage
+        << osc::BeginMessage("/the_y2") << 2.0f << osc::EndMessage
+        << osc::EndBundle
+        << osc::BeginBundle(12345)
+        << osc::BeginMessage("/the_i3") << 500 << osc::EndMessage
+        << osc::BeginMessage("/the_x3") << 1.0f << osc::EndMessage
+        << osc::BeginMessage("/the_y3") << 2.0f << osc::EndMessage
+        << osc::EndBundle
+        << osc::BeginBundle(12345)
+        << osc::BeginMessage("/the_i4") << 500 << osc::EndMessage
+        << osc::BeginMessage("/the_x4") << 1.0f << osc::EndMessage
+        << osc::BeginMessage("/the_y4") << 2.0f << osc::EndMessage
+        << osc::EndBundle
+        << osc::BeginBundle(12345)
+        << osc::BeginMessage("/the_i5") << 500 << osc::EndMessage
+        << osc::BeginMessage("/the_x5") << 1.0f << osc::EndMessage
+        << osc::BeginMessage("/the_y5") << 2.0f << osc::EndMessage
+        << osc::EndBundle
+    << osc::EndBundle;
+
+    //socket.Send(p.Data(), p.Size());
 
     transmitSocket.Send(p.Data(), p.Size());
 

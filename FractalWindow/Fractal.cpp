@@ -24,7 +24,7 @@ int Fractal::ricorsioniJuliaSet1(double cr, double ci, int max_iterations)
 {
     double parteRealeC = -0.7269, parteImmaginariaC = 0.1889; // costante c di partenza del set
     int numeroRicorsioni = 0;
-    while (numeroRicorsioni < max_iter && cr * cr + ci * ci < 4.0)
+    while (numeroRicorsioni < max_iter && (cr * cr + ci * ci) < 4.0)
     {
         double tempX = cr * cr - ci * ci + parteRealeC;
         double tempY = 2.0 * cr * ci + parteImmaginariaC;
@@ -40,7 +40,7 @@ int Fractal::ricorsioniJuliaSet2(double cr, double ci, int max_iterations)
 {
     double parteRealeC = 0.285, parteImmaginariaC = 0.01; // costante c di partenza del set
     int numeroRicorsioni = 0;
-    while (numeroRicorsioni < max_iter && cr * cr + ci * ci < 4.0)
+    while (numeroRicorsioni < max_iter && (cr * cr + ci * ci) < 4.0)
     {
         double tempX = cr * cr - ci * ci + parteRealeC;
         double tempY = 2.0 * cr * ci + parteImmaginariaC;
