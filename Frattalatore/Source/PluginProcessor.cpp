@@ -12,8 +12,6 @@
 #include <iostream>
 #include <tuple>
 
-#define PORT 7000
-
 //==============================================================================
 FrattalatoreAudioProcessor::FrattalatoreAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -28,8 +26,6 @@ FrattalatoreAudioProcessor::FrattalatoreAudioProcessor()
     apvts(*this, nullptr, "Parameters", createParams())
 #endif
 {
-    juce::OSCReceiver::addListener(this);
-    connect(PORT);
     //polyphonic synthesiser
     synth.addSound(new SynthSound());
     for (int v = 0; v < numVoices; v++) 
@@ -104,28 +100,6 @@ void FrattalatoreAudioProcessor::changeProgramName (int index, const juce::Strin
 {
 }
 
-//////////////////////////////////////OSC////////////////////////////////////////
-void FrattalatoreAudioProcessor::oscMessageReceived(const juce::OSCMessage& message)
-{
-    if(message[0].isInt32()) DBG(message[0].getInt32());
-    else if (message[0].isFloat32()) DBG(message[0].getFloat32());
-    else DBG("Type Error");
-}
-void FrattalatoreAudioProcessor::oscBundleReceived(const juce::OSCBundle& bundle)
-{
-    if (!connect(7000)) showConnectionErrorMessage("Error: could not connect to UDP port 7000.");
-    if (!bundle.isEmpty())
-    {
-        for (int i = 0; i < bundle.size(); ++i)
-        {
-            auto elem = bundle[i];
-            if (elem.isMessage())
-                oscMessageReceived(elem.getMessage());
-            else if (elem.isBundle())
-                oscBundleReceived(elem.getBundle());
-        }
-    }
-}
 
 void FrattalatoreAudioProcessor::showConnectionErrorMessage(const juce::String& messageText)
 {
@@ -399,27 +373,6 @@ void FrattalatoreAudioProcessor::setVoiceParams()
     }
 }
 
-void FrattalatoreAudioProcessor::setFMOscParams(float oscFMFreq, float oscFMDepth, int oscillatorIdx)
-{
-    for (int i = 0; i < synth.getNumVoices(); ++i)
-    {
-        //check the correct casting for each voice
-        if (auto voice = dynamic_cast<SynthVoice*> (synth.getVoice(i)))
-        {
-            auto& oscillator1 = voice->getOscillator1();
-            auto& oscillator2 = voice->getOscillator2();
-            auto& oscillator3 = voice->getOscillator3();
-            auto& oscillator4 = voice->getOscillator4();
-            auto& oscillator5 = voice->getOscillator5();
-
-            for (int j = 0; j < getTotalNumOutputChannels(); j++)
-            {
-                voice->getOscillator(oscillatorIdx)[j].updateFm(oscFMFreq, oscFMDepth);
-            }           
-        }
-    }
-
-}
 
 void FrattalatoreAudioProcessor::setFilterParams()
 {

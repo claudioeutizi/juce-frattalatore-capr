@@ -15,9 +15,7 @@
 //==============================================================================
 /**
 */
-class FrattalatoreAudioProcessor  : public juce::AudioProcessor,
-    public juce::OSCReceiver,
-    public juce::OSCReceiver::Listener<juce::OSCReceiver::MessageLoopCallback>
+class FrattalatoreAudioProcessor  : public juce::AudioProcessor
 {
 public:
     //==============================================================================
@@ -52,8 +50,6 @@ public:
     const juce::String getProgramName (int index) override;
     void changeProgramName (int index, const juce::String& newName) override;
     //======================================================================
-    virtual void oscMessageReceived(const juce::OSCMessage& message) override;
-    virtual void oscBundleReceived(const juce::OSCBundle& bundle) override;
     void showConnectionErrorMessage(const juce::String& messageText);
     //==============================================================================
     void getStateInformation (juce::MemoryBlock& destData) override;
@@ -74,7 +70,6 @@ private:
     juce::AudioProcessorValueTreeState::ParameterLayout createParams();
     void setParams();
     void setVoiceParams();
-    void setFMOscParams(float oscFMFreq, float oscFMDepth, int oscillatorIdx);
     void setFilterParams();
     std::array<float, numChannelsToProcess> lfoOutput{ 0.0f, 0.0f };
 
@@ -84,7 +79,6 @@ private:
     static constexpr float defaultOscGain{ -60.0f };
 
     //OSC values
-    std::array<std::tuple<int, float, float>, 5> OSCReceivedValues;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FrattalatoreAudioProcessor)
 };

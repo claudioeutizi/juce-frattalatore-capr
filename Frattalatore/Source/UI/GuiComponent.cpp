@@ -11,7 +11,6 @@
 #include <JuceHeader.h>
 #include "GuiComponent.h"
 
-
 //===============IMPLEMENTATION OF SliderWithLabel===================================
 
 using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
@@ -21,6 +20,7 @@ SliderWithLabel::SliderWithLabel(juce::String labelName, juce::String paramId, j
 {
     sliderWidth = width;
     sliderHeight = height;
+
 
     guiSlider.setSliderStyle(style);
     guiSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, textBoxWidth, textBoxHeight);
@@ -35,6 +35,7 @@ SliderWithLabel::SliderWithLabel(juce::String labelName, juce::String paramId, j
 
     guiSliderAttachment = std::make_unique<SliderAttachment>(apvts, paramId, guiSlider);
 }
+
 
 void SliderWithLabel::resized()
 {

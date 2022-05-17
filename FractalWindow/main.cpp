@@ -3,13 +3,12 @@
 #include "Fractal.h"
 #include "threeValuesArray.h"
 #include "changeParameters.h"
-//#include "osc/osc/OscOutboundPacketStream.h"
-//#include "osc/ip/UdpSocket.h"
-//#include "ExamplePacketListener.h"
+#include "osc/OscOutboundPacketStream.h"
+#include "osc/ip/UdpSocket.h"
 
 
 #define ADDRESS "127.0.0.1"
-#define PORT 9001
+#define PORT 7000
 
 #define OUTPUT_BUFFER_SIZE 1024
 using namespace sf;
@@ -17,30 +16,18 @@ using namespace sf;
 double zoom = 1.0;
 double step = 20.0;
 //static variables
+
 static int x_fp = 0;
 static int y_fp = 0;
 float XoscToSend;
 float YoscToSend;
-int nIteratioForElement;
-//static double xPoint;
-//static double yPoint;
+int nIterationToSend;
 
 int main()
 {
-    /*//OSC
-    UdpTransmitSocket transmitSocket(IpEndpointName(ADDRESS, PORT));
     char buffer[OUTPUT_BUFFER_SIZE];
     osc::OutboundPacketStream p(buffer, OUTPUT_BUFFER_SIZE);
-        p << osc::BeginBundleImmediate
-        << osc::BeginMessage("/test1")
-        << true << 23 << (float)3.1415 << "hello" << osc::EndMessage
-        << osc::BeginMessage("/test2")
-        << true << 24 << (float)10.8 << "world" << osc::EndMessage
-        << osc::EndBundle;
-    transmitSocket.Send(p.Data(), p.Size());
-    */
-
-
+    UdpTransmitSocket transmitSocket(IpEndpointName(ADDRESS, PORT));
 
     // Create the main window
     RenderWindow menu(VideoMode(800, 400), "Main Menu", Style::Default);
@@ -61,8 +48,6 @@ int main()
     Texture Maintexture;
     Maintexture.loadFromFile("Images/Orange.jpg");
     background.setTexture(&Maintexture);
-
-
     while (menu.isOpen())
     {
         Event event;
@@ -164,24 +149,40 @@ int main()
 
                                            XoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[0].x;
                                            YoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[0].y;
-                                           nIteratioForElement = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[0].numeroIterazioni;
+                                           nIterationToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[0].numeroIterazioni;
+                                           p.Clear();
+                                           p << osc::BeginMessage("/juce/osc1")
+                                               << nIterationToSend << (float)XoscToSend << (float)YoscToSend<< osc::EndMessage;
+                                           transmitSocket.Send(p.Data(), p.Size());
                                            XoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[1].x;
                                            YoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[1].y;
-                                           nIteratioForElement = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[1].numeroIterazioni;
+                                           nIterationToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[1].numeroIterazioni;
+                                           p.Clear();
+                                           p << osc::BeginMessage("/juce/osc2")
+                                               << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
+                                           transmitSocket.Send(p.Data(), p.Size());
                                            XoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[2].x;
                                            YoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[2].y;
-                                           nIteratioForElement = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[2].numeroIterazioni;
+                                           nIterationToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[2].numeroIterazioni;
+                                           p.Clear();
+                                           p << osc::BeginMessage("/juce/osc3")
+                                               << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
+                                           transmitSocket.Send(p.Data(), p.Size());
                                            XoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[3].x;
                                            YoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[3].y;
-                                           nIteratioForElement = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[3].numeroIterazioni;
+                                           nIterationToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[3].numeroIterazioni;
+                                           p.Clear();
+                                           p << osc::BeginMessage("/juce/osc4")
+                                               << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
+                                           transmitSocket.Send(p.Data(), p.Size());
                                            XoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[4].x;
                                            YoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[4].y;
-                                           nIteratioForElement = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[4].numeroIterazioni;
-
-                                          
-
+                                           nIterationToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[4].numeroIterazioni;
+                                           p.Clear();
+                                           p << osc::BeginMessage("/juce/osc5")
+                                               <<nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
+                                           transmitSocket.Send(p.Data(), p.Size());
                                           //arrayOSC.calcoloMandelbrot(xNew, yNew, 5)[i].perc
-
                                       }
                                   }
                               }
@@ -221,8 +222,8 @@ int main()
                   {
                       RenderWindow Julia1Window(VideoMode(600, 600), "Julia1");
                       Fractal julia1Fractal;
-                      int bellaiterazione = 0;
-                      bellaiterazione = julia1Fractal.getMaxIter();
+                      int iter = 0;
+                      iter = julia1Fractal.getMaxIter();
                       
                       while (Julia1Window.isOpen())
                       {
@@ -247,8 +248,8 @@ int main()
                                   {
                                       double cr = julia1Fractal.getMinRe() + (static_cast<double>(julia1Fractal.getMaxRe()) - julia1Fractal.getMinRe()) * x / julia1Fractal.getW();
                                       double ci = julia1Fractal.getMinIm() + (static_cast<double>(julia1Fractal.getMaxIm()) - julia1Fractal.getMinIm()) * y / julia1Fractal.getH();
-                                      int n = julia1Fractal.ricorsioniJuliaSet1(cr, ci, bellaiterazione);
-                                      Color c = julia1Fractal.paint_fractal(n, bellaiterazione);
+                                      int n = julia1Fractal.ricorsioniJuliaSet1(cr, ci, iter);
+                                      Color c = julia1Fractal.paint_fractal(n, iter);
                                       plotFrattale.setPixel(x, y, Color(c));
                                   }
                               }
@@ -280,23 +281,23 @@ int main()
 
                                           cout << " la nuova coordinata y e :" << yNew << endl;
 
-                                          arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione);
+                                          arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter);
 
-                                          XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[0].x;
-                                          YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[0].y;
-                                          nIteratioForElement = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[0].numeroIterazioni;
-                                          XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[1].x;
-                                          YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[1].y;
-                                          nIteratioForElement = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[1].numeroIterazioni;
-                                          XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[2].x;
-                                          YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[2].y;
-                                          nIteratioForElement = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[2].numeroIterazioni;
-                                          XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[3].x;
-                                          YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[3].y;
-                                          nIteratioForElement = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[3].numeroIterazioni;
-                                          XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[4].x;
-                                          YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[4].y;
-                                          nIteratioForElement = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, bellaiterazione)[4].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[0].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[0].y;
+                                          nIterationToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[0].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[1].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[1].y;
+                                          nIterationToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[1].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[2].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[2].y;
+                                          nIterationToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[2].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[3].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[3].y;
+                                          nIterationToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[3].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[4].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[4].y;
+                                          nIterationToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[4].numeroIterazioni;
 
 
                                       }
@@ -312,17 +313,17 @@ int main()
                                       {
                                           if (julia1Event.mouseWheelScroll.delta > 0)
                                           {
-                                              newIter = bellaiterazione*2;
-                                              bellaiterazione = newIter;
-                                              cout << "newIter +: "<< bellaiterazione;
+                                              newIter = iter*2;
+                                              iter = newIter;
+                                              cout << "newIter +: "<< iter;
                                           }
                                           else
                                           {
-                                              newIter = bellaiterazione /2;
-                                              bellaiterazione = newIter;
-                                              cout << "newIter -: "<< bellaiterazione;
+                                              newIter = iter /2;
+                                              iter = newIter;
+                                              cout << "newIter -: "<< iter;
                                           
-                                              if(bellaiterazione < 1) bellaiterazione = 1;
+                                              if(iter < 1) iter = 1;
                                           }
                                       }
                                   }
@@ -335,8 +336,8 @@ int main()
                   {
                       RenderWindow Julia2Window(VideoMode(600, 600), "Julia2");
                       Fractal julia2Fractal;
-                      int bellaiterazione = 0;
-                      bellaiterazione = julia2Fractal.getMaxIter();
+                      int iter = 0;
+                      iter = julia2Fractal.getMaxIter();
                       
                       while (Julia2Window.isOpen())
                       {
@@ -361,8 +362,8 @@ int main()
                                   {
                                       double cr = julia2Fractal.getMinRe() + (static_cast<double>(julia2Fractal.getMaxRe()) - julia2Fractal.getMinRe()) * x / julia2Fractal.getW();
                                       double ci = julia2Fractal.getMinIm() + (static_cast<double>(julia2Fractal.getMaxIm()) - julia2Fractal.getMinIm()) * y / julia2Fractal.getH();
-                                      int n = julia2Fractal.ricorsioniJuliaSet2(cr, ci, bellaiterazione);
-                                      Color c = julia2Fractal.paint_fractal(n, bellaiterazione);
+                                      int n = julia2Fractal.ricorsioniJuliaSet2(cr, ci, iter);
+                                      Color c = julia2Fractal.paint_fractal(n, iter);
                                       plotFrattale.setPixel(x, y, Color(c));
                                   }
                               }
@@ -394,23 +395,23 @@ int main()
 
                                           cout << " la nuova coordinata y e :" << yNew << endl;
 
-                                          arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione);
+                                          arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter);
 
-                                          XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[0].x;
-                                          YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[0].y;
-                                          nIteratioForElement = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[0].numeroIterazioni;
-                                          XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[1].x;
-                                          YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[1].y;
-                                          nIteratioForElement = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[1].numeroIterazioni;
-                                          XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[2].x;
-                                          YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[2].y;
-                                          nIteratioForElement = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[2].numeroIterazioni;
-                                          XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[3].x;
-                                          YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[3].y;
-                                          nIteratioForElement = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[3].numeroIterazioni;
-                                          XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[4].x;
-                                          YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[4].y;
-                                          nIteratioForElement = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, bellaiterazione)[4].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[0].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[0].y;
+                                          nIterationToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[0].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[1].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[1].y;
+                                          nIterationToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[1].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[2].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[2].y;
+                                          nIterationToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[2].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[3].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[3].y;
+                                          nIterationToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[3].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[4].x;
+                                          YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[4].y;
+                                          nIterationToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[4].numeroIterazioni;
 
                                          
                                       }
@@ -426,17 +427,17 @@ int main()
                                       {
                                           if (julia2Event.mouseWheelScroll.delta > 0)
                                           {
-                                              newIter = bellaiterazione*2;
-                                              bellaiterazione = newIter;
-                                              cout << "newIter +: "<< bellaiterazione;
+                                              newIter = iter*2;
+                                              iter = newIter;
+                                              cout << "newIter +: "<< iter;
                                           }
                                           else
                                           {
-                                              newIter = bellaiterazione /2;
-                                              bellaiterazione = newIter;
-                                              cout << "newIter -: "<< bellaiterazione;
+                                              newIter = iter /2;
+                                              iter = newIter;
+                                              cout << "newIter -: "<< iter;
                                           
-                                              if(bellaiterazione < 1) bellaiterazione = 1;
+                                              if(iter < 1) iter = 1;
                                           }
                                       }
                                   }
@@ -450,8 +451,8 @@ int main()
                   {
                       RenderWindow BurningShipWindow(VideoMode(600, 600), "Burning ship");
                       Fractal burningFractal;
-                      int bellaiterazione = 0;
-                      bellaiterazione = burningFractal.getMaxIter();
+                      int iter = 0;
+                      iter = burningFractal.getMaxIter();
                       
                       while (BurningShipWindow.isOpen())
                       {
@@ -476,8 +477,8 @@ int main()
                                   {
                                       double cr = burningFractal.getMinRe() + (static_cast<double>(burningFractal.getMaxRe()) - burningFractal.getMinRe()) * x / burningFractal.getW();
                                       double ci = burningFractal.getMinIm() + (static_cast<double>(burningFractal.getMaxIm()) - burningFractal.getMinIm()) * y / burningFractal.getH();
-                                      int n = burningFractal.ricorsioniBurning_ship(cr, ci, bellaiterazione);
-                                      Color c = burningFractal.paint_fractal(n, bellaiterazione);
+                                      int n = burningFractal.ricorsioniBurning_ship(cr, ci, iter);
+                                      Color c = burningFractal.paint_fractal(n, iter);
                                       plotFrattale.setPixel(x, y, Color(c));
                                   }
                               }
@@ -509,24 +510,24 @@ int main()
 
                                           cout << " la nuova coordinata y e :" << yNew << endl;
 
-                                          arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione);
+                                          arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter);
 
 
-                                          XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[0].x;
-                                          YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[0].y;
-                                          nIteratioForElement = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[0].numeroIterazioni;
-                                          XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[1].x;
-                                          YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[1].y;
-                                          nIteratioForElement = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[1].numeroIterazioni;
-                                          XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[2].x;
-                                          YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[2].y;
-                                          nIteratioForElement = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[2].numeroIterazioni;
-                                          XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[3].x;
-                                          YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[3].y;
-                                          nIteratioForElement = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[3].numeroIterazioni;
-                                          XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[4].x;
-                                          YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[4].y;
-                                          nIteratioForElement = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, bellaiterazione)[4].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[0].x;
+                                          YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[0].y;
+                                          nIterationToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[0].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[1].x;
+                                          YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[1].y;
+                                          nIterationToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[1].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[2].x;
+                                          YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[2].y;
+                                          nIterationToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[2].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[3].x;
+                                          YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[3].y;
+                                          nIterationToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[3].numeroIterazioni;
+                                          XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[4].x;
+                                          YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[4].y;
+                                          nIterationToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[4].numeroIterazioni;
                                       }
                                   }
                                   //move image with keyboard arrows
@@ -615,27 +616,21 @@ int main()
                                       {
                                           if (burningEvent.mouseWheelScroll.delta > 0)
                                           {
-                                              newIter = bellaiterazione*2;
-                                              bellaiterazione = newIter;
-                                              cout << "newIter +: "<< bellaiterazione;
+                                              newIter = iter*2;
+                                              iter = newIter;
+                                              cout << "newIter +: "<< iter;
                                           }
                                           else
                                           {
-                                              newIter = bellaiterazione /2;
-                                              bellaiterazione = newIter;
-                                              cout << "newIter -: "<< bellaiterazione;
+                                              newIter = iter /2;
+                                              iter = newIter;
+                                              cout << "newIter -: "<< iter;
                                           
-                                              if(bellaiterazione < 1) bellaiterazione = 1;
+                                              if(iter < 1) iter = 1;
                                           }
                                       }
                                   }
                               }
-                              
-                                 
-
-                              
-
-                             
                           }
                       }
                   }

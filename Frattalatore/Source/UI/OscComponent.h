@@ -15,7 +15,9 @@
 //==============================================================================
 /*
 */
-class OscComponent  : public GuiComponent
+class OscComponent  : public GuiComponent,
+    public juce::OSCReceiver,
+    public juce::OSCReceiver::ListenerWithOSCAddress<juce::OSCReceiver::MessageLoopCallback>
 {
 public:
     OscComponent(juce::AudioProcessorValueTreeState& apvts, 
@@ -23,9 +25,14 @@ public:
     juce::String gainId,
     juce::String pitchId,
     juce::String fmFreqId,
-    juce::String fmDepthId);
+    juce::String fmDepthId,
+    juce::String fmOSCAddPatt);
     ~OscComponent() override;
     void resized() override;
+    void oscMessageReceived(const juce::OSCMessage& message) override;
+    float convertingIterationsInFMFreqRange(const int iterations);
+    float computingModulusCoordinatesForFMDepth(float x, float y);
+    void showConnectionErrorMessage(const juce::String& messageText);
 
 private:
     juce::ComboBox oscTypeSelector;
@@ -35,6 +42,8 @@ private:
     SliderWithLabel pitch;
     SliderWithLabel fmFreq;
     SliderWithLabel fmDepth;
+
+    juce::String fmOSCAddressPattern{ "" };
 
     static constexpr int dialWidth = 70;
     static constexpr int dialHeight = 70;

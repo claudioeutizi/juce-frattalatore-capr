@@ -84,12 +84,12 @@ float OscData::processNextSample(float input)
     return gain.processSample(processSample(input));
 }
 
-void OscData::setParams(const int oscChoice, const float oscGain, const int oscPitch, const float fmFreq, const float freqDepth)
+void OscData::setParams(const int oscChoice, const float oscGain, const int oscPitch, const float fmFreq, const float fmDepth)
 {
     setOscWaveType(oscChoice);
     setGain(oscGain);
     setPitch(oscPitch);
-    updateFm(freqDepth, fmFreq);
+    updateFm(fmDepth, fmFreq);
 }
 
 void OscData::resetOsc()
