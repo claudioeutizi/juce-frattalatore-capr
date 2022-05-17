@@ -47,27 +47,27 @@ OscComponent::~OscComponent()
 void OscComponent::oscMessageReceived(const juce::OSCMessage& message)
 {
     if (message.getAddressPattern().toString() == OSCAddressPattern)
-        if (message.size() == 3
+        if (message.size() == 4
             && message[0].isInt32()
-            && message[1].isFloat32()
-            && message[2].isFloat32())
+            && message[1].isInt32()
+            && message[2].isFloat32()
+            && message[3].isFloat32())
         {
-            this->fmFreq.getGuiSlider().setValue(juce::jlimit(0.0f,100.0f,convertingIterationsInFMFreqRange(message[0].getInt32())));
-            float depth = computingModulusCoordinatesForFMDepth(message[1].getFloat32(), message[2].getFloat32());
-            this->fmDepth.getGuiSlider().setValue(juce::jlimit(0.0f, 100.0f, depth));
-            DBG(OSCAddressPattern);
+            this->fmDepth.getGuiSlider().setValue(juce::jlimit(0.0f,100.0f,convertingIterationsInFMDepthRange(message[1].getInt32(), message[0].getInt32())));
+            float freq = computingModulusCoordinatesForFMFreq(message[2].getFloat32(), message[3].getFloat32());
+            this->fmFreq.getGuiSlider().setValue(juce::jlimit(0.0f, 20.0f, freq));
         }
 }
 
-float OscComponent::convertingIterationsInFMFreqRange(const int iterations)
+float OscComponent::convertingIterationsInFMDepthRange(const int iterations, const int maxIterations)
 {
-    int oldRange = 128;
-    float newRange = 20.0f;
+    int oldRange = maxIterations - 1;
+    float newRange = 100.0f;
     float newValue = (((iterations - 1) * newRange) / oldRange) + 0.0f;
     return newRange - newValue;
 }
 
-float OscComponent::computingModulusCoordinatesForFMDepth(float x, float y)
+float OscComponent::computingModulusCoordinatesForFMFreq(float x, float y)
 {
     return sqrt((x * x) + (y * y));
 }

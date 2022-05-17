@@ -31,8 +31,8 @@ public:
     ~OscComponent() override;
     void resized() override;
     void oscMessageReceived(const juce::OSCMessage& message) override;
-    float convertingIterationsInFMFreqRange(const int iterations);
-    float computingModulusCoordinatesForFMDepth(float x, float y);
+    float convertingIterationsInFMDepthRange(const int iterations, const int maxIterations);
+    float computingModulusCoordinatesForFMFreq(float x, float y);
     void showConnectionErrorMessage(const juce::String& messageText);
 
 private:
