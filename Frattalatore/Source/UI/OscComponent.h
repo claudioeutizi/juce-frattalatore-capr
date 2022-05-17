@@ -26,7 +26,8 @@ public:
     juce::String pitchId,
     juce::String fmFreqId,
     juce::String fmDepthId,
-    juce::String fmOSCAddPatt);
+    juce::String fmOSCAddressPattern,
+        int OSCPort);
     ~OscComponent() override;
     void resized() override;
     void oscMessageReceived(const juce::OSCMessage& message) override;
@@ -43,7 +44,7 @@ private:
     SliderWithLabel fmFreq;
     SliderWithLabel fmDepth;
 
-    juce::String fmOSCAddressPattern{ "" };
+    juce::String OSCAddressPattern {""};
 
     static constexpr int dialWidth = 70;
     static constexpr int dialHeight = 70;

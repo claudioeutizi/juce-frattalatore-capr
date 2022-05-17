@@ -7,54 +7,54 @@ C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalW
 C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\Fractal.h(32,22): warning C4244: 'return': conversione da 'const double' a 'int'. Possibile perdita di dati.
 C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\Fractal.h(37,27): warning C4244: 'return': conversione da 'double' a 'int'. Possibile perdita di dati.
 C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\Fractal.h(39,27): warning C4244: 'return': conversione da 'double' a 'int'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(34,55): warning C4244: 'argomento': conversione da 'T' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(42,55): warning C4244: 'argomento': conversione da 'T' a 'float'. Possibile perdita di dati.
           with
           [
               T=unsigned int
           ]
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(34,37): warning C4244: 'argomento': conversione da 'T' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(42,37): warning C4244: 'argomento': conversione da 'T' a 'float'. Possibile perdita di dati.
           with
           [
               T=unsigned int
           ]
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(150,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(151,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(157,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
 C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(158,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(164,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(165,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(171,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(172,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(178,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(179,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(286,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(287,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(289,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(290,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(292,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(293,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(295,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(296,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(298,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(299,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(400,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(401,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(403,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(404,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(406,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(407,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(409,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(410,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(412,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(413,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(516,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(517,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(519,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(520,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(522,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(523,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(525,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(526,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(528,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
-C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(529,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(159,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(167,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(168,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(176,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(177,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(185,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(186,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(194,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(195,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(302,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(303,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(311,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(312,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(320,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(321,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(329,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(330,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(338,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(339,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(443,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(444,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(452,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(453,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(461,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(462,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(470,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(471,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(479,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(480,105): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(585,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(586,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(594,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(595,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(603,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(604,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(612,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(613,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(621,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
+C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\main.cpp(622,107): warning C4244: '=': conversione da 'double' a 'float'. Possibile perdita di dati.
   FractalWindow.vcxproj -> C:\Users\claud\OneDrive\Documenti\JUCE\exercises\juce-frattalatore-capr\FractalWindow\x64\Debug\FractalWindow.exe

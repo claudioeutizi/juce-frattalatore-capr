@@ -8,7 +8,6 @@
 
 
 #define ADDRESS "127.0.0.1"
-#define PORT 7000
 
 #define OUTPUT_BUFFER_SIZE 1024
 using namespace sf;
@@ -26,8 +25,17 @@ int nIterationToSend;
 int main()
 {
     char buffer[OUTPUT_BUFFER_SIZE];
-    osc::OutboundPacketStream p(buffer, OUTPUT_BUFFER_SIZE);
-    UdpTransmitSocket transmitSocket(IpEndpointName(ADDRESS, PORT));
+    osc::OutboundPacketStream p1(buffer, OUTPUT_BUFFER_SIZE);
+    osc::OutboundPacketStream p2(buffer, OUTPUT_BUFFER_SIZE);
+    osc::OutboundPacketStream p3(buffer, OUTPUT_BUFFER_SIZE);
+    osc::OutboundPacketStream p4(buffer, OUTPUT_BUFFER_SIZE);
+    osc::OutboundPacketStream p5(buffer, OUTPUT_BUFFER_SIZE);
+
+    UdpTransmitSocket transmitSocket1(IpEndpointName(ADDRESS, 7000));
+    UdpTransmitSocket transmitSocket2(IpEndpointName(ADDRESS, 7001));
+    UdpTransmitSocket transmitSocket3(IpEndpointName(ADDRESS, 7002));
+    UdpTransmitSocket transmitSocket4(IpEndpointName(ADDRESS, 7003));
+    UdpTransmitSocket transmitSocket5(IpEndpointName(ADDRESS, 7004));
 
     // Create the main window
     RenderWindow menu(VideoMode(800, 400), "Main Menu", Style::Default);
@@ -150,38 +158,46 @@ int main()
                                            XoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[0].x;
                                            YoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[0].y;
                                            nIterationToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[0].numeroIterazioni;
-                                           p.Clear();
-                                           p << osc::BeginMessage("/juce/osc1")
+
+                                           p1.Clear();
+                                           p1 << osc::BeginMessage("/juce/osc1")
                                                << nIterationToSend << (float)XoscToSend << (float)YoscToSend<< osc::EndMessage;
-                                           transmitSocket.Send(p.Data(), p.Size());
+                                           transmitSocket1.Send(p1.Data(), p1.Size());
+
                                            XoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[1].x;
                                            YoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[1].y;
                                            nIterationToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[1].numeroIterazioni;
-                                           p.Clear();
-                                           p << osc::BeginMessage("/juce/osc2")
+
+                                           p2.Clear();
+                                           p2 << osc::BeginMessage("/juce/osc2")
                                                << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
-                                           transmitSocket.Send(p.Data(), p.Size());
+                                           transmitSocket2.Send(p2.Data(), p2.Size());
+
                                            XoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[2].x;
                                            YoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[2].y;
                                            nIterationToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[2].numeroIterazioni;
-                                           p.Clear();
-                                           p << osc::BeginMessage("/juce/osc3")
+
+                                           p3.Clear();
+                                           p3 << osc::BeginMessage("/juce/osc3")
                                                << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
-                                           transmitSocket.Send(p.Data(), p.Size());
+                                           transmitSocket3.Send(p3.Data(), p3.Size());
+
                                            XoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[3].x;
                                            YoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[3].y;
                                            nIterationToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[3].numeroIterazioni;
-                                           p.Clear();
-                                           p << osc::BeginMessage("/juce/osc4")
+
+                                           p4.Clear();
+                                           p4 << osc::BeginMessage("/juce/osc4")
                                                << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
-                                           transmitSocket.Send(p.Data(), p.Size());
+                                           transmitSocket4.Send(p4.Data(), p4.Size());
+
                                            XoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[4].x;
                                            YoscToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[4].y;
                                            nIterationToSend = arrayOSC.calcoloMandelbrot(xNew, yNew, 5, iter)[4].numeroIterazioni;
-                                           p.Clear();
-                                           p << osc::BeginMessage("/juce/osc5")
+                                           p5.Clear();
+                                           p5 << osc::BeginMessage("/juce/osc5")
                                                <<nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
-                                           transmitSocket.Send(p.Data(), p.Size());
+                                           transmitSocket5.Send(p5.Data(), p5.Size());
                                           //arrayOSC.calcoloMandelbrot(xNew, yNew, 5)[i].perc
                                       }
                                   }
@@ -286,19 +302,46 @@ int main()
                                           XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[0].x;
                                           YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[0].y;
                                           nIterationToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[0].numeroIterazioni;
+
+                                          p1.Clear();
+                                          p1 << osc::BeginMessage("/juce/osc1")
+                                              << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
+                                          transmitSocket1.Send(p1.Data(), p1.Size());
+
                                           XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[1].x;
                                           YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[1].y;
                                           nIterationToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[1].numeroIterazioni;
+
+                                          p2.Clear();
+                                          p2 << osc::BeginMessage("/juce/osc2")
+                                              << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
+                                          transmitSocket2.Send(p2.Data(), p2.Size());
+
                                           XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[2].x;
                                           YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[2].y;
                                           nIterationToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[2].numeroIterazioni;
+
+                                          p3.Clear();
+                                          p3 << osc::BeginMessage("/juce/osc3")
+                                              << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
+                                          transmitSocket3.Send(p3.Data(), p3.Size());
+
                                           XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[3].x;
                                           YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[3].y;
                                           nIterationToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[3].numeroIterazioni;
+
+                                          p4.Clear();
+                                          p4 << osc::BeginMessage("/juce/osc4")
+                                              << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
+                                          transmitSocket4.Send(p4.Data(), p4.Size());
+
                                           XoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[4].x;
                                           YoscToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[4].y;
                                           nIterationToSend = arrayOSC.calcoloJuliaSet1(xNew, yNew, 5, iter)[4].numeroIterazioni;
-
+                                          p5.Clear();
+                                          p5 << osc::BeginMessage("/juce/osc5")
+                                              << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
+                                          transmitSocket5.Send(p5.Data(), p5.Size());
 
                                       }
                                   }
@@ -400,20 +443,47 @@ int main()
                                           XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[0].x;
                                           YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[0].y;
                                           nIterationToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[0].numeroIterazioni;
+
+                                          p1.Clear();
+                                          p1 << osc::BeginMessage("/juce/osc1")
+                                              << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
+                                          transmitSocket1.Send(p1.Data(), p1.Size());
+
                                           XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[1].x;
                                           YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[1].y;
                                           nIterationToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[1].numeroIterazioni;
+
+                                          p2.Clear();
+                                          p2 << osc::BeginMessage("/juce/osc2")
+                                              << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
+                                          transmitSocket2.Send(p2.Data(), p2.Size());
+
                                           XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[2].x;
                                           YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[2].y;
                                           nIterationToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[2].numeroIterazioni;
+
+                                          p3.Clear();
+                                          p3 << osc::BeginMessage("/juce/osc3")
+                                              << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
+                                          transmitSocket3.Send(p3.Data(), p3.Size());
+
                                           XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[3].x;
                                           YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[3].y;
                                           nIterationToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[3].numeroIterazioni;
+
+                                          p4.Clear();
+                                          p4 << osc::BeginMessage("/juce/osc4")
+                                              << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
+                                          transmitSocket4.Send(p4.Data(), p4.Size());
+
                                           XoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[4].x;
                                           YoscToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[4].y;
                                           nIterationToSend = arrayOSC.calcoloJuliaSet2(xNew, yNew, 5, iter)[4].numeroIterazioni;
+                                          p5.Clear();
+                                          p5 << osc::BeginMessage("/juce/osc5")
+                                              << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
+                                          transmitSocket5.Send(p5.Data(), p5.Size());
 
-                                         
                                       }
                                   }
                               }
@@ -512,22 +582,49 @@ int main()
 
                                           arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter);
 
-
                                           XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[0].x;
                                           YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[0].y;
                                           nIterationToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[0].numeroIterazioni;
+
+                                          p1.Clear();
+                                          p1 << osc::BeginMessage("/juce/osc1")
+                                              << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
+                                          transmitSocket1.Send(p1.Data(), p1.Size());
+
                                           XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[1].x;
                                           YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[1].y;
                                           nIterationToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[1].numeroIterazioni;
+
+                                          p2.Clear();
+                                          p2 << osc::BeginMessage("/juce/osc2")
+                                              << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
+                                          transmitSocket2.Send(p2.Data(), p2.Size());
+
                                           XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[2].x;
                                           YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[2].y;
                                           nIterationToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[2].numeroIterazioni;
+
+                                          p3.Clear();
+                                          p3 << osc::BeginMessage("/juce/osc3")
+                                              << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
+                                          transmitSocket3.Send(p3.Data(), p3.Size());
+
                                           XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[3].x;
                                           YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[3].y;
                                           nIterationToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[3].numeroIterazioni;
+
+                                          p4.Clear();
+                                          p4 << osc::BeginMessage("/juce/osc4")
+                                              << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
+                                          transmitSocket4.Send(p4.Data(), p4.Size());
+
                                           XoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[4].x;
                                           YoscToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[4].y;
                                           nIterationToSend = arrayOSC.calcoloBurninhShip(xNew, yNew, 5, iter)[4].numeroIterazioni;
+                                          p5.Clear();
+                                          p5 << osc::BeginMessage("/juce/osc5")
+                                              << nIterationToSend << (float)XoscToSend << (float)YoscToSend << osc::EndMessage;
+                                          transmitSocket5.Send(p5.Data(), p5.Size());
                                       }
                                   }
                                   //move image with keyboard arrows
