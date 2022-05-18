@@ -9,13 +9,13 @@
 namespace BinaryData
 {
     extern const char*   burningShipBackgroundImg_png;
-    const int            burningShipBackgroundImg_pngSize = 70402;
+    const int            burningShipBackgroundImg_pngSize = 64349;
 
     extern const char*   JuliaBackgroundImg1_png;
-    const int            JuliaBackgroundImg1_pngSize = 143470;
+    const int            JuliaBackgroundImg1_pngSize = 139153;
 
     extern const char*   JuliaBackgroundImg2_png;
-    const int            JuliaBackgroundImg2_pngSize = 130262;
+    const int            JuliaBackgroundImg2_pngSize = 121878;
 
     extern const char*   Knob2_png;
     const int            Knob2_pngSize = 33608;
@@ -24,7 +24,7 @@ namespace BinaryData
     const int            LOGO_Capr_pngSize = 1712519;
 
     extern const char*   mandelbrotBackgroundImg_png;
-    const int            mandelbrotBackgroundImg_pngSize = 65527;
+    const int            mandelbrotBackgroundImg_pngSize = 59553;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
     const int namedResourceListSize = 6;

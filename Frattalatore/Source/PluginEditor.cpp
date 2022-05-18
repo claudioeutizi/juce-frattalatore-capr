@@ -23,18 +23,18 @@ FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (Frattalatore
     adsr(audioProcessor.apvts, "ATTACK", "DECAY", "SUSTAIN", "RELEASE"),
     lfo(audioProcessor.apvts, "LFOFREQ", "LFODEPTH")
 
-{
+{/*
     backgroundImage = juce::ImageCache::getFromMemory(BinaryData::burningShipBackgroundImg_png, BinaryData::burningShipBackgroundImg_pngSize);
+    backgroundImage = backgroundImage.rescaled(900,600-120);*/
+
+    //backgroundImage = juce::ImageCache::getFromMemory(BinaryData::JuliaBackgroundImg1_png, BinaryData::JuliaBackgroundImg1_pngSize);
+    //backgroundImage = backgroundImage.rescaled(900,600-120);
+
+    //backgroundImage = juce::ImageCache::getFromMemory(BinaryData::JuliaBackgroundImg2_png, BinaryData::JuliaBackgroundImg2_pngSize);
+    //backgroundImage = backgroundImage.rescaled(900,600-120);
+
+    backgroundImage = juce::ImageCache::getFromMemory(BinaryData::mandelbrotBackgroundImg_png, BinaryData::mandelbrotBackgroundImg_pngSize);
     backgroundImage = backgroundImage.rescaled(900,600-120);
-
-    /*backgroundImage = juce::ImageCache::getFromMemory(BinaryData::JuliaBackgroundImg1_png, BinaryData::JuliaBackgroundImg1_pngSize);
-    backgroundImage = backgroundImage.rescaled(900,600-120);*/
-
-    /*backgroundImage = juce::ImageCache::getFromMemory(BinaryData::JuliaBackgroundImg2_png, BinaryData::JuliaBackgroundImg2_pngSize);
-    backgroundImage = backgroundImage.rescaled(900,600-120);*/
-
-    /*backgroundImage = juce::ImageCache::getFromMemory(BinaryData::mandelbrotBackgroundImg_jpg, BinaryData::mandelbrotBackgroundImg_jpgSize);
-    backgroundImage = backgroundImage.rescaled(900,600-120);*/
 
     logoCapr = juce::ImageCache::getFromMemory(BinaryData::LOGO_Capr_png, BinaryData::LOGO_Capr_pngSize);
     logoCapr = logoCapr.rescaled(160, 160);

@@ -7,15 +7,15 @@
   <MAINGROUP id="se2h2i" name="Frattalatore">
     <GROUP id="{C0F91FE8-0C3E-9FE3-FFCD-5FDE5855DD7D}" name="Source">
       <GROUP id="{34E01083-371C-EA4C-043C-C637DCC432E4}" name="Resources">
-        <FILE id="E4fwaM" name="burningShipBackgroundImg.png" compile="0" resource="1"
+        <FILE id="eeFQNT" name="burningShipBackgroundImg.png" compile="0" resource="1"
               file="Source/Resources/burningShipBackgroundImg.png"/>
-        <FILE id="Lvblgu" name="JuliaBackgroundImg1.png" compile="0" resource="1"
+        <FILE id="ypKSqp" name="JuliaBackgroundImg1.png" compile="0" resource="1"
               file="Source/Resources/JuliaBackgroundImg1.png"/>
-        <FILE id="fKMDrE" name="JuliaBackgroundImg2.png" compile="0" resource="1"
+        <FILE id="xp7oNk" name="JuliaBackgroundImg2.png" compile="0" resource="1"
               file="Source/Resources/JuliaBackgroundImg2.png"/>
-        <FILE id="JkXmvt" name="Knob2.png" compile="0" resource="1" file="Source/Resources/Knob2.png"/>
-        <FILE id="kWJERh" name="LOGO Capr.png" compile="0" resource="1" file="Source/Resources/LOGO Capr.png"/>
-        <FILE id="rEamCQ" name="mandelbrotBackgroundImg.png" compile="0" resource="1"
+        <FILE id="ZEfh7W" name="Knob2.png" compile="0" resource="1" file="Source/Resources/Knob2.png"/>
+        <FILE id="cZOtTG" name="LOGO Capr.png" compile="0" resource="1" file="Source/Resources/LOGO Capr.png"/>
+        <FILE id="j9Smmq" name="mandelbrotBackgroundImg.png" compile="0" resource="1"
               file="Source/Resources/mandelbrotBackgroundImg.png"/>
       </GROUP>
       <GROUP id="{AEB390DC-7447-1A74-FE25-7109AF802E88}" name="Data">
