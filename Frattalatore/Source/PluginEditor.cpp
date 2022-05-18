@@ -1,4 +1,4 @@
-/*
+/*-
   ==============================================================================
 
     This file contains the basic framework code for a JUCE plugin editor.
@@ -23,18 +23,24 @@ FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (Frattalatore
     adsr(audioProcessor.apvts, "ATTACK", "DECAY", "SUSTAIN", "RELEASE"),
     lfo(audioProcessor.apvts, "LFOFREQ", "LFODEPTH")
 
-{/*
-    backgroundImage = juce::ImageCache::getFromMemory(BinaryData::burningShipBackgroundImg_png, BinaryData::burningShipBackgroundImg_pngSize);
-    backgroundImage = backgroundImage.rescaled(900,600-120);*/
-
-    //backgroundImage = juce::ImageCache::getFromMemory(BinaryData::JuliaBackgroundImg1_png, BinaryData::JuliaBackgroundImg1_pngSize);
-    //backgroundImage = backgroundImage.rescaled(900,600-120);
-
-    //backgroundImage = juce::ImageCache::getFromMemory(BinaryData::JuliaBackgroundImg2_png, BinaryData::JuliaBackgroundImg2_pngSize);
-    //backgroundImage = backgroundImage.rescaled(900,600-120);
-
-    backgroundImage = juce::ImageCache::getFromMemory(BinaryData::mandelbrotBackgroundImg_png, BinaryData::mandelbrotBackgroundImg_pngSize);
-    backgroundImage = backgroundImage.rescaled(900,600-120);
+{
+    int bg = 2;
+    switch (bg)
+    {
+    case 1:
+        backgroundImage = juce::ImageCache::getFromMemory(BinaryData::burningShipBackgroundImg_png, BinaryData::burningShipBackgroundImg_pngSize).rescaled(900, 600 - 120);
+        break;
+    case 2:
+        backgroundImage = juce::ImageCache::getFromMemory(BinaryData::JuliaBackgroundImg1_png, BinaryData::JuliaBackgroundImg1_pngSize).rescaled(900, 600 - 120);
+        break;
+    case 3 : 
+        backgroundImage = juce::ImageCache::getFromMemory(BinaryData::JuliaBackgroundImg2_png, BinaryData::JuliaBackgroundImg2_pngSize).rescaled(900, 600 - 120);
+        break;
+    case 4 : 
+        backgroundImage = juce::ImageCache::getFromMemory(BinaryData::mandelbrotBackgroundImg_png, BinaryData::mandelbrotBackgroundImg_pngSize).rescaled(900, 600 - 120);
+        break;
+    default: backgroundImage = juce::ImageCache::getFromMemory(BinaryData::burningShipBackgroundImg_png, BinaryData::burningShipBackgroundImg_pngSize).rescaled(900, 600 - 120);
+    }
 
     logoCapr = juce::ImageCache::getFromMemory(BinaryData::LOGO_Capr_png, BinaryData::LOGO_Capr_pngSize);
     logoCapr = logoCapr.rescaled(160, 160);
