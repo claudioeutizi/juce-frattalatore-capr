@@ -24,7 +24,7 @@ FrattalatoreAudioProcessorEditor::FrattalatoreAudioProcessorEditor (Frattalatore
     lfo(audioProcessor.apvts, "LFOFREQ", "LFODEPTH")
 
 {
-    int bg = 2;
+    int bg = 1;
     switch (bg)
     {
     case 1:
