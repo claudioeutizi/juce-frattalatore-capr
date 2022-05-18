@@ -92,7 +92,7 @@ int main()
 
                   if (scelta == 0)
                   {
-                      RenderWindow MandelWindow(VideoMode(600, 600), "Julia2");
+                      RenderWindow MandelWindow(VideoMode(600, 600), "Mandelbrot");
                       Fractal MandelFractal;
                       int iter = 0;
                       iter = MandelFractal.getMaxIter();
